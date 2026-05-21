@@ -1,0 +1,242 @@
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base Styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #F1E9DB;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+    }
+}
+
+/* Header */
+
+/* CSS for improved navigation */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+
+header .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-menu {
+  list-style: none;
+  display: flex;
+}
+
+.nav-item {
+  margin-right: 20px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  position: relative;
+}
+
+.nav-item:hover {
+  color: #f36f38;
+}
+
+.nav-item:hover::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: #f36f38;
+  left: 0;
+  bottom: -5px;
+}
+
+
+/* Navigation */
+nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Buttons and Links */
+.link-button, .cta-button {
+    display: inline-block;
+    background: #333;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover, .link-button:hover {
+    background-color: #0056b3;
+}
+
+/* Hero Section */
+#hero {
+    background: url('img/main.jpg') no-repeat center center/cover;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* New About Us Section */
+#about-us-new {
+    background-color: #F1E9DB;
+    padding: 50px 0;
+}
+
+#about-us-new h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.about-item, .process-step, .advantages {
+    margin-bottom: 30px;
+}
+
+.about-item h3, .process-step h3, .advantages h3 {
+    font-size: 1.5em;
+    color: #007BFF;
+    margin-bottom: 10px;
+}
+
+.about-item p, .process-step p, .advantages p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.8;
+}
+
+/* Responsive Design for About Section */
+@media (max-width: 768px) {
+    #about-us-new h2 {
+        font-size: 2em;
+    }
+
+    .about-item h3, .process-step h3, .advantages h3 {
+        font-size: 1.3em;
+    }
+
+    .about-item p, .process-step p, .advantages p {
+        font-size: 0.95rem;
+    }
+
+    .link-button {
+        padding: 0.5rem 1.2rem;
+    }
+}
+
+/* Sections and Content */
+section, .privacy-policy-content, .gallery, .contact, .services {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+section h2, .gallery h2, .contact h2, .services h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #555;
+}
+
+/* Services Specifics */
+.service-icons {
+    display: flex;
+    justify-content: space-around;
+}
+
+@media (max-width: 768px) {
+    .service-icons {
+        flex-direction: column;
+    }
+}
+
+.service-icon {
+    background: #333;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 50%;
+    text-align: center;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer .social-media a {
+    margin-right: 10px;
+}
+
+footer .privacy-policy, footer .quick-links, footer .social-media {
+    font-size: 0.9em;
+}
+
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+    }
+}
+
+/* Carousel */
+.carousel {
+    display: flex;
+    overflow-x: scroll;
+}

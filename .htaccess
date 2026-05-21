@@ -1,0 +1,19 @@
+
+RewriteEngine on
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} !on
+RewriteCond %{HTTP_HOST} ^pleasureislanddesign\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.pleasureislanddesign\.com$
+RewriteRule ^(.*)$ "https\:\/\/www\.pleasureislanddesign\.com\/$1" [R=301,L]
+
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^http://pleasureislanddesign.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://pleasureislanddesign.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.pleasureislanddesign.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^http://www.pleasureislanddesign.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://pleasureislanddesign.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://pleasureislanddesign.com$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.pleasureislanddesign.com/.*$      [NC]
+RewriteCond %{HTTP_REFERER} !^https://www.pleasureislanddesign.com$      [NC]
+RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
+

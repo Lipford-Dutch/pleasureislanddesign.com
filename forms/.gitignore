@@ -1,0 +1,16 @@
+.idea
+themes/classicgrey
+themes/deepblue
+themes/ohcanada
+themes/default/cache
+cache/*.tpl.php
+.DS_Store
+global/config.php
+
+upload/*
+!upload/index.html
+modules/*
+!modules/index.html
+global/api/*
+!global/api/index.html
+

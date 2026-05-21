@@ -1,0 +1,6 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^pleasureislanddesign\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.pleasureislanddesign\.com$
+RewriteRule ^(.*)$ "http\:\/\/http\:\/\/$1" [R=301,L]
+
