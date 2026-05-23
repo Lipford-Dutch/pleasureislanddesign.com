@@ -66,30 +66,51 @@ galleryImages.forEach(image => {
     });
 });
 
-// Contact Form Validation
+// Contact Form Submission via Formspree
 document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent form submission to check validation
+    event.preventDefault();
 
-    // Retrieve form fields
     const name = document.getElementById("name").value.trim();
     const email = document.getElementById("email").value.trim();
     const message = document.getElementById("message").value.trim();
     const formMessage = document.getElementById("form-message");
-
-    // Regular expression for validating email format
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Validation checks
     if (name === "" || !emailPattern.test(email) || message === "") {
         formMessage.style.display = "block";
+        formMessage.style.color = "#cc0000";
         formMessage.innerText = "Please fill in all fields correctly.";
-    } else {
-        formMessage.style.display = "none";
-
-        // If validation passes, simulate form submission
-        alert("Form submitted successfully!"); // Replace with actual submission logic (e.g., AJAX call)
-        document.getElementById("contact-form").reset(); // Clear the form
+        return;
     }
+
+    const submitButton = this.querySelector('button[type="submit"]');
+    submitButton.disabled = true;
+    submitButton.innerText = "Sending...";
+
+    fetch("https://formspree.io/f/pleasureislanddesign@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify({ name, email, message })
+    })
+    .then(function(response) {
+        if (response.ok) {
+            formMessage.style.display = "block";
+            formMessage.style.color = "#2e7d32";
+            formMessage.innerText = "Thank you! We'll be in touch soon.";
+            document.getElementById("contact-form").reset();
+        } else {
+            throw new Error("Form submission failed");
+        }
+    })
+    .catch(function() {
+        formMessage.style.display = "block";
+        formMessage.style.color = "#cc0000";
+        formMessage.innerText = "Something went wrong. Please call us at (910) 444-1230 or email pleasureislanddesign@gmail.com.";
+    })
+    .finally(function() {
+        submitButton.disabled = false;
+        submitButton.innerText = "Request a Free Consultation";
+    });
 });
 
 // Activate Testimonials Section
@@ -115,15 +136,28 @@ document.querySelector('.cta-button').addEventListener('click', function() {
   });
 });
 
-// Scroll Tracking: Track how far users scroll on long pages.
-window.addEventListener('scroll', function() {
-    let scrollDepth = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-    gtag('event', 'scroll', {
-        'event_category': 'Page Interaction',
-        'event_label': 'Scroll Depth',
-        'value': scrollDepth
+// Scroll Tracking: Track milestone depths (25%, 50%, 75%, 100%)
+(function() {
+    var scrollMilestones = {};
+    var scrollTimer;
+    window.addEventListener('scroll', function() {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(function() {
+            var depth = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            var milestones = [25, 50, 75, 100];
+            milestones.forEach(function(m) {
+                if (depth >= m && !scrollMilestones[m]) {
+                    scrollMilestones[m] = true;
+                    gtag('event', 'scroll', {
+                        'event_category': 'Page Interaction',
+                        'event_label': 'Scroll Depth ' + m + '%',
+                        'value': m
+                    });
+                }
+            });
+        }, 200);
     });
-});
+})();
 
 // Gallery Interaction Tracking 
 document.querySelectorAll('.gallery-item img').forEach(image => {

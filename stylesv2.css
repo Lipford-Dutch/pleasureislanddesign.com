@@ -342,9 +342,9 @@ blockquote {
     color: #333;
     margin-bottom: 20px;
 }
-.availability-calendar .calendar-container {
-    max-width: 1000px;  
-    width: 250px;
+.availability-calendar .calendar-wrapper {
+    max-width: 1000px;
+    width: 100%;
     margin: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
@@ -429,7 +429,7 @@ blockquote {
 
 /* Animations */
 .fade-in {
-    opacity: 1;
+    opacity: 0;
     transition: opacity 1s ease;
 }
 .fade-in.active {
@@ -437,7 +437,7 @@ blockquote {
 }
 .slide-up {
     transform: translateY(50px);
-    opacity: 1;
+    opacity: 0;
     transition: transform 0.8s ease, opacity 0.8s ease;
 }
 .slide-up.active {
@@ -446,10 +446,42 @@ blockquote {
 }
 .scale-in {
     transform: scale(0.9);
-    opacity: 1;
+    opacity: 0;
     transition: transform 0.8s ease, opacity 0.8s ease;
 }
 .scale-in.active {
     transform: scale(1);
     opacity: 1;
+}
+
+/* Lightbox */
+#lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+#lightbox.active {
+    display: flex;
+}
+#lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Section Spacing */
+section {
+    border-bottom: 1px solid #eee;
+}
+section:last-of-type {
+    border-bottom: none;
 }
