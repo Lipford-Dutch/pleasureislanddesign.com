@@ -1,0 +1,20 @@
+/* MkDocs Material theme overrides — matches PID brand */
+:root {
+  --md-primary-fg-color: #1E3A5F;
+  --md-primary-fg-color--light: #2D5080;
+  --md-primary-fg-color--dark: #0F1E30;
+  --md-accent-fg-color: #7DA69E;
+  --md-typeset-a-color: #7DA69E;
+}
+
+.md-header {
+  background-color: #1E3A5F;
+}
+
+.md-tabs {
+  background-color: #2D5080;
+}
+
+.md-footer {
+  background-color: #1C1C1E;
+}
