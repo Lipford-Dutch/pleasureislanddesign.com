@@ -91,12 +91,39 @@
   }
 
   /* ================================================================
-     HERO: Ken Burns effect trigger
+     HERO: Ken Burns effect trigger + visual img load
      ================================================================ */
   function initHero() {
     const hero = document.querySelector('.hero');
     if (!hero) {return;}
-    setTimeout(() => hero.classList.add('loaded'), 100);
+    const img = hero.querySelector('.hero-visual-img');
+    if (img && img.complete) {
+      hero.classList.add('loaded');
+    } else if (img) {
+      img.addEventListener('load', () => hero.classList.add('loaded'));
+    } else {
+      setTimeout(() => hero.classList.add('loaded'), 100);
+    }
+  }
+
+  /* ================================================================
+     MOBILE STICKY CTA BAR
+     ================================================================ */
+  function initMobileStickyBar() {
+    const bar = document.getElementById('mobile-cta-bar');
+    if (!bar) {return;}
+    let shown = false;
+
+    window.addEventListener('scroll', () => {
+      const pastHero = window.scrollY > window.innerHeight * 0.6;
+      if (pastHero && !shown) {
+        bar.removeAttribute('hidden');
+        shown = true;
+      } else if (!pastHero && shown) {
+        bar.setAttribute('hidden', '');
+        shown = false;
+      }
+    }, { passive: true });
   }
 
   /* ================================================================
@@ -544,6 +571,7 @@
     initHero();
     initStatCounters();
     initReveal();
+    initProcessSteps();
     initGalleryFilter();
     initBeforeAfterSliders();
     initCarousel();
@@ -551,9 +579,31 @@
     initContactForm();
     initNewsletterForm();
     initScrollTop();
+    initMobileStickyBar();
     initCopyrightYear();
     initCTATracking();
     initScrollTracking();
+  }
+
+  /* ================================================================
+     PROCESS STEPS: staggered reveal via CSS custom property delay
+     ================================================================ */
+  function initProcessSteps() {
+    const steps = document.querySelectorAll('.process-step');
+    if (!steps.length) {return;}
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {return;}
+        const delay = entry.target.style.getPropertyValue('--step-delay') || '0ms';
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, parseInt(delay, 10));
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    steps.forEach(step => observer.observe(step));
   }
 
   if (document.readyState === 'loading') {

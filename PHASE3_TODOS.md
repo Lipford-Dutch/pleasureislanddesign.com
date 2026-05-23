@@ -161,5 +161,25 @@
 
 ---
 
-_Last updated: Phase 2 Design Modernization — December 2024_
+---
+
+## Phase 4 Backlog — Discovered During Phase 2.5
+
+> Items found during hero redesign and UX audit. Lower priority than Phase 3 but worth tracking.
+
+- [ ] **Featured Project Case Study** — Deep-dive section: one project shown as before → process photos → after, with client quote. Builds narrative trust.
+- [ ] **Video Testimonials** — Support embedding short client video clips alongside text reviews
+- [ ] **Instagram Feed Grid** — Live @pleasureislanddesign feed embedded in gallery or footer section
+- [ ] **Interior Designer Landing Page** — Dedicated `/designers` page with trade program details, reference list, downloadable spec sheet
+- [ ] **Contractor/Builder Landing Page** — Dedicated `/builders` page explaining partnership workflow and turnaround SLA
+- [ ] **Before/After Photo Submission Portal** — Let past clients submit their own project photos (with approval workflow)
+- [ ] **Virtual Consultation Option** — Zoom/video call booking option alongside in-person for out-of-area designers and second-home owners
+- [ ] **Project 360° Tours** — Interactive room tours for select showcase projects
+- [ ] **Material Sample Request** — "Request a finish sample" form for designers and builders evaluating finishes
+- [ ] **Service Area Map** — Interactive map showing all completed project locations across SE NC
+- [ ] **Seasonal Promotions System** — CMS-driven banner for Sales/Specials (spring refresh, holiday booking)
+- [ ] **Sticky Header CTA on Desktop** — Show "Request Consultation" button in header after scrolling past hero (currently desktop header only shows on scroll)
+- [ ] **Progressive Image Loading** — Replace heavy gallery images with WebP + srcset for Core Web Vitals
+
+_Last updated: Phase 2.5 Hero & UX Redesign_
 _Next review: After Phase 2 merge_
