@@ -8,7 +8,7 @@
      UTILITIES
      ================================================================ */
   function safeGtag(...args) {
-    if (typeof gtag === 'function') gtag(...args);
+    if (typeof gtag === 'function') {gtag(...args);}
   }
 
   function clamp(value, min, max) {
@@ -20,7 +20,7 @@
      ================================================================ */
   function initHeader() {
     const header = document.getElementById('site-header');
-    if (!header) return;
+    if (!header) {return;}
 
     const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
     const sections = [];
@@ -28,7 +28,7 @@
     navLinks.forEach(link => {
       const id = link.getAttribute('href').slice(1);
       const section = document.getElementById(id);
-      if (section) sections.push({ link, section });
+      if (section) {sections.push({ link, section });}
     });
 
     let ticking = false;
@@ -65,7 +65,7 @@
   function initHamburger() {
     const hamburger = document.getElementById('hamburger');
     const nav = document.getElementById('primary-nav');
-    if (!hamburger || !nav) return;
+    if (!hamburger || !nav) {return;}
 
     hamburger.addEventListener('click', () => {
       const expanded = hamburger.getAttribute('aria-expanded') === 'true';
@@ -83,7 +83,7 @@
 
     // Close on outside click
     document.addEventListener('click', e => {
-      if (!header || (!hamburger.contains(e.target) && !nav.contains(e.target))) {
+      if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
         hamburger.setAttribute('aria-expanded', 'false');
         nav.classList.remove('open');
       }
@@ -95,7 +95,7 @@
      ================================================================ */
   function initHero() {
     const hero = document.querySelector('.hero');
-    if (!hero) return;
+    if (!hero) {return;}
     setTimeout(() => hero.classList.add('loaded'), 100);
   }
 
@@ -104,11 +104,11 @@
      ================================================================ */
   function initStatCounters() {
     const stats = document.querySelectorAll('.stat-number[data-target]');
-    if (!stats.length) return;
+    if (!stats.length) {return;}
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
+        if (!entry.isIntersecting) {return;}
         observer.unobserve(entry.target);
         animateCounter(entry.target);
       });
@@ -127,7 +127,7 @@
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
       el.textContent = Math.round(eased * target);
-      if (progress < 1) requestAnimationFrame(step);
+      if (progress < 1) {requestAnimationFrame(step);}
     }
 
     requestAnimationFrame(step);
@@ -138,11 +138,11 @@
      ================================================================ */
   function initReveal() {
     const reveals = document.querySelectorAll('.reveal');
-    if (!reveals.length) return;
+    if (!reveals.length) {return;}
 
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
+        if (!entry.isIntersecting) {return;}
         entry.target.classList.add('visible');
         observer.unobserve(entry.target);
       });
@@ -157,7 +157,7 @@
   function initGalleryFilter() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const items = document.querySelectorAll('.gallery-item');
-    if (!filterBtns.length) return;
+    if (!filterBtns.length) {return;}
 
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -185,7 +185,7 @@
     document.querySelectorAll('.before-after-slider').forEach(slider => {
       const before = slider.querySelector('.slider-before');
       const handle = slider.querySelector('.slider-handle');
-      if (!before || !handle) return;
+      if (!before || !handle) {return;}
 
       // Add BEFORE/AFTER labels
       const lblBefore = document.createElement('span');
@@ -213,13 +213,13 @@
 
       // Mouse
       handle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
-      window.addEventListener('mousemove', e => { if (dragging) setPosition(getPct(e.clientX)); });
+      window.addEventListener('mousemove', e => { if (dragging) {setPosition(getPct(e.clientX));} });
       window.addEventListener('mouseup', () => { dragging = false; });
 
       // Touch
       handle.addEventListener('touchstart', e => { dragging = true; e.preventDefault(); }, { passive: false });
       window.addEventListener('touchmove', e => {
-        if (dragging) setPosition(getPct(e.touches[0].clientX));
+        if (dragging) {setPosition(getPct(e.touches[0].clientX));}
       }, { passive: true });
       window.addEventListener('touchend', () => { dragging = false; });
 
@@ -243,10 +243,10 @@
     const prevBtn = document.getElementById('carousel-prev');
     const nextBtn = document.getElementById('carousel-next');
     const dotsContainer = document.getElementById('carousel-dots');
-    if (!track) return;
+    if (!track) {return;}
 
     const cards = track.querySelectorAll('.testimonial-card');
-    if (!cards.length) return;
+    if (!cards.length) {return;}
 
     let current = 0;
     let autoTimer;
@@ -282,8 +282,8 @@
     const region = document.getElementById('testimonials-carousel');
     if (region) {
       region.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft')  goTo(current - 1);
-        if (e.key === 'ArrowRight') goTo(current + 1);
+        if (e.key === 'ArrowLeft')  {goTo(current - 1);}
+        if (e.key === 'ArrowRight') {goTo(current + 1);}
       });
     }
 
@@ -299,7 +299,7 @@
     const closeBtn = document.getElementById('lightbox-close');
     const prevBtn = document.getElementById('lightbox-prev');
     const nextBtn = document.getElementById('lightbox-next');
-    if (!lightbox || !content) return;
+    if (!lightbox || !content) {return;}
 
     const singleItems = Array.from(document.querySelectorAll('.gallery-item-single'));
     let lightboxImages = [];
@@ -324,7 +324,7 @@
     }
 
     function showCurrent() {
-      if (!lightboxImages.length) return;
+      if (!lightboxImages.length) {return;}
       const { src, alt } = lightboxImages[currentIdx];
       content.innerHTML = '';
       const img = document.createElement('img');
@@ -338,7 +338,7 @@
       document.body.style.overflow = '';
     }
 
-    singleItems.forEach((item, i) => {
+    singleItems.forEach((item) => {
       item.addEventListener('click', () => {
         buildImageList();
         const activeItems = singleItems.filter(el => !el.classList.contains('hidden'));
@@ -349,14 +349,14 @@
     });
 
     closeBtn && closeBtn.addEventListener('click', closeLightbox);
-    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) {closeLightbox();} });
 
     prevBtn && prevBtn.addEventListener('click', () => { currentIdx = (currentIdx - 1 + lightboxImages.length) % lightboxImages.length; showCurrent(); });
     nextBtn && nextBtn.addEventListener('click', () => { currentIdx = (currentIdx + 1) % lightboxImages.length; showCurrent(); });
 
     document.addEventListener('keydown', e => {
       if (lightbox.getAttribute('aria-hidden') === 'false') {
-        if (e.key === 'Escape')      closeLightbox();
+        if (e.key === 'Escape')      {closeLightbox();}
         if (e.key === 'ArrowLeft')   { currentIdx = (currentIdx - 1 + lightboxImages.length) % lightboxImages.length; showCurrent(); }
         if (e.key === 'ArrowRight')  { currentIdx = (currentIdx + 1) % lightboxImages.length; showCurrent(); }
       }
@@ -369,7 +369,7 @@
   function initContactForm() {
     const form = document.getElementById('contact-form');
     const feedback = document.getElementById('form-message');
-    if (!form || !feedback) return;
+    if (!form || !feedback) {return;}
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -426,7 +426,7 @@
   function initNewsletterForm() {
     const form = document.getElementById('newsletter-form');
     const msg = document.getElementById('newsletter-message');
-    if (!form || !msg) return;
+    if (!form || !msg) {return;}
 
     form.addEventListener('submit', async e => {
       e.preventDefault();
@@ -470,7 +470,7 @@
      ================================================================ */
   function initScrollTop() {
     const btn = document.getElementById('scroll-top');
-    if (!btn) return;
+    if (!btn) {return;}
 
     window.addEventListener('scroll', () => {
       const show = window.scrollY > 500;
@@ -491,7 +491,7 @@
      ================================================================ */
   function initCopyrightYear() {
     const el = document.getElementById('copyright-year');
-    if (el) el.textContent = new Date().getFullYear();
+    if (el) {el.textContent = new Date().getFullYear();}
   }
 
   /* ================================================================
@@ -519,7 +519,7 @@
       clearTimeout(timer);
       timer = setTimeout(() => {
         const scrollable = document.body.scrollHeight - window.innerHeight;
-        if (scrollable <= 0) return;
+        if (scrollable <= 0) {return;}
         const depth = Math.round((window.scrollY / scrollable) * 100);
         [25, 50, 75, 100].forEach(m => {
           if (depth >= m && !milestones[m]) {

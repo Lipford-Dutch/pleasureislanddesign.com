@@ -12,8 +12,21 @@
     "alpha-value-notation": null,
     "media-feature-range-notation": null,
     "rule-empty-line-before": null,
+    "at-rule-empty-line-before": null,
     "declaration-block-no-redundant-longhand-properties": null,
     "no-descending-specificity": null,
-    "font-family-no-missing-generic-family-keyword": null
+    "font-family-no-missing-generic-family-keyword": null,
+    "custom-property-pattern": null,
+    "declaration-block-single-line-max-declarations": null,
+    "keyframes-name-pattern": null,
+    "property-no-vendor-prefix": null,
+    "value-keyword-case": [
+      "lower",
+      {
+        "camelCaseSvgKeywords": true,
+        "ignoreFunctions": [],
+        "ignoreKeywords": ["Georgia", "Arial", "Lato", "Helvetica", "Helvetica Neue", "Times New Roman"]
+      }
+    ]
   }
 }
