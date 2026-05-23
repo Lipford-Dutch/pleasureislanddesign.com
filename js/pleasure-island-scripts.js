@@ -138,13 +138,13 @@ document.querySelector('.cta-button').addEventListener('click', function() {
 
 // Scroll Tracking: Track milestone depths (25%, 50%, 75%, 100%)
 (function() {
-    var scrollMilestones = {};
-    var scrollTimer;
+    const scrollMilestones = {};
+    let scrollTimer;
     window.addEventListener('scroll', function() {
         clearTimeout(scrollTimer);
         scrollTimer = setTimeout(function() {
-            var depth = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
-            var milestones = [25, 50, 75, 100];
+            const depth = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            const milestones = [25, 50, 75, 100];
             milestones.forEach(function(m) {
                 if (depth >= m && !scrollMilestones[m]) {
                     scrollMilestones[m] = true;
