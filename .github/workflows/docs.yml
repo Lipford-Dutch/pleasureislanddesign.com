@@ -1,0 +1,51 @@
+name: Build & Publish Docs
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ closed ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-docs:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install MkDocs and plugins
+        run: |
+          pip install \
+            mkdocs==1.5.3 \
+            mkdocs-material==9.5.3 \
+            mkdocs-git-revision-date-localized-plugin==1.2.2 \
+            mkdocs-minify-plugin==0.7.2
+
+      - name: Auto-generate CHANGELOG page
+        run: |
+          cp CHANGELOG.md docs/release-notes.md
+          echo "Auto-generated from CHANGELOG.md on $(date -u '+%Y-%m-%d %H:%M UTC')" >> docs/release-notes.md
+
+      - name: Build MkDocs site
+        run: mkdocs build --strict
+
+      - name: Commit updated docs if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/release-notes.md
+          git diff --staged --quiet || git commit -m "docs: auto-update release notes from CHANGELOG [skip ci]"
+          git push || true
