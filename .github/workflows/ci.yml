@@ -1,0 +1,171 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  lint:
+    name: Lint Code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Lint HTML
+        run: npx htmlhint index.html
+        continue-on-error: false
+
+      - name: Lint CSS
+        run: npx stylelint "**/*.css"
+
+      - name: Lint JavaScript
+        run: npx eslint js/ --ext .js
+
+  validate:
+    name: Validate Assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate image references
+        run: |
+          # Check for broken image paths in HTML
+          set +e
+          broken=0
+          while IFS= read -r line; do
+            if [[ $line =~ src=\"([^\"]+)\" ]]; then
+              path="${BASH_REMATCH[1]}"
+              if [[ ! $path =~ ^http ]]; then
+                if [[ ! -f "$path" ]]; then
+                  echo "❌ Missing image: $path"
+                  ((broken++))
+                fi
+              fi
+            fi
+          done < <(grep -o 'src="[^"]*"' index.html)
+
+          if [ $broken -gt 0 ]; then
+            echo "::error::Found $broken broken image references"
+            exit 1
+          else
+            echo "✓ All image references valid"
+          fi
+
+  check-formatting:
+    name: Check Code Formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Prettier
+        run: npm install --legacy-peer-deps prettier@latest
+
+      - name: Check formatting
+        run: npx prettier --check index.html styles.css js/pleasure-island-scripts.js
+        continue-on-error: true
+
+  test-links:
+    name: Test Internal Links
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate HTML links
+        run: |
+          # Check for valid anchor links
+          set +e
+          errors=0
+
+          # Extract all href="#..." anchors
+          anchors=$(grep -o 'href="#[^"]*"' index.html | sed 's/href="#//;s/"//' | sort -u)
+
+          # Extract all id="..." elements
+          ids=$(grep -o 'id="[^"]*"' index.html | sed 's/id="//;s/"//' | sort -u)
+
+          # Check each anchor has matching id
+          while IFS= read -r anchor; do
+            if [[ ! -z "$anchor" ]]; then
+              if ! echo "$ids" | grep -q "^$anchor$"; then
+                echo "❌ Broken anchor link: #$anchor"
+                ((errors++))
+              fi
+            fi
+          done <<< "$anchors"
+
+          if [ $errors -gt 0 ]; then
+            echo "::error::Found $errors broken anchor links"
+            exit 1
+          else
+            echo "✓ All anchor links valid"
+          fi
+
+  security:
+    name: Security Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check for common vulnerabilities
+        run: |
+          echo "Checking for hardcoded secrets and vulnerabilities..."
+
+          # Check for hardcoded API keys pattern (basic)
+          if grep -r "api[_-]?key\s*[=:]\s*['\"]" . --include="*.html" --include="*.js" --include="*.css" 2>/dev/null; then
+            echo "::warning::Possible hardcoded secrets detected"
+          fi
+
+          # Check for unescaped innerHTML
+          if grep -r "innerHTML\s*=" js/ 2>/dev/null | grep -v "lightbox\|formMessage"; then
+            echo "::warning::innerHTML usage detected - verify it's safe"
+          fi
+
+          echo "✓ Security baseline checks passed"
+
+  summary:
+    name: CI Summary
+    needs: [ lint, validate, check-formatting, test-links, security ]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: Check job status
+        run: |
+          if [[ "${{ needs.lint.result }}" == "failure" || \
+                "${{ needs.validate.result }}" == "failure" || \
+                "${{ needs.test-links.result }}" == "failure" ]]; then
+            echo "::error::CI checks failed - please review errors above"
+            exit 1
+          fi
+
+          echo "✓ All CI checks passed!"

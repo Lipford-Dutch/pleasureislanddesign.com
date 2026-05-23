@@ -1,0 +1,22 @@
+{
+  "name": "pleasureislanddesign.com",
+  "version": "1.0.0",
+  "description": "Pleasure Island Design - Premium Cabinet Refinishing & Repair",
+  "license": "MIT",
+  "author": "Pleasure Island Design LLC",
+  "scripts": {
+    "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
+    "lint:html": "htmlhint index.html",
+    "lint:css": "stylelint \"**/*.css\"",
+    "lint:js": "eslint js/ --ext .js",
+    "format": "prettier --write index.html styles.css js/pleasure-island-scripts.js",
+    "format:check": "prettier --check index.html styles.css js/pleasure-island-scripts.js"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "htmlhint": "^1.1.4",
+    "prettier": "^3.1.1",
+    "stylelint": "^16.3.1",
+    "stylelint-config-standard": "^36.0.0"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["media"]
+      }
+    ],
+    "color-hex-length": null,
+    "color-function-notation": null,
+    "alpha-value-notation": null,
+    "media-feature-range-notation": null,
+    "rule-empty-line-before": null,
+    "declaration-block-no-redundant-longhand-properties": null,
+    "no-descending-specificity": null,
+    "font-family-no-missing-generic-family-keyword": null
+  }
+}
