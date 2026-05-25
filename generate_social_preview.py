@@ -1,14 +1,11 @@
 #!/usr/bin/env python3
 """Generate social media preview image for Pleasure Island Design"""
 
-from reportlab.lib.pagesizes import landscape
-from reportlab.lib.units import inch
-from reportlab.pdfgen import canvas
-from reportlab.lib import colors
-from reportlab.pdfbase import pdfmetrics
-from reportlab.pdfbase.ttfonts import TTFont
-from PIL import Image, ImageDraw, ImageFont
-import io
+try:
+    from PIL import Image, ImageDraw, ImageFont
+except ImportError:
+    print("Error: Pillow not installed. Install with: pip install Pillow")
+    exit(1)
 
 def create_social_preview_image():
     """Create a Twitter/Facebook social preview image"""
