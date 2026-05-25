@@ -31,33 +31,42 @@ Comprehensive roadmap for moving from current production issues (3.7/10 audit sc
 
 ### 🔴 Critical Issues to Fix (1-2 Days)
 
-| Issue | Severity | Est. Time | Assigned |
-|-------|----------|-----------|----------|
-| Canonical/OG domain mismatch | CRITICAL | 30 mins | SEO |
-| "0+ Years" statistics display | CRITICAL | 1 hour | Frontend |
-| Clarity analytics unconfigured | CRITICAL | 30 mins | Analytics |
-| Robots.txt domain reference | CRITICAL | 15 mins | SEO |
-| Sitemap domain references | CRITICAL | 30 mins | SEO |
-| JSON-LD URL incorrect | CRITICAL | 15 mins | SEO |
+| Issue | Severity | Est. Time | Status | Notes |
+|-------|----------|-----------|--------|-------|
+| Canonical/OG domain mismatch | CRITICAL | 30 mins | ✅ DONE | By design (prod on GoDaddy, sandbox on GitHub Pages) |
+| "0+ Years" statistics display | CRITICAL | 1 hour | ✅ DONE | Now displays actual values with scroll animation |
+| Clarity analytics unconfigured | CRITICAL | 30 mins | ⏳ DEFERRED | Requires real project ID from clarity.microsoft.com — pending user config |
+| Robots.txt domain reference | CRITICAL | 15 mins | ✅ DONE | Already correctly references production domain |
+| Sitemap domain references | CRITICAL | 30 mins | ✅ DONE | Already correct, shop removed from sitemap |
+| JSON-LD URL incorrect | CRITICAL | 15 mins | ✅ DONE | Already correctly references production domain |
 
 **Total Est. Time:** ~3 hours  
 **Owner:** Engineering  
-**Deadline:** May 26, 2026
+**Deadline:** May 26, 2026  
+**Completion:** May 25, 2026 ✅
 
 ### 🟠 High Priority Fixes (This Week)
 
-| Issue | Severity | Est. Time | Notes |
-|-------|----------|-----------|-------|
-| Fix "0-8" to "5-8" days | HIGH | 30 mins | Timeline consistency |
-| Debug stat animation | HIGH | 2 hours | JavaScript investigation |
-| Remove shop from sitemap | HIGH | 15 mins | Until functionality ready |
-| Complete video section | HIGH | 1 hour | Embed YouTube videos |
-| Complete specials flyer | HIGH | 1 hour | Add PDF download |
-| Remove Apache license link | HIGH | 15 mins | Branding cleanup |
+| Issue | Severity | Est. Time | Status | Notes |
+|-------|----------|-----------|--------|-------|
+| Fix "0-8" to "5-8" days | HIGH | 30 mins | ✅ DONE | Already correct in codebase |
+| Debug stat animation | HIGH | 2 hours | ✅ DONE | Hybrid approach: display values, animate on scroll |
+| Remove shop from sitemap | HIGH | 15 mins | ✅ DONE | Shop removed until ready for production |
+| Complete video section | HIGH | 1 hour | ✅ DONE | Two YouTube videos embedded from PID channel |
+| Complete specials flyer | HIGH | 1 hour | ⏳ PENDING | Awaiting flyer file/content |
+| Remove Apache license link | HIGH | 15 mins | ✅ DONE | Apache 2.0 link removed from footer |
 
 **Total Est. Time:** ~5 hours  
 **Owner:** Engineering  
-**Deadline:** May 31, 2026
+**Deadline:** May 31, 2026  
+**Completion:** May 25, 2026 (5 of 6 complete)
+
+### 🔵 Deferred/Blocked Items
+
+| Item | Priority | Status | Action |
+|------|----------|--------|--------|
+| Configure Microsoft Clarity analytics | CRITICAL | ⏳ DEFERRED | Get real project ID from https://clarity.microsoft.com and replace "placeholder-clarity-id" in index.html line 55 |
+| Add specials/promotions flyer | HIGH | ⏳ PENDING | Upload flyer PDF and create download link on /specials/ page |
 
 ### 🟡 Medium Priority (This Month)
 
