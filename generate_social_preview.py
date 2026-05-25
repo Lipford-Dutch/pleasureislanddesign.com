@@ -49,15 +49,26 @@ def create_social_preview_image():
         points_bottom.append((x, int(height - 80 - 20 * (x % 40) / 40)))
     draw.line(points_bottom, fill='#d4a574', width=2)
 
-    # Add main text
-    try:
-        title_font = ImageFont.truetype("/usr/share/fonts/opentype/liberation/LiberationSerif-Bold.ttf", 80)
-        subtitle_font = ImageFont.truetype("/usr/share/fonts/opentype/liberation/LiberationSans-Regular.ttf", 40)
-        body_font = ImageFont.truetype("/usr/share/fonts/opentype/liberation/LiberationSans-Regular.ttf", 28)
-    except:
-        title_font = ImageFont.load_default()
-        subtitle_font = ImageFont.load_default()
-        body_font = ImageFont.load_default()
+    # Add main text - Try multiple font paths and fallback to default
+    title_font = ImageFont.load_default()
+    subtitle_font = ImageFont.load_default()
+    body_font = ImageFont.load_default()
+
+    font_paths = [
+        "/usr/share/fonts/opentype/liberation/LiberationSerif-Bold.ttf",
+        "/usr/share/fonts/truetype/liberation/LiberationSerif-Bold.ttf",
+        "/System/Library/Fonts/Times New Roman.ttf",  # macOS
+        "C:\\Windows\\Fonts\\times.ttf",  # Windows
+    ]
+
+    for font_path in font_paths:
+        try:
+            title_font = ImageFont.truetype(font_path, 80)
+            subtitle_font = ImageFont.truetype(font_path.replace('Serif', 'Sans'), 40) if 'Serif' in font_path else ImageFont.truetype(font_path, 40)
+            body_font = ImageFont.truetype(font_path.replace('Serif', 'Sans'), 28) if 'Serif' in font_path else ImageFont.truetype(font_path, 28)
+            break
+        except:
+            continue
 
     # Title
     title_text = "Transform Your Kitchen"
@@ -151,16 +162,8 @@ def create_social_preview_image():
 
     # Text on square
     title_sq = "PID"
-    try:
-        title_sq_font = ImageFont.truetype(
-            "/usr/share/fonts/opentype/liberation/LiberationSerif-Bold.ttf", 200
-        )
-        subtitle_sq_font = ImageFont.truetype(
-            "/usr/share/fonts/opentype/liberation/LiberationSans-Regular.ttf", 60
-        )
-    except:
-        title_sq_font = ImageFont.load_default()
-        subtitle_sq_font = ImageFont.load_default()
+    title_sq_font = title_font
+    subtitle_sq_font = body_font
 
     title_sq_bbox = draw_sq.textbbox((0, 0), title_sq, font=title_sq_font)
     title_sq_width = title_sq_bbox[2] - title_sq_bbox[0]

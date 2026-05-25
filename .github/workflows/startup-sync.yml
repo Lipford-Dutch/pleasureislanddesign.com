@@ -109,9 +109,14 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install dependencies
+      - name: Install system dependencies
         run: |
-          pip install -q reportlab Pillow
+          sudo apt-get update -qq
+          sudo apt-get install -qq -y fonts-liberation 2>/dev/null || echo "Font installation optional"
+
+      - name: Install Python dependencies
+        run: |
+          pip install -q reportlab Pillow 2>&1 | grep -v "already satisfied" || true
 
       - name: Generate social media assets
         run: |
