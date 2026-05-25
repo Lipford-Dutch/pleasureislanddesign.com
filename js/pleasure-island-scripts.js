@@ -147,6 +147,7 @@
   function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);
     const duration = 1600;
+    el.textContent = '0'; // Reset to 0 for animation
     const start = performance.now();
 
     function step(now) {
