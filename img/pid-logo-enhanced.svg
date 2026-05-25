@@ -1,0 +1,57 @@
+<svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .pid-text { font-family: 'Playfair Display', serif; font-weight: 700; }
+      .pid-subtext { font-family: 'Lato', sans-serif; font-weight: 400; font-size: 12px; letter-spacing: 2px; }
+    </style>
+    <linearGradient id="coastalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a252f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle for icon -->
+  <circle cx="60" cy="60" r="55" fill="url(#coastalGradient)" opacity="0.95"/>
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#d4a574" stroke-width="2" opacity="0.6"/>
+
+  <!-- Broom Icon (left side of circle) -->
+  <g transform="translate(35, 40)">
+    <!-- Broom handle -->
+    <line x1="0" y1="0" x2="0" y2="35" stroke="#8b7355" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Broom bristles -->
+    <path d="M -8 32 Q -6 35 0 38 Q 6 35 8 32" fill="#c9a961" stroke="#d4a574" stroke-width="1.5"/>
+    <path d="M -10 29 Q -7 33 0 36 Q 7 33 10 29" fill="#d4a574" stroke="#d4a574" stroke-width="1"/>
+    <path d="M -6 35 Q -4 38 0 40 Q 4 38 6 35" fill="#b8935c" stroke="#d4a574" stroke-width="1"/>
+  </g>
+
+  <!-- Chair Icon (right side of circle) -->
+  <g transform="translate(65, 42)">
+    <!-- Chair back -->
+    <rect x="-3" y="0" width="6" height="12" fill="none" stroke="#48a3a3" stroke-width="1.5" rx="1"/>
+    <!-- Chair seat -->
+    <rect x="-8" y="12" width="16" height="3" fill="#48a3a3" stroke="#48a3a3" stroke-width="1" rx="1"/>
+    <!-- Chair legs -->
+    <line x1="-7" y1="15" x2="-6" y2="25" stroke="#48a3a3" stroke-width="1.5" stroke-linecap="round"/>
+    <line x1="7" y1="15" x2="6" y2="25" stroke="#48a3a3" stroke-width="1.5" stroke-linecap="round"/>
+    <!-- Chair bottom stretcher -->
+    <line x1="-6" y1="25" x2="6" y2="25" stroke="#48a3a3" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Text: PID -->
+  <text x="130" y="75" font-size="48" class="pid-text" fill="#2c3e50">PID</text>
+
+  <!-- Text: Pleasure Island Design -->
+  <text x="130" y="95" font-size="14" class="pid-subtext" fill="#48a3a3" font-weight="600">PLEASURE ISLAND DESIGN</text>
+
+  <!-- Decorative line -->
+  <line x1="130" y1="103" x2="380" y2="103" stroke="#d4a574" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Tagline -->
+  <text x="130" y="120" font-size="11" class="pid-subtext" fill="#666">COASTAL CABINET ARTISANS</text>
+
+  <!-- Coastal wave accent -->
+  <path d="M 130 130 Q 150 128 170 130 T 210 130" stroke="#48a3a3" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Bottom tagline -->
+  <text x="130" y="155" font-size="10" fill="#999" font-family="Lato" letter-spacing="1px">Premium Cabinet Refinishing • Wilmington, NC</text>
+</svg>

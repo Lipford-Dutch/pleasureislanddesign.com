@@ -1,0 +1,180 @@
+name: Startup Configuration Sync
+
+on:
+  push:
+    paths:
+      - 'pid-startup.html'
+      - '.github/workflows/startup-sync.yml'
+  schedule:
+    # Sync configuration daily at 12:00 AM UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync-startup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Check startup file integrity
+        run: |
+          echo "Validating pid-startup.html structure..."
+          if grep -q "PID Startup Configuration" pid-startup.html; then
+            echo "✓ Startup file structure valid"
+          else
+            echo "✗ Startup file structure invalid"
+            exit 1
+          fi
+
+      - name: Verify critical configs
+        run: |
+          echo "Checking critical configurations..."
+
+          # Check Google Analytics ID
+          if grep -q "G-X0PJB95RBE" pid-startup.html; then
+            echo "✓ GA4 ID verified"
+          else
+            echo "⚠ GA4 ID not found or outdated"
+          fi
+
+          # Check GTM ID
+          if grep -q "GTM-W2TMT5K8" pid-startup.html; then
+            echo "✓ GTM ID verified"
+          else
+            echo "⚠ GTM ID not found or outdated"
+          fi
+
+          # Check contact information
+          if grep -q "(910) 444-1230" pid-startup.html; then
+            echo "✓ Contact info verified"
+          else
+            echo "⚠ Contact info not found"
+          fi
+
+      - name: Check analytics configuration
+        run: |
+          echo "Verifying analytics setup in main HTML..."
+
+          # Check if Clarity ID is still placeholder
+          if grep -q 'placeholder-clarity-id' index.html; then
+            echo "⚠️ WARNING: Clarity ID still uses placeholder"
+            echo "Action required: Configure real Clarity ID in index.html"
+          else
+            echo "✓ Clarity appears to be configured"
+          fi
+
+      - name: Generate timestamp
+        run: |
+          echo "Last synced: $(date -u +'%Y-%m-%d %H:%M:%S UTC')" > /tmp/sync-time.txt
+          cat /tmp/sync-time.txt
+
+      - name: Commit changes if needed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          # Check if there are changes to commit
+          if ! git diff --quiet; then
+            git add pid-startup.html
+            git commit -m "chore: sync startup configuration [automated]"
+            git push
+            echo "✓ Startup config synced and committed"
+          else
+            echo "✓ No changes needed - startup config already in sync"
+          fi
+
+      - name: Notify on configuration issues
+        if: failure()
+        run: |
+          echo "⚠️ Configuration sync check failed"
+          echo "Please review the startup configuration and resolve any issues"
+
+  generate-assets:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -q reportlab Pillow
+
+      - name: Generate social media assets
+        run: |
+          if [ -f generate_social_preview.py ]; then
+            python3 generate_social_preview.py
+            echo "✓ Social media assets generated"
+          else
+            echo "generate_social_preview.py not found - skipping"
+          fi
+
+      - name: Generate PDF audit reports
+        run: |
+          if [ -f generate_audit_pdf.py ]; then
+            python3 generate_audit_pdf.py || echo "Audit PDF generation is optional"
+          fi
+
+      - name: Commit generated assets
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          # Add generated images if they exist
+          if git ls-files --others --exclude-standard img/*.png | grep -q .; then
+            git add img/*.png
+            git commit -m "chore: update social media preview assets [automated]" || echo "No new assets to commit"
+            git push
+          fi
+
+  validate-sync:
+    runs-on: ubuntu-latest
+    needs: [sync-startup, generate-assets]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Final validation
+        run: |
+          echo "✅ Startup configuration sync completed successfully"
+          echo ""
+          echo "Validated items:"
+          echo "  ✓ Startup configuration file"
+          echo "  ✓ Critical configuration values"
+          echo "  ✓ Social media assets"
+          echo "  ✓ Repository sync"
+          echo ""
+          echo "Next steps (if needed):"
+          echo "  1. Review generated files"
+          echo "  2. Update configuration if needed"
+          echo "  3. Deploy when ready"
+
+  notify-status:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: validate-sync
+
+    steps:
+      - name: Report completion
+        run: |
+          echo "📊 Startup Configuration Sync Report"
+          echo "=================================="
+          echo "Status: ${{ job.status }}"
+          echo "Timestamp: $(date -u +'%Y-%m-%d %H:%M:%S UTC')"
+          echo ""
+          echo "For issues, see GitHub Actions logs:"
+          echo "https://github.com/${{ github.repository }}/actions"

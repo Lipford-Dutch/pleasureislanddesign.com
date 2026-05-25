@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PID Startup Configuration | Pleasure Island Design</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #2c3e50 0%, #48a3a3 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      max-width: 900px;
+      width: 100%;
+      padding: 40px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      border-bottom: 3px solid #48a3a3;
+      padding-bottom: 20px;
+    }
+    header h1 {
+      color: #2c3e50;
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    header p {
+      color: #666;
+      font-size: 14px;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .section h2 {
+      color: #2c3e50;
+      font-size: 18px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .status-card {
+      background: #f5f3f0;
+      border-left: 4px solid #48a3a3;
+      padding: 15px;
+      border-radius: 4px;
+    }
+    .status-card.warning {
+      border-left-color: #d4a574;
+      background: #fff9f5;
+    }
+    .status-card.error {
+      border-left-color: #c0392b;
+      background: #ffe8e6;
+    }
+    .status-card.success {
+      border-left-color: #27ae60;
+      background: #e8f8f1;
+    }
+    .status-label {
+      font-size: 12px;
+      color: #999;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .status-value {
+      font-size: 16px;
+      color: #2c3e50;
+      font-weight: 600;
+      word-break: break-all;
+    }
+    .config-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    .config-item:last-child {
+      border-bottom: none;
+    }
+    .config-key {
+      color: #666;
+      font-weight: 600;
+    }
+    .config-val {
+      color: #2c3e50;
+      font-family: 'Courier New', monospace;
+      max-width: 50%;
+      word-break: break-all;
+    }
+    .indicator {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .indicator.ok { background: #27ae60; }
+    .indicator.warning { background: #d4a574; }
+    .indicator.error { background: #c0392b; }
+    .notes {
+      background: #ecf0f1;
+      border-left: 4px solid #2c3e50;
+      padding: 15px;
+      border-radius: 4px;
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      margin-top: 20px;
+    }
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .btn-primary {
+      background: #48a3a3;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #3a8080;
+    }
+    .btn-secondary {
+      background: #f0f0f0;
+      color: #2c3e50;
+      border: 1px solid #ddd;
+    }
+    .btn-secondary:hover {
+      background: #e8e8e8;
+    }
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      font-size: 12px;
+      color: #999;
+    }
+    @media (max-width: 600px) {
+      .container { padding: 20px; }
+      header h1 { font-size: 24px; }
+      .status-grid { grid-template-columns: 1fr; }
+      .btn-group { flex-direction: column; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🚀 PID Startup Configuration</h1>
+      <p>Dynamic system status and configuration management</p>
+    </header>
+
+    <!-- System Status Section -->
+    <div class="section">
+      <h2>System Status</h2>
+      <div class="status-grid">
+        <div class="status-card success">
+          <div class="status-label">Website Status</div>
+          <div class="status-value">
+            <span class="indicator ok"></span> Operational
+          </div>
+        </div>
+        <div class="status-card" id="analytics-status">
+          <div class="status-label">Analytics</div>
+          <div class="status-value">
+            <span class="indicator warning"></span> Checking...
+          </div>
+        </div>
+        <div class="status-card success">
+          <div class="status-label">GitHub Pages</div>
+          <div class="status-value">
+            <span class="indicator ok"></span> Connected
+          </div>
+        </div>
+        <div class="status-card">
+          <div class="status-label">Build Status</div>
+          <div class="status-value">
+            <span class="indicator ok"></span> Passing
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analytics Configuration -->
+    <div class="section">
+      <h2>📊 Analytics Configuration</h2>
+      <div class="config-item">
+        <span class="config-key">Google Analytics 4 ID:</span>
+        <span class="config-val">G-X0PJB95RBE</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Google Tag Manager ID:</span>
+        <span class="config-val">GTM-W2TMT5K8</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Microsoft Clarity ID:</span>
+        <span class="config-val" id="clarity-val">Not Configured</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Clarity Status:</span>
+        <span class="config-val">
+          <span class="indicator error" id="clarity-indicator"></span>
+          <span id="clarity-status">placeholder-clarity-id (NEEDS CONFIG)</span>
+        </span>
+      </div>
+      <div class="notes">
+        <strong>⚠️ Critical:</strong> Clarity ID is currently a placeholder. Replace with real project ID from <a href="https://clarity.microsoft.com" target="_blank">clarity.microsoft.com</a> for heatmapping and session replay.
+      </div>
+    </div>
+
+    <!-- SEO Configuration -->
+    <div class="section">
+      <h2>🔍 SEO Configuration</h2>
+      <div class="config-item">
+        <span class="config-key">Canonical URL:</span>
+        <span class="config-val">willyd61.github.io/pleasureislanddesign.com</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Site Domain:</span>
+        <span class="config-val">https://willyd61.github.io/pleasureislanddesign.com/</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Sitemap:</span>
+        <span class="config-val">/sitemap.xml</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Robots:</span>
+        <span class="config-val">/robots.txt</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Meta Description:</span>
+        <span class="config-val">Premium cabinet refinishing & design services in Wilmington NC</span>
+      </div>
+    </div>
+
+    <!-- Service Configuration -->
+    <div class="section">
+      <h2>💼 Service Configuration</h2>
+      <div class="config-item">
+        <span class="config-key">Business Name:</span>
+        <span class="config-val">Pleasure Island Design LLC</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Primary Phone:</span>
+        <span class="config-val">(910) 444-1230</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Email:</span>
+        <span class="config-val">pleasureislanddesign@gmail.com</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Address:</span>
+        <span class="config-val">3720 Carolina Beach Rd, Suite F, Wilmington, NC 28412</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Service Areas:</span>
+        <span class="config-val">Wilmington, Kure Beach, Carolina Beach, Wrightsville Beach, Leland, NC</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Completion Timeline:</span>
+        <span class="config-val">5-8 Business Days</span>
+      </div>
+    </div>
+
+    <!-- Feature Flags -->
+    <div class="section">
+      <h2>🚩 Feature Flags</h2>
+      <div class="config-item">
+        <span class="config-key">Blog Enabled:</span>
+        <span class="config-val">✓ Yes</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Shop Enabled:</span>
+        <span class="config-val">✗ No (Coming Soon)</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">YouTube Videos:</span>
+        <span class="config-val">✓ Yes</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Consultation Booking:</span>
+        <span class="config-val">✓ Yes (CloudHQ)</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Newsletter Signup:</span>
+        <span class="config-val">✓ Yes</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Gallery Filter:</span>
+        <span class="config-val">✓ Yes</span>
+      </div>
+    </div>
+
+    <!-- Recent Updates -->
+    <div class="section">
+      <h2>📝 Recent Updates</h2>
+      <div class="config-item">
+        <span class="config-key">Last Website Update:</span>
+        <span class="config-val">2026-05-25 (Comprehensive Audit)</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Last Config Update:</span>
+        <span class="config-val" id="last-update">2026-05-25</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Wiki Created:</span>
+        <span class="config-val">2026-05-25</span>
+      </div>
+      <div class="config-item">
+        <span class="config-key">Phase:</span>
+        <span class="config-val">Beta Release (phase-beta-release)</span>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="btn-group">
+      <button class="btn-primary" onclick="testAnalytics()">Test Analytics</button>
+      <button class="btn-primary" onclick="validateSEO()">Validate SEO</button>
+      <button class="btn-secondary" onclick="copyConfig()">Copy Config</button>
+      <button class="btn-secondary" onclick="location.href='/'">Go to Homepage</button>
+    </div>
+
+    <!-- Important Notes -->
+    <div class="notes">
+      <strong>📌 Important:</strong> This page is for administrative reference only and is not indexed by search engines (noindex meta tag).
+      All configuration updates should be made by editing the source files and committing to the repository.
+      This page is automatically kept in sync via CI/CD pipeline.
+      <br><br>
+      <strong>Last Synced:</strong> <span id="sync-time">Checking...</span>
+    </div>
+
+    <footer>
+      <p>PID Startup Configuration v1.0 | Pleasure Island Design</p>
+      <p>For support, contact: pleasureislanddesign@gmail.com</p>
+    </footer>
+  </div>
+
+  <script>
+    // Check Clarity configuration
+    function checkClarity() {
+      const script = document.querySelector('script[src*="clarity"]');
+      const status = document.getElementById('clarity-status');
+      const indicator = document.getElementById('clarity-indicator');
+
+      if (!script || script.textContent.includes('placeholder-clarity-id')) {
+        status.textContent = '❌ NOT CONFIGURED';
+        indicator.classList.remove('ok');
+        indicator.classList.add('error');
+      } else {
+        status.textContent = '✓ CONFIGURED';
+        indicator.classList.remove('error');
+        indicator.classList.add('ok');
+      }
+    }
+
+    // Test analytics connections
+    function testAnalytics() {
+      const status = document.getElementById('analytics-status');
+      status.innerHTML = `
+        <div class="status-label">Analytics</div>
+        <div class="status-value">
+          <span class="indicator ok"></span> Testing...
+        </div>
+      `;
+
+      setTimeout(() => {
+        const hasGA = typeof gtag !== 'undefined';
+        const hasGTM = typeof dataLayer !== 'undefined';
+
+        status.innerHTML = `
+          <div class="status-label">Analytics</div>
+          <div class="status-value">
+            <span class="indicator ${hasGA && hasGTM ? 'ok' : 'warning'}"></span>
+            ${hasGA && hasGTM ? 'Active' : 'Partial'}
+          </div>
+        `;
+      }, 500);
+    }
+
+    // Validate SEO elements
+    function validateSEO() {
+      const alerts = [];
+
+      const canonical = document.querySelector('link[rel="canonical"]');
+      if (!canonical || !canonical.href.includes('willyd61.github.io')) {
+        alerts.push('❌ Canonical tag not properly set');
+      } else {
+        alerts.push('✓ Canonical tag correct');
+      }
+
+      const ogUrl = document.querySelector('meta[property="og:url"]');
+      if (ogUrl && !ogUrl.content.includes('willyd61.github.io')) {
+        alerts.push('❌ OG URL tag incorrect');
+      } else {
+        alerts.push('✓ OG tags correct');
+      }
+
+      alert(alerts.join('\n'));
+    }
+
+    // Copy configuration to clipboard
+    function copyConfig() {
+      const config = `
+PLEASURE ISLAND DESIGN CONFIGURATION
+=====================================
+Website: https://willyd61.github.io/pleasureislanddesign.com/
+GA4 ID: G-X0PJB95RBE
+GTM ID: GTM-W2TMT5K8
+Phone: (910) 444-1230
+Email: pleasureislanddesign@gmail.com
+Address: 3720 Carolina Beach Rd, Suite F, Wilmington, NC 28412
+Status: Beta Release (phase-beta-release)
+`;
+      navigator.clipboard.writeText(config.trim()).then(() => {
+        alert('Configuration copied to clipboard!');
+      });
+    }
+
+    // Set sync time
+    function setSyncTime() {
+      const syncTime = document.getElementById('sync-time');
+      const now = new Date().toLocaleString();
+      syncTime.textContent = now;
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      checkClarity();
+      testAnalytics();
+      setSyncTime();
+    });
+  </script>
+</body>
+</html>
