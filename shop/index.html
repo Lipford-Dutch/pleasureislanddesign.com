@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W2TMT5K8');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PID Merch Shop | Pleasure Island Design</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Show your love for coastal craftsmanship with Pleasure Island Design merch. Signature tees, embroidered hats, and koozies featuring the PID logo. Powered by Printify — coming soon.">
+  <meta name="keywords" content="Pleasure Island Design shop, PID merch, cabinet refinishing Wilmington NC, PID tee, coastal craftsmanship">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Pleasure Island Design LLC">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.pleasureislanddesign.com/shop/">
+  <meta property="og:title" content="PID Merch Shop | Pleasure Island Design">
+  <meta property="og:description" content="Show your love for coastal craftsmanship with Pleasure Island Design merch. Coming soon — powered by Printify.">
+  <meta property="og:image" content="https://www.pleasureislanddesign.com/img/pid-logo-small.jpg">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@PID_KitchenCabs">
+  <meta name="twitter:title" content="PID Merch Shop | Pleasure Island Design">
+  <meta name="twitter:description" content="Show your love for coastal craftsmanship. Signature tees, hats, and koozies featuring the PID logo. Coming soon.">
+  <meta name="twitter:image" content="https://www.pleasureislanddesign.com/img/pid-logo-small.jpg">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.pleasureislanddesign.com/shop/">
+
+  <!-- Favicon -->
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X0PJB95RBE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X0PJB95RBE');
+  </script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../styles.css">
+
+  <style>
+    /* ---- Skip Link ---- */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--space-4);
+      background: var(--pid-gold);
+      color: var(--pid-navy-dark);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: var(--text-sm);
+      z-index: calc(var(--z-modal) + 1);
+      text-decoration: none;
+      transition: top var(--transition-fast);
+    }
+    .skip-link:focus { top: var(--space-4); }
+
+    /* ---- Shop Hero ---- */
+    .shop-hero {
+      background: var(--pid-navy);
+      padding: calc(var(--space-32) + var(--space-8)) var(--container-pad) var(--space-16);
+      text-align: center;
+    }
+    .shop-hero .section-eyebrow { color: var(--pid-gold); margin-bottom: var(--space-4); }
+    .shop-hero-title {
+      font-family: var(--font-display);
+      font-size: var(--text-4xl);
+      font-weight: 700;
+      color: var(--pid-white);
+      line-height: 1.15;
+      max-width: 700px;
+      margin: 0 auto var(--space-5);
+    }
+    .shop-hero-sub {
+      color: rgba(255,255,255,0.7);
+      font-size: var(--text-lg);
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ---- Products Section ---- */
+    .products-section {
+      background: var(--pid-cream);
+      padding: var(--space-16) var(--container-pad);
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+      max-width: var(--container-max);
+      margin: var(--space-10) auto 0;
+    }
+    @media (max-width: 900px) { .products-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .products-grid { grid-template-columns: 1fr; } }
+
+    /* ---- Product Card ---- */
+    .product-card {
+      background: var(--pid-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+    }
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Product image placeholder */
+    .product-placeholder {
+      aspect-ratio: 4 / 3;
+      background: var(--pid-navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      padding: var(--space-8);
+      position: relative;
+    }
+    .product-placeholder-logo {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--pid-gold);
+      letter-spacing: 0.04em;
+    }
+    .product-placeholder-divider {
+      width: 40px;
+      height: 2px;
+      background: rgba(196,151,59,0.4);
+    }
+    .product-placeholder-name {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+    .product-coming-soon {
+      position: absolute;
+      top: var(--space-4);
+      right: var(--space-4);
+      background: var(--pid-gold);
+      color: var(--pid-navy-dark);
+      font-size: var(--text-xs);
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+    }
+
+    .product-body {
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .product-name {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 700;
+      color: var(--pid-navy);
+      margin-bottom: var(--space-3);
+    }
+    .product-desc {
+      font-size: var(--text-sm);
+      color: var(--pid-text-muted);
+      line-height: 1.65;
+      flex: 1;
+      margin-bottom: var(--space-5);
+    }
+    .product-notify-btn {
+      display: inline-block;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* ---- Printify Note ---- */
+    .printify-note {
+      background: var(--pid-white);
+      padding: var(--space-12) var(--container-pad);
+      text-align: center;
+    }
+    .printify-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .printify-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--pid-cream);
+      border: 1px solid rgba(30,58,95,0.1);
+      border-radius: var(--radius-full);
+      padding: var(--space-2) var(--space-5);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--pid-navy);
+      margin-bottom: var(--space-5);
+    }
+    .printify-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--pid-navy);
+      margin-bottom: var(--space-4);
+    }
+    .printify-desc {
+      color: var(--pid-text-muted);
+      font-size: var(--text-base);
+      line-height: 1.7;
+      margin-bottom: var(--space-6);
+    }
+
+    /* ---- Newsletter ---- */
+    .newsletter {
+      background: var(--pid-navy);
+    }
+    .newsletter-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-10);
+      flex-wrap: wrap;
+    }
+    .newsletter-content { flex: 1; min-width: 260px; }
+    .newsletter-content .section-eyebrow { color: var(--pid-gold); }
+    .newsletter-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 700;
+      color: var(--pid-white);
+      line-height: 1.25;
+      margin-bottom: var(--space-3);
+    }
+    .newsletter-title em { color: var(--pid-gold); font-style: italic; }
+    .newsletter-content > p { color: rgba(255,255,255,0.65); font-size: var(--text-sm); }
+    .newsletter-form { flex: 1; min-width: 280px; max-width: 420px; }
+    .newsletter-fields {
+      display: flex;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+    }
+    .newsletter-fields input[type="email"] {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.72em 1.1em;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-full);
+      background: rgba(255,255,255,0.08);
+      color: var(--pid-white);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      transition: border-color var(--transition-base);
+    }
+    .newsletter-fields input[type="email"]::placeholder { color: rgba(255,255,255,0.4); }
+    .newsletter-fields input[type="email"]:focus {
+      outline: none;
+      border-color: var(--pid-gold);
+    }
+    .newsletter-note {
+      margin-top: var(--space-3);
+      font-size: var(--text-xs);
+      color: rgba(255,255,255,0.45);
+      min-height: 1.4em;
+    }
+  </style>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Pleasure Island Design Shop",
+    "url": "https://www.pleasureislanddesign.com/shop/",
+    "description": "Official merch from Pleasure Island Design — signature tees, hats, and koozies featuring the PID logo. Powered by Printify, coming soon.",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Pleasure Island Design",
+      "url": "https://www.pleasureislanddesign.com"
+    }
+  }
+  </script>
+
+  <!-- Scripts (deferred) -->
+  <script src="../js/pleasure-island-scripts.js" defer></script>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W2TMT5K8" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="../" class="header-logo" aria-label="Pleasure Island Design — Home">
+        <img src="../img/pid-logo-small.jpg" alt="Pleasure Island Design" width="220" height="95">
+      </a>
+
+      <nav class="primary-nav" id="primary-nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="../" class="nav-link">Home</a></li>
+          <li><a href="../#about" class="nav-link">About</a></li>
+          <li><a href="../#services" class="nav-link">Services</a></li>
+          <li><a href="../#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="../#testimonials" class="nav-link">Reviews</a></li>
+          <li><a href="../#contact" class="nav-link">Contact</a></li>
+          <li><a href="../blog/" class="nav-link">Blog</a></li>
+          <li><a href="index.html" class="nav-link active" aria-current="page">Shop</a></li>
+          <li><a href="../specials/" class="nav-link">Specials</a></li>
+        </ul>
+        <a href="https://www.cloudhq.net/meeting/pleasureislanddesign@gmail.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-cta" data-track="nav-cta">Request Consultation</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="shop-hero" aria-label="PID Shop">
+    <p class="section-eyebrow">Wear the Brand</p>
+    <h1 class="shop-hero-title">Pleasure Island Design Shop</h1>
+    <p class="shop-hero-sub">Show your love for coastal craftsmanship. All items feature our signature PID logo.</p>
+  </section>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main id="main-content">
+
+    <!-- ===== PRODUCTS SECTION ===== -->
+    <section class="products-section" aria-label="Shop products">
+      <div class="container">
+        <div class="section-header reveal" style="text-align:center;">
+          <p class="section-eyebrow">Our Collection</p>
+          <h2 class="section-title">Signature <em>PID Gear</em></h2>
+          <p class="section-subtitle">Premium items designed for those who appreciate quality craftsmanship — on and off the kitchen.</p>
+        </div>
+
+        <div class="products-grid">
+
+          <!-- Product 1: Signature Tee -->
+          <article class="product-card reveal" aria-label="Signature Tee — Coming Soon">
+            <div class="product-placeholder" role="img" aria-label="Signature Tee product placeholder">
+              <span class="product-coming-soon" aria-label="Coming Soon">Coming Soon</span>
+              <span class="product-placeholder-logo">PID</span>
+              <span class="product-placeholder-divider" aria-hidden="true"></span>
+              <span class="product-placeholder-name">Signature Tee</span>
+            </div>
+            <div class="product-body">
+              <h3 class="product-name">Signature Tee</h3>
+              <p class="product-desc">Premium cotton tee featuring the PID logo. Available in navy and white. Sizes S–3XL. Soft, durable, and designed to outlast the competition — just like our cabinet finishes.</p>
+              <a href="../#contact" class="btn btn-primary product-notify-btn" data-track="shop-tee-notify" aria-label="Notify me when the Signature Tee launches">Notify Me</a>
+            </div>
+          </article>
+
+          <!-- Product 2: Coastal Hat -->
+          <article class="product-card reveal" aria-label="Coastal Hat — Coming Soon">
+            <div class="product-placeholder" role="img" aria-label="Coastal Hat product placeholder">
+              <span class="product-coming-soon" aria-label="Coming Soon">Coming Soon</span>
+              <span class="product-placeholder-logo">PID</span>
+              <span class="product-placeholder-divider" aria-hidden="true"></span>
+              <span class="product-placeholder-name">Coastal Hat</span>
+            </div>
+            <div class="product-body">
+              <h3 class="product-name">Coastal Hat</h3>
+              <p class="product-desc">Embroidered structured cap in navy with gold PID logo. One size adjustable. The perfect hat for a day on the coast — built with the same attention to detail we bring to every cabinet.</p>
+              <a href="../#contact" class="btn btn-primary product-notify-btn" data-track="shop-hat-notify" aria-label="Notify me when the Coastal Hat launches">Notify Me</a>
+            </div>
+          </article>
+
+          <!-- Product 3: Koozie Pack -->
+          <article class="product-card reveal" aria-label="Koozie Pack — Coming Soon">
+            <div class="product-placeholder" role="img" aria-label="Koozie Pack product placeholder">
+              <span class="product-coming-soon" aria-label="Coming Soon">Coming Soon</span>
+              <span class="product-placeholder-logo">PID</span>
+              <span class="product-placeholder-divider" aria-hidden="true"></span>
+              <span class="product-placeholder-name">Koozie Pack</span>
+            </div>
+            <div class="product-body">
+              <h3 class="product-name">Koozie Pack (2-pack)</h3>
+              <p class="product-desc">Neoprene koozies in PID navy. Keep your coastal beverages cold in style. Featuring the PID logo in gold — great for housewarming gifts and entertaining after your new kitchen reveal.</p>
+              <a href="../#contact" class="btn btn-primary product-notify-btn" data-track="shop-koozie-notify" aria-label="Notify me when the Koozie Pack launches">Notify Me</a>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PRINTIFY NOTE ===== -->
+    <section class="printify-note" aria-label="About our store">
+      <div class="printify-inner reveal">
+        <span class="printify-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Powered by Printify
+        </span>
+        <h2 class="printify-title">Store Launching Soon</h2>
+        <p class="printify-desc">
+          Our merch store is coming soon. We've partnered with Printify to bring you on-demand, quality-printed products that ship directly to your door. Sign up below to be notified the moment products go live — and get an exclusive early-bird discount.
+        </p>
+        <a href="../#contact" class="btn btn-primary" data-track="printify-notify-cta">Get Early Access</a>
+      </div>
+    </section>
+
+    <!-- ===== NEWSLETTER / NOTIFY SIGNUP ===== -->
+    <section class="section newsletter" aria-label="Get notified when the shop launches">
+      <div class="container">
+        <div class="newsletter-inner reveal">
+          <div class="newsletter-content">
+            <p class="section-eyebrow">Be First in Line</p>
+            <h2 class="newsletter-title">Know When <em>We Launch</em></h2>
+            <p>Sign up to receive a notification the moment the PID shop goes live. Early subscribers get an exclusive launch discount — no spam, ever.</p>
+          </div>
+          <form class="newsletter-form" id="newsletter-form" aria-label="Shop launch notification signup">
+            <div class="newsletter-fields">
+              <input type="email" id="newsletter-email" name="email" placeholder="Your email address" required aria-label="Email address" autocomplete="email">
+              <button type="submit" class="btn btn-primary" data-track="shop-notify-signup">Notify Me</button>
+            </div>
+            <p class="newsletter-note" id="newsletter-message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="../img/pid-logo-small.jpg" alt="Pleasure Island Design" width="200" height="86" loading="lazy">
+          <p class="footer-tagline">Interiors · Cabinetry · Furniture</p>
+          <p class="footer-desc">Premium cabinet refinishing and design services serving Southeast North Carolina since 2014.</p>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-heading">Services</h3>
+          <ul class="footer-links">
+            <li><a href="../#services">Cabinet Refinishing</a></li>
+            <li><a href="../#services">Cabinet Repair</a></li>
+            <li><a href="../#services">Hardware Installation</a></li>
+            <li><a href="../#services">Cabinet Refacing</a></li>
+            <li><a href="../#services">Drawer Upgrades</a></li>
+            <li><a href="../#contact">Design Consultation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-heading">Contact</h3>
+          <address class="footer-contact">
+            <p>3720 Carolina Beach Road, Suite F<br>Wilmington, NC 28412</p>
+            <p><a href="tel:+19104441230">(910) 444-1230</a></p>
+            <p><a href="mailto:pleasureislanddesign@gmail.com">pleasureislanddesign@gmail.com</a></p>
+          </address>
+          <div class="footer-awards">
+            <img src="../img/2021-nextdoor-award.jpg" alt="2021 Neighborhood Favorite" width="60" height="60" loading="lazy">
+            <img src="../img/2023-nextdoor-award.jpg" alt="2023 Neighborhood Favorite" width="60" height="60" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="copyright-year">2026</span> Pleasure Island Design LLC. All rights reserved.</p>
+        <p class="footer-license">Licensed under <a href="../LICENSE" target="_blank" rel="noopener noreferrer">Apache 2.0</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== SCROLL TO TOP ===== -->
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top" hidden>↑</button>
+
+  <!-- ===== MOBILE STICKY CTA ===== -->
+  <div class="mobile-cta-bar" id="mobile-cta-bar" aria-label="Quick contact" hidden>
+    <a href="tel:+19104441230" class="mobile-cta-phone" data-track="mobile-sticky-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92l-.08 2z"/></svg>
+      (910) 444-1230
+    </a>
+    <a href="../#contact" class="btn btn-gold mobile-cta-book" data-track="mobile-sticky-cta">
+      Book Consultation
+    </a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{
+  "name": "pleasureislanddesign.com",
+  "version": "1.0.0",
+  "description": "Pleasure Island Design - Premium Cabinet Refinishing & Repair Services in Southeast North Carolina",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Pleasure Island Design LLC",
+    "email": "pleasureislanddesign@gmail.com",
+    "url": "https://www.pleasureislanddesign.com"
+  },
+  "homepage": "https://www.pleasureislanddesign.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/willyd61/pleasureislanddesign.com.git"
+  },
+  "bugs": {
+    "url": "https://github.com/willyd61/pleasureislanddesign.com/issues",
+    "email": "pleasureislanddesign@gmail.com"
+  },
+  "keywords": [
+    "cabinet-refinishing",
+    "kitchen-transformation",
+    "home-improvement",
+    "north-carolina",
+    "wilmington",
+    "interior-design"
+  ],
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "scripts": {
+    "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
+    "lint:html": "htmlhint index.html",
+    "lint:css": "stylelint \"**/*.css\"",
+    "lint:js": "eslint js/ --ext .js",
+    "format": "prettier --write index.html styles.css js/pleasure-island-scripts.js",
+    "format:check": "prettier --check index.html styles.css js/pleasure-island-scripts.js",
+    "precommit": "npm run lint && npm run format:check"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "htmlhint": "^1.1.4",
+    "prettier": "^3.1.1",
+    "stylelint": "^16.3.1",
+    "stylelint-config-standard": "^36.0.0"
+  }
+}
