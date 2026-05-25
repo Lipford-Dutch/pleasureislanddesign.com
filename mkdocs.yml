@@ -2,6 +2,7 @@ site_name: Pleasure Island Design — Technical Reference
 site_url: https://willyd61.github.io/pleasureislanddesign.com/
 site_author: Pleasure Island Design LLC
 site_description: Technical documentation, white papers, and operational guides for pleasureislanddesign.com
+docs_dir: .
 
 repo_name: willyd61/pleasureislanddesign.com
 repo_url: https://github.com/willyd61/pleasureislanddesign.com
