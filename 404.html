@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-W2TMT5K8');</script>
+  <!-- End Google Tag Manager -->
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page Not Found | Pleasure Island Design</title>
+
+  <!-- SEO -->
+  <meta name="description" content="The page you're looking for may have moved or doesn't exist. Return to Pleasure Island Design — Wilmington NC's premier cabinet refinishing studio.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="author" content="Pleasure Island Design LLC">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.pleasureislanddesign.com/404.html">
+  <meta property="og:title" content="Page Not Found | Pleasure Island Design">
+  <meta property="og:description" content="The page you're looking for may have moved or doesn't exist. Return to Pleasure Island Design.">
+  <meta property="og:image" content="https://www.pleasureislanddesign.com/img/pid-logo-small.jpg">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@PID_KitchenCabs">
+  <meta name="twitter:title" content="Page Not Found | Pleasure Island Design">
+  <meta name="twitter:description" content="The page you're looking for may have moved or doesn't exist. Return to Pleasure Island Design.">
+  <meta name="twitter:image" content="https://www.pleasureislanddesign.com/img/pid-logo-small.jpg">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.pleasureislanddesign.com/404.html">
+
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-X0PJB95RBE"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-X0PJB95RBE');
+  </script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ---- Skip Link ---- */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--space-4);
+      background: var(--pid-gold);
+      color: var(--pid-navy-dark);
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: var(--text-sm);
+      z-index: calc(var(--z-modal) + 1);
+      text-decoration: none;
+      transition: top var(--transition-fast);
+    }
+    .skip-link:focus { top: var(--space-4); }
+
+    /* ---- 404 Section ---- */
+    .error-section {
+      background: var(--pid-navy);
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(var(--space-32) + var(--space-8)) var(--container-pad) var(--space-16);
+    }
+    .error-inner {
+      text-align: center;
+      max-width: 620px;
+    }
+
+    /* PID Logo mark */
+    .error-logo {
+      margin-bottom: var(--space-8);
+    }
+    .error-logo img {
+      width: 140px;
+      height: auto;
+      opacity: 0.85;
+    }
+
+    /* Giant 404 */
+    .error-code {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 18vw, 10rem);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--pid-gold);
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-4);
+      /* Subtle text-shadow for depth */
+      text-shadow: 0 4px 32px rgba(196,151,59,0.25);
+    }
+    .error-divider {
+      width: 60px;
+      height: 3px;
+      background: rgba(196,151,59,0.4);
+      margin: 0 auto var(--space-6);
+      border-radius: 2px;
+    }
+    .error-title {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: 700;
+      color: var(--pid-white);
+      margin-bottom: var(--space-5);
+      line-height: 1.2;
+    }
+    .error-message {
+      color: rgba(255,255,255,0.7);
+      font-size: var(--text-lg);
+      line-height: 1.65;
+      margin-bottom: var(--space-10);
+    }
+
+    /* Helpful links */
+    .error-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+    }
+    .error-link-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      padding: 0.65em 1.3em;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: var(--radius-full);
+      transition: color var(--transition-base), border-color var(--transition-base), background var(--transition-base);
+    }
+    .error-link-secondary:hover {
+      color: var(--pid-white);
+      border-color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.06);
+    }
+    .error-link-back {
+      color: rgba(255,255,255,0.55);
+      font-size: var(--text-sm);
+      margin-top: var(--space-6);
+      display: block;
+    }
+    .error-link-back a {
+      color: var(--pid-gold);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .error-link-back a:hover { text-decoration: underline; }
+  </style>
+
+  <!-- Scripts (deferred) -->
+  <script src="js/pleasure-island-scripts.js" defer></script>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W2TMT5K8" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="Pleasure Island Design — Home">
+        <img src="img/pid-logo-small.jpg" alt="Pleasure Island Design" width="220" height="95">
+      </a>
+
+      <nav class="primary-nav" id="primary-nav" role="navigation" aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/#about" class="nav-link">About</a></li>
+          <li><a href="/#services" class="nav-link">Services</a></li>
+          <li><a href="/#gallery" class="nav-link">Gallery</a></li>
+          <li><a href="/#testimonials" class="nav-link">Reviews</a></li>
+          <li><a href="/#contact" class="nav-link">Contact</a></li>
+          <li><a href="/blog/" class="nav-link">Blog</a></li>
+          <li><a href="/shop/" class="nav-link">Shop</a></li>
+          <li><a href="/specials/" class="nav-link">Specials</a></li>
+        </ul>
+        <a href="https://www.cloudhq.net/meeting/pleasureislanddesign@gmail.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary nav-cta" data-track="nav-cta">Request Consultation</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-nav">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main id="main-content">
+    <section class="error-section" aria-label="Page not found">
+      <div class="error-inner">
+
+        <div class="error-logo">
+          <img src="img/pid-logo-small.jpg" alt="Pleasure Island Design" loading="eager">
+        </div>
+
+        <p class="error-code" aria-label="Error 404">404</p>
+        <div class="error-divider" aria-hidden="true"></div>
+
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-message">
+          The page you're looking for may have moved or doesn't exist. Let's get you back on track.
+        </p>
+
+        <nav class="error-links" aria-label="Helpful navigation links">
+          <a href="/" class="btn btn-gold btn-lg" data-track="404-home-cta">
+            &#8592; Back Home
+          </a>
+          <a href="/#gallery" class="error-link-secondary" data-track="404-gallery-cta">
+            View Our Work
+          </a>
+          <a href="/#contact" class="error-link-secondary" data-track="404-contact-cta">
+            Contact Us
+          </a>
+        </nav>
+
+        <p class="error-link-back">
+          Looking for something specific? <a href="/#contact">Send us a message</a> and we'll point you in the right direction.
+        </p>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="img/pid-logo-small.jpg" alt="Pleasure Island Design" width="200" height="86" loading="lazy">
+          <p class="footer-tagline">Interiors · Cabinetry · Furniture</p>
+          <p class="footer-desc">Premium cabinet refinishing and design services serving Southeast North Carolina since 2014.</p>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-heading">Services</h3>
+          <ul class="footer-links">
+            <li><a href="/#services">Cabinet Refinishing</a></li>
+            <li><a href="/#services">Cabinet Repair</a></li>
+            <li><a href="/#services">Hardware Installation</a></li>
+            <li><a href="/#services">Cabinet Refacing</a></li>
+            <li><a href="/#services">Drawer Upgrades</a></li>
+            <li><a href="/#contact">Design Consultation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3 class="footer-heading">Contact</h3>
+          <address class="footer-contact">
+            <p>3720 Carolina Beach Road, Suite F<br>Wilmington, NC 28412</p>
+            <p><a href="tel:+19104441230">(910) 444-1230</a></p>
+            <p><a href="mailto:pleasureislanddesign@gmail.com">pleasureislanddesign@gmail.com</a></p>
+          </address>
+          <div class="footer-awards">
+            <img src="img/2021-nextdoor-award.jpg" alt="2021 Neighborhood Favorite" width="60" height="60" loading="lazy">
+            <img src="img/2023-nextdoor-award.jpg" alt="2023 Neighborhood Favorite" width="60" height="60" loading="lazy">
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="copyright-year">2026</span> Pleasure Island Design LLC. All rights reserved.</p>
+        <p class="footer-license">Licensed under <a href="LICENSE" target="_blank" rel="noopener noreferrer">Apache 2.0</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== SCROLL TO TOP ===== -->
+  <button class="scroll-top" id="scroll-top" aria-label="Scroll to top" hidden>↑</button>
+
+  <!-- ===== MOBILE STICKY CTA ===== -->
+  <div class="mobile-cta-bar" id="mobile-cta-bar" aria-label="Quick contact" hidden>
+    <a href="tel:+19104441230" class="mobile-cta-phone" data-track="mobile-sticky-phone">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92l-.08 2z"/></svg>
+      (910) 444-1230
+    </a>
+    <a href="/#contact" class="btn btn-gold mobile-cta-book" data-track="mobile-sticky-cta">
+      Book Consultation
+    </a>
+  </div>
+</body>
+</html>

@@ -141,19 +141,49 @@
 
 ---
 
-## 🎨 Design Enhancements (Phase 3+)
+## 🎨 Design Enhancements
 
 - [ ] **Dark mode** — Complete dark mode implementation
 - [ ] **Print styles** — Printable quote/service sheet
 - [ ] **Animation polish** — Refine scroll animations, micro-interactions
 - [ ] **Loading states** — Skeleton screens for dynamic content
-- [ ] **Error pages** — Custom 404 and 500 pages
+- [x] **Error pages** — Custom 404 page *(done Phase 3)*
+
+---
+
+## 🏗️ Landing Pages & Trade Sections
+
+> Moved from Phase 4 — high ROI for designer/builder audience
+
+- [ ] **Interior Designer Landing Page** — Dedicated `/designers` page with trade program details, reference list, downloadable spec sheet
+- [ ] **Contractor/Builder Landing Page** — Dedicated `/builders` page explaining partnership workflow and turnaround SLA
+- [ ] **Featured Project Case Study** — Deep-dive section: one project shown as before → process photos → after, with client quote. Builds narrative trust.
+- [ ] **Location landing pages** — Remaining pages: Kure Beach, Carolina Beach, Leland, Wrightsville Beach *(Wilmington done Phase 3)*
+
+---
+
+## 📸 Content & Media
+
+- [ ] **Instagram Feed Grid** — Live @pleasureislanddesign feed embedded in gallery or footer section
+- [ ] **Video Testimonials** — Support embedding short client video clips alongside text reviews
+- [ ] **Project 360° Tours** — Interactive room tours for select showcase projects
+- [ ] **Before/After Photo Submission Portal** — Let past clients submit their own project photos (with approval workflow)
+- [ ] **Progressive Image Loading** — Replace heavy gallery images with WebP + srcset for Core Web Vitals
+
+---
+
+## 🛠️ UX Enhancements
+
+- [ ] **Sticky Header CTA on Desktop** — Show "Request Consultation" button in header after scrolling past hero
+- [ ] **Seasonal Promotions System** — CMS-driven banner for Sales/Specials (spring refresh, holiday booking)
+- [ ] **Material Sample Request** — "Request a finish sample" form for designers and builders evaluating finishes
+- [ ] **Virtual Consultation Option** — Zoom/video call booking option alongside in-person for out-of-area designers
 
 ---
 
 ## 📋 Notes
 
-- **Priority order suggested:** SEO → Reviews → Blog → Video → Swag Store
+- **Priority order suggested:** SEO → Reviews → Blog → Video → Swag Store → Landing Pages
 - **Quick wins:** Google Reviews integration, heatmapping, back-reference links
 - **Biggest ROI:** Location landing pages + blog posts for organic traffic
 - **Platform recommendation for video:** YouTube (free, SEO boost, no hosting costs)
@@ -161,25 +191,23 @@
 
 ---
 
----
+## Phase 3 Progress
 
-## Phase 4 Backlog — Discovered During Phase 2.5
+> Items completed in Phase 3:
 
-> Items found during hero redesign and UX audit. Lower priority than Phase 3 but worth tracking.
+- [x] Blog section: listing page + 3 SEO posts
+- [x] Specials page (`/specials/`)
+- [x] Shop page (`/shop/`)
+- [x] Custom 404 page
+- [x] Location landing page: Wilmington NC (`/locations/wilmington.html`)
+- [x] Video section placeholder on homepage
+- [x] Blog teaser section on homepage
+- [x] Service area map section on homepage
+- [x] Skip-to-content accessibility link
+- [x] Microsoft Clarity heatmapping
+- [x] Sitemap.xml expanded with all new pages
+- [x] Nav updated with Blog + Specials links
+- [x] Phase 4 backlog merged into Phase 3
 
-- [ ] **Featured Project Case Study** — Deep-dive section: one project shown as before → process photos → after, with client quote. Builds narrative trust.
-- [ ] **Video Testimonials** — Support embedding short client video clips alongside text reviews
-- [ ] **Instagram Feed Grid** — Live @pleasureislanddesign feed embedded in gallery or footer section
-- [ ] **Interior Designer Landing Page** — Dedicated `/designers` page with trade program details, reference list, downloadable spec sheet
-- [ ] **Contractor/Builder Landing Page** — Dedicated `/builders` page explaining partnership workflow and turnaround SLA
-- [ ] **Before/After Photo Submission Portal** — Let past clients submit their own project photos (with approval workflow)
-- [ ] **Virtual Consultation Option** — Zoom/video call booking option alongside in-person for out-of-area designers and second-home owners
-- [ ] **Project 360° Tours** — Interactive room tours for select showcase projects
-- [ ] **Material Sample Request** — "Request a finish sample" form for designers and builders evaluating finishes
-- [ ] **Service Area Map** — Interactive map showing all completed project locations across SE NC
-- [ ] **Seasonal Promotions System** — CMS-driven banner for Sales/Specials (spring refresh, holiday booking)
-- [ ] **Sticky Header CTA on Desktop** — Show "Request Consultation" button in header after scrolling past hero (currently desktop header only shows on scroll)
-- [ ] **Progressive Image Loading** — Replace heavy gallery images with WebP + srcset for Core Web Vitals
-
-_Last updated: Phase 2.5 Hero & UX Redesign_
-_Next review: After Phase 2 merge_
+_Last updated: Phase 3 Feature Development_
+_Next review: Pre-release testing_
