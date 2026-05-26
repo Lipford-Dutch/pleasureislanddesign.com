@@ -51,6 +51,7 @@
   </script>
 
   <!-- Microsoft Clarity (heatmapping) -->
+  <!-- ⚠️ NEEDS CONFIGURATION: Replace "placeholder-clarity-id" with real project ID from https://clarity.microsoft.com -->
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","placeholder-clarity-id");
   </script>
@@ -192,7 +193,7 @@
             </div>
             <div class="hero-proof-divider" aria-hidden="true"></div>
             <div class="hero-proof-stat">
-              <strong class="stat-number" data-target="500">0</strong><strong>+</strong>
+              <strong class="stat-number" data-target="500">500</strong><strong>+</strong>
               <span>Transformations</span>
             </div>
             <div class="hero-proof-divider" aria-hidden="true"></div>
@@ -254,19 +255,19 @@
     <div class="container">
       <div class="stats-grid">
         <div class="stat-item">
-          <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
+          <span class="stat-number" data-target="10">10</span><span class="stat-suffix">+</span>
           <span class="stat-label">Years Experience</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span>
+          <span class="stat-number" data-target="500">500</span><span class="stat-suffix">+</span>
           <span class="stat-label">Transformations</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number" data-target="5">0</span><span class="stat-suffix">–8</span>
+          <span class="stat-number" data-target="5">5</span><span class="stat-suffix">–8</span>
           <span class="stat-label">Day Completion</span>
         </div>
         <div class="stat-item">
-          <span class="stat-number" data-target="100">0</span><span class="stat-suffix">%</span>
+          <span class="stat-number" data-target="100">100</span><span class="stat-suffix">%</span>
           <span class="stat-label">Satisfaction Rate</span>
         </div>
       </div>
@@ -538,41 +539,17 @@
         <p class="section-subtitle">There's nothing like seeing the before-and-after in motion. Follow our work on YouTube for process walkthroughs, transformations, and care tips.</p>
       </div>
       <div class="video-grid reveal">
-        <div class="video-placeholder">
-          <div class="video-placeholder-inner">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
-            <p class="video-placeholder-text">Video Coming Soon</p>
-            <p class="video-placeholder-sub">We're building our YouTube channel with process walkthroughs and project reveals. Subscribe to be notified when we launch.</p>
-            <a href="https://www.youtube.com/@pleasureislanddesign" target="_blank" rel="noopener noreferrer" class="btn btn-outline-navy" data-track="youtube-subscribe">Subscribe on YouTube</a>
-          </div>
+        <div class="video-embed">
+          <iframe width="100%" height="315" src="https://www.youtube.com/embed/jvEmaRHYsOM" title="Pleasure Island Design - Cabinet Transformation" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
         </div>
-        <div class="video-cta-panel reveal">
-          <p class="section-eyebrow">Coming Soon</p>
-          <h3 class="video-cta-title">What We're Creating</h3>
-          <ul class="video-coming-list">
-            <li>
-              <span class="video-coming-icon" aria-hidden="true">🎬</span>
-              <span>Process Walkthrough — Prep to Finish</span>
-            </li>
-            <li>
-              <span class="video-coming-icon" aria-hidden="true">📸</span>
-              <span>Before &amp; After Transformation Reveals</span>
-            </li>
-            <li>
-              <span class="video-coming-icon" aria-hidden="true">💬</span>
-              <span>Client Testimonial Videos</span>
-            </li>
-            <li>
-              <span class="video-coming-icon" aria-hidden="true">🎨</span>
-              <span>Color Selection &amp; Trend Tips</span>
-            </li>
-            <li>
-              <span class="video-coming-icon" aria-hidden="true">✨</span>
-              <span>Nicole's Founder Story</span>
-            </li>
-          </ul>
-          <a href="https://www.youtube.com/@pleasureislanddesign" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-track="youtube-channel">Visit Our Channel</a>
+        <div class="video-embed">
+          <iframe width="100%" height="315" src="https://www.youtube.com/embed/miqI0lsGViw" title="Pleasure Island Design - Cabinet Refinishing Process" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
         </div>
+      </div>
+      <div class="video-cta-panel reveal" style="margin-top: 40px; text-align: center;">
+        <h3 class="video-cta-title">More Content Coming</h3>
+        <p style="margin: 15px 0;">Process walkthroughs, before &amp; after reveals, and client testimonials</p>
+        <a href="https://www.youtube.com/@pleasureislanddesign" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-track="youtube-channel">Subscribe for Updates</a>
       </div>
     </div>
   </section>
@@ -1009,7 +986,6 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; <span id="copyright-year">2026</span> Pleasure Island Design LLC. All rights reserved.</p>
-        <p class="footer-license">Licensed under <a href="LICENSE" target="_blank" rel="noopener noreferrer">Apache 2.0</a></p>
       </div>
     </div>
   </footer>
