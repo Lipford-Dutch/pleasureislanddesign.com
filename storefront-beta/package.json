@@ -1,0 +1,15 @@
+{
+  "name": "pleasure-island-design-swag-store",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "build": "node --check server.mjs && node --check src/catalog.mjs && node --check src/cart.mjs && node --check src/checkout.mjs && node --check public/app.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

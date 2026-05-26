@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Coastal Color Fan Deck">
+  <rect width="640" height="480" fill="#fffaf0"/>
+  <g transform="translate(319 270)">
+    <rect x="-42" y="-170" width="84" height="220" rx="12" fill="#092f4f" transform="rotate(-34)"/>
+    <rect x="-42" y="-170" width="84" height="220" rx="12" fill="#174a71" transform="rotate(-18)"/>
+    <rect x="-42" y="-170" width="84" height="220" rx="12" fill="#4f9ead" transform="rotate(0)"/>
+    <rect x="-42" y="-170" width="84" height="220" rx="12" fill="#e8d0a3" transform="rotate(18)"/>
+    <rect x="-42" y="-170" width="84" height="220" rx="12" fill="#b78a45" transform="rotate(34)"/>
+    <circle r="18" fill="#fffaf0" stroke="#092f4f" stroke-width="8"/>
+  </g>
+  <text x="320" y="430" text-anchor="middle" font-family="Georgia,serif" font-size="31" font-weight="700" fill="#092f4f">Coastal Color Fan Deck</text>
+</svg>

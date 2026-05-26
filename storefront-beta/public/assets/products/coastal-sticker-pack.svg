@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Coastal Sticker Pack">
+  <rect width="640" height="480" fill="#fffaf0"/>
+  <rect x="122" y="106" width="128" height="128" rx="24" fill="#092f4f"/>
+  <rect x="260" y="154" width="128" height="128" rx="24" fill="#e8d0a3" stroke="#b78a45" stroke-width="6"/>
+  <rect x="398" y="112" width="128" height="128" rx="24" fill="#4f9ead"/>
+  <path d="M144 182c32 22 62 21 90-3-20 45-67 48-90 3Z" fill="#fffaf0"/>
+  <path d="M292 218h64M292 242h64M292 194h64" stroke="#092f4f" stroke-width="8" stroke-linecap="round"/>
+  <path d="M421 181c17-42 45-55 84-38-19 8-32 26-38 52-19 0-34-5-46-14Z" fill="#fffaf0"/>
+  <circle cx="223" cy="296" r="40" fill="#b78a45"/>
+  <circle cx="418" cy="309" r="40" fill="#092f4f"/>
+  <text x="320" y="430" text-anchor="middle" font-family="Georgia,serif" font-size="31" font-weight="700" fill="#092f4f">Coastal Sticker Pack</text>
+</svg>

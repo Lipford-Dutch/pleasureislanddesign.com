@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Coastal Craft Cap">
+  <rect width="640" height="480" fill="#fffaf0"/>
+  <path d="M60 384h520" stroke="#b78a45" stroke-width="4"/>
+  <path d="M168 274c10-98 73-154 174-154 80 0 132 51 151 154H168Z" fill="#092f4f"/>
+  <path d="M163 274c-50 8-83 31-101 68 85 15 181-3 283-54l-8-14H163Z" fill="#174a71"/>
+  <path d="M224 271c12-62 47-96 105-102 58-5 99 25 124 90" fill="none" stroke="#e8d0a3" stroke-width="10" opacity=".55"/>
+  <circle cx="333" cy="226" r="42" fill="#fbf7ec"/>
+  <path d="M302 233c22 19 46 19 67 0-12 32-55 32-67 0Z" fill="#4f9ead"/>
+  <text x="320" y="366" text-anchor="middle" font-family="Georgia,serif" font-size="31" font-weight="700" fill="#092f4f">Coastal Craft Cap</text>
+</svg>

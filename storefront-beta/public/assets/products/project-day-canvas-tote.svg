@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Project Day Canvas Tote">
+  <rect width="640" height="480" fill="#fffaf0"/>
+  <path d="M202 152h236l28 232H174l28-232Z" fill="#fbf7ec" stroke="#092f4f" stroke-width="12"/>
+  <path d="M250 166c0-55 28-83 70-83s70 28 70 83" fill="none" stroke="#b78a45" stroke-width="14"/>
+  <circle cx="320" cy="258" r="46" fill="#092f4f"/>
+  <path d="M286 272c26 18 51 18 76 0-14 39-60 39-76 0Z" fill="#4f9ead"/>
+  <path d="M233 335h174" stroke="#e8d0a3" stroke-width="10" stroke-linecap="round"/>
+  <text x="320" y="432" text-anchor="middle" font-family="Georgia,serif" font-size="31" font-weight="700" fill="#092f4f">Project Day Canvas Tote</text>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Morning Coast Mug">
+  <rect width="640" height="480" fill="#fffaf0"/>
+  <path d="M207 144h220v156c0 62-39 98-110 98s-110-36-110-98V144Z" fill="#fbf7ec" stroke="#092f4f" stroke-width="14"/>
+  <path d="M427 190h40c43 0 61 66 23 95-17 13-38 14-63 4" fill="none" stroke="#092f4f" stroke-width="18"/>
+  <path d="M221 287c44 29 87 29 129 0 20-14 39-18 59-12-35 54-108 78-185 34" fill="#4f9ead"/>
+  <path d="M218 332h198c-10 44-43 66-99 66s-89-22-99-66Z" fill="#092f4f"/>
+  <text x="320" y="438" text-anchor="middle" font-family="Georgia,serif" font-size="31" font-weight="700" fill="#092f4f">Morning Coast Mug</text>
+</svg>
