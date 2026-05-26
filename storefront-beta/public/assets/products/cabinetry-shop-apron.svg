@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Cabinetry Shop Apron">
+  <rect width="640" height="480" fill="#fffaf0"/>
+  <path d="M244 80h152l34 318H210l34-318Z" fill="#174a71"/>
+  <path d="M266 110c0 44 18 66 54 66s54-22 54-66" fill="none" stroke="#e8d0a3" stroke-width="12"/>
+  <rect x="256" y="254" width="128" height="84" rx="8" fill="#092f4f"/>
+  <path d="M276 294h88" stroke="#e8d0a3" stroke-width="8" stroke-linecap="round"/>
+  <path d="M210 398h220" stroke="#b78a45" stroke-width="6"/>
+  <text x="320" y="438" text-anchor="middle" font-family="Georgia,serif" font-size="31" font-weight="700" fill="#092f4f">Cabinetry Shop Apron</text>
+</svg>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Pleasure Island Design branded swag storefront.">
+    <title>Pleasure Island Design Swag Store</title>
+    <link rel="stylesheet" href="/styles.css?v=2">
+  </head>
+  <body>
+    <a class="skip-link" href="#products">Skip to products</a>
+    <div class="shell">
+      <header class="site-header" aria-label="Store header">
+        <a class="brand" href="/store" aria-label="Pleasure Island Design store home">
+          <img src="/assets/logo-mark.svg" alt="" width="48" height="48">
+          <span>
+            <strong>Pleasure Island Design</strong>
+            <small>Swag Store</small>
+          </span>
+        </a>
+        <nav class="nav-links" aria-label="Store navigation">
+          <a href="#products">Products</a>
+          <a href="#details">Details</a>
+          <a href="#returns">Policies</a>
+        </nav>
+        <button class="cart-button" type="button" data-open-cart aria-haspopup="dialog">
+          <span class="cart-icon" aria-hidden="true"></span>
+          Cart
+          <span class="cart-count" data-cart-count>0</span>
+        </button>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <p class="overline">Coastal craft goods</p>
+            <h1 id="hero-title">Shop the Pleasure Island Design finish kit.</h1>
+            <p>
+              Small-batch swag for cabinet obsessives, project planners, and neighbors who like their tools as polished as their kitchens.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#products">Browse products</a>
+              <button class="button ghost" type="button" data-open-cart>Review cart</button>
+            </div>
+          </div>
+          <div class="hero-panel" aria-label="Store promise">
+            <div class="seal" aria-hidden="true">PID</div>
+            <p>Secure hosted checkout</p>
+            <strong>Ships from North Carolina</strong>
+          </div>
+        </section>
+
+        <section class="store-status" data-status hidden role="status"></section>
+
+        <section class="store-layout" aria-live="polite">
+          <div class="products-section">
+            <div class="section-heading">
+              <p class="overline">Up to 12 curated items</p>
+              <h2 id="products">Swag catalog</h2>
+            </div>
+            <div class="product-grid" data-products>
+              <div class="loading-card">Loading products...</div>
+            </div>
+          </div>
+
+          <aside class="detail-panel" id="details" aria-labelledby="details-title" data-detail>
+            <p class="overline">Product detail</p>
+            <h2 id="details-title">Choose a product</h2>
+            <p>Select an item to see details, options, availability, and checkout notes.</p>
+          </aside>
+        </section>
+
+        <section class="policy-band" id="returns">
+          <div>
+            <p class="overline">Shipping</p>
+            <h2>Simple, careful fulfillment.</h2>
+          </div>
+          <p data-shipping-notes>Ships from North Carolina. Local pickup can be coordinated after checkout.</p>
+          <a href="mailto:support@pleasureislanddesign.com" data-support-link>Need help?</a>
+        </section>
+      </main>
+    </div>
+
+    <div class="drawer-backdrop" data-cart-backdrop hidden></div>
+    <aside class="cart-drawer" data-cart-drawer aria-labelledby="cart-title" aria-modal="true" role="dialog" hidden>
+      <div class="drawer-header">
+        <div>
+          <p class="overline">Secure checkout</p>
+          <h2 id="cart-title">Your cart</h2>
+        </div>
+        <button class="icon-button" type="button" data-close-cart aria-label="Close cart">x</button>
+      </div>
+      <div class="cart-message" data-cart-message hidden role="alert"></div>
+      <div class="cart-items" data-cart-items></div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Subtotal</span>
+          <strong data-cart-subtotal>$0.00</strong>
+        </div>
+        <p>Taxes, discounts, and shipping are finalized in Stripe Checkout.</p>
+        <button class="button primary checkout-button" type="button" data-checkout>
+          Continue to checkout
+        </button>
+      </div>
+    </aside>
+
+    <script type="module" src="/app.mjs"></script>
+  </body>
+</html>

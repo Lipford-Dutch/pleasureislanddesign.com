@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" role="img" aria-label="Cabinet Care Kit">
+  <rect width="640" height="480" fill="#fffaf0"/>
+  <rect x="134" y="142" width="372" height="224" rx="18" fill="#092f4f"/>
+  <rect x="158" y="166" width="324" height="176" rx="12" fill="#fbf7ec"/>
+  <path d="M220 218h92v80h-92zM331 218h92v80h-92z" fill="#e8d0a3" stroke="#b78a45" stroke-width="6"/>
+  <path d="M220 252h92M331 252h92" stroke="#092f4f" stroke-width="6"/>
+  <path d="M250 120h140c16 0 28 10 33 30H217c5-20 17-30 33-30Z" fill="#b78a45"/>
+  <path d="M232 320c51 21 100 19 148-7 20-11 38-13 56-7-46 48-116 61-204 31Z" fill="#4f9ead"/>
+  <text x="320" y="430" text-anchor="middle" font-family="Georgia,serif" font-size="31" font-weight="700" fill="#092f4f">Cabinet Care Kit</text>
+</svg>
