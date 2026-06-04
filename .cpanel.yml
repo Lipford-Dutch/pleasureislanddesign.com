@@ -1,0 +1,38 @@
+---
+# cPanel Git Version Control deployment manifest
+# Deploys ONLY public-facing static files into public_html.
+# Keeps .git, storefront-beta (Node source), docs, and build scripts OUT of the web root.
+#
+# How it works: cPanel clones this repo into a PRIVATE folder (~/repositories/...),
+# then "Deploy HEAD Commit" runs these tasks to publish into public_html.
+#
+# NOTE: DEPLOYPATH uses $HOME/public_html (correct for the PRIMARY domain).
+# If this domain is an ADDON/subdomain, change public_html to that domain's docroot.
+
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html
+    - /bin/mkdir -p $DEPLOYPATH
+
+    # --- Root pages & server config ---
+    - /bin/cp -f index.html      $DEPLOYPATH/
+    - /bin/cp -f 404.html        $DEPLOYPATH/
+    - /bin/cp -f styles.css      $DEPLOYPATH/
+    - /bin/cp -f robots.txt      $DEPLOYPATH/
+    - /bin/cp -f sitemap.xml     $DEPLOYPATH/
+    - /bin/cp -f .htaccess       $DEPLOYPATH/
+    - /bin/cp -f .nojekyll       $DEPLOYPATH/
+
+    # --- Public directories (remove-then-copy = idempotent, clears stale files) ---
+    - /bin/rm -rf $DEPLOYPATH/blog       && /bin/cp -R blog       $DEPLOYPATH/
+    - /bin/rm -rf $DEPLOYPATH/specials   && /bin/cp -R specials   $DEPLOYPATH/
+    - /bin/rm -rf $DEPLOYPATH/shop       && /bin/cp -R shop       $DEPLOYPATH/
+    - /bin/rm -rf $DEPLOYPATH/gallery    && /bin/cp -R gallery    $DEPLOYPATH/
+    - /bin/rm -rf $DEPLOYPATH/locations  && /bin/cp -R locations  $DEPLOYPATH/
+    - /bin/rm -rf $DEPLOYPATH/js         && /bin/cp -R js         $DEPLOYPATH/
+    - /bin/rm -rf $DEPLOYPATH/img        && /bin/cp -R img        $DEPLOYPATH/
+    - /bin/rm -rf $DEPLOYPATH/fonts      && /bin/cp -R fonts      $DEPLOYPATH/
+    - /bin/rm -rf $DEPLOYPATH/forms      && /bin/cp -R forms      $DEPLOYPATH/
+    - /bin/rm -rf $DEPLOYPATH/opt-images && /bin/cp -R opt-images $DEPLOYPATH/
+
+    - echo "Deploy complete -> $DEPLOYPATH"
