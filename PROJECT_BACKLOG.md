@@ -1,8 +1,35 @@
 # Pleasure Island Design - Project Backlog & Roadmap
 
-**Current Phase:** Beta Release (`phase-beta-release`)  
-**Last Updated:** May 25, 2026  
-**Burn Rate:** High (Critical audit fixes)
+**Current Phase:** Beta Release (`phase-beta-release`) + **AI Digital Home Parallel Track**  
+**Last Updated:** June 02, 2026  
+**Burn Rate:** High (Critical audit fixes + archive foundation)
+
+---
+
+## 🤖 NEW: AI-Powered Digital Archive & Knowledge Base Initiative (High Priority Enabler)
+
+**Status:** Foundation seeded on `feature/ai-digital-home-archive` branch  
+**Target**: Complete pilot (5-10 docs) by June 10, full marketing/ops/strategy migration by end of June 2026  
+**Owner**: Willy + multi-AI team (Grok, Claude, GPT, Gemini, Copilot)  
+**Why Critical**: Unlocks authentic content for website Phase 2/3, provides institutional memory, accelerates blog/whitepaper/shop requirements gathering, and fulfills the original vision of this repo as the full digital home.
+
+### Key Deliverables
+- [x] Taxonomy, metadata schema, multi-AI workflow documented in business/README.md
+- [x] Helper Python script skeleton + Copilot enhancement path
+- [ ] Pilot ingestion: 5 representative documents processed end-to-end (marketing calendar/spreadsheet + strategy PDF + ops welcome + hiring + Instagram assets)
+- [ ] Merge foundation to main
+- [ ] Batch migration sprints (themed by category)
+- [ ] Integration: Auto-suggest updates to docs/whitepaper/ and new blog/ posts from insights
+- [ ] Optional: Local RAG prototype over knowledge-base/ for "Ask our past campaigns"
+
+### How It Accelerates Other Backlog Items
+- **Blog Expansion**: Historical marketing plans & strategy docs → 10+ ready-to-adapt posts
+- **Whitepaper Enhancement**: Real data from business-model, service-standards sources
+- **Shop / Phase 2**: Understand past offerings, pricing experiments, customer feedback from old docs
+- **Content for Interactive Tools**: Real before/after stories, process details from ops
+- **SEO/Local**: Authentic long-form content from old plans
+
+**Next Action**: Checkout branch, process first pilot doc with Claude/GPT, commit with Copilot assist. Ask Grok for review or prompt refinements.
 
 ---
 
@@ -61,7 +88,7 @@ Comprehensive roadmap for moving from current production issues (3.7/10 audit sc
 **Deadline:** May 31, 2026  
 **Completion:** May 25, 2026 (5 of 6 complete)
 
-### 🔵 Deferred/Blocked Items
+### 🚫 Deferred/Blocked Items
 
 | Item | Priority | Status | Action |
 |------|----------|--------|--------|
@@ -71,7 +98,7 @@ Comprehensive roadmap for moving from current production issues (3.7/10 audit sc
 ### 🟡 Medium Priority (This Month)
 
 | Issue | Severity | Est. Time | Notes |
-|-------|----------|-----------|-------|
+|-------|----------|-----------|--------|-------|
 | Create additional location pages | MEDIUM | 4 hours | Kure Beach, Carolina Beach, etc. |
 | Add locations to sitemap | MEDIUM | 30 mins | Update XML |
 | Expand blog content | MEDIUM | 3-4 hours | Target 10+ posts |
@@ -123,7 +150,7 @@ Comprehensive roadmap for moving from current production issues (3.7/10 audit sc
   - [ ] Before/after transformation videos
   - [ ] Process walkthrough series
   - [ ] Customer testimonial videos
-  - Est. Time: 20-30 hours (including production)
+  - Est. Time: 20-30 hours
 
 - [ ] **Interactive Tools**
   - [ ] Color selector tool
@@ -310,6 +337,7 @@ Comprehensive roadmap for moving from current production issues (3.7/10 audit sc
 - [ ] CI/CD pipeline ✓ (Done)
 - [ ] Logo finalization ✓ (Done)
 - [ ] Critical audit fixes (In Progress)
+- [ ] AI Archive foundation ✓ (Seeded)
 
 ### Known Blockers
 - None currently blocking Beta release
@@ -331,6 +359,7 @@ Comprehensive roadmap for moving from current production issues (3.7/10 audit sc
 - [ ] Complete specials flyer
 - [ ] Test all forms
 - [ ] Mobile audit
+- [ ] **AI Archive: Process first 3-5 pilot documents** (NEW)
 
 ### Week 3 (June 8-14)
 - [ ] Create location pages
@@ -338,12 +367,13 @@ Comprehensive roadmap for moving from current production issues (3.7/10 audit sc
 - [ ] Update social media profiles
 - [ ] Final QA testing
 - [ ] Performance optimization
+- [ ] **AI Archive: Merge pilot PR, begin themed batch migration**
 
 ### Week 4 (June 15)
 - [ ] Beta release to main branch
 - [ ] Monitor analytics
 - [ ] Gather feedback
-- [ ] Plan Phase 2
+- [ ] Plan Phase 2 + AI Archive integration sprints
 
 ---
 
@@ -355,6 +385,7 @@ Comprehensive roadmap for moving from current production issues (3.7/10 audit sc
 | 2026-05-25 | Added wiki completion | 1.0 |
 | 2026-05-25 | Added social assets | 1.0 |
 | 2026-05-25 | Added CI/CD workflows | 1.0 |
+| 2026-06-02 | Added AI Digital Home Archive initiative + branch + foundation files | 1.1 |
 
 ---
 
@@ -370,6 +401,4 @@ Use issue templates at `.github/ISSUE_TEMPLATE/`
 **For Development:**
 See [Development Guide](.github/wiki/Development.md)
 
----
-
-*This backlog is a living document and will be updated regularly. Last review: May 25, 2026*
+*This backlog is a living document and will be updated regularly. Last review: June 02, 2026*
