@@ -18,6 +18,24 @@ Pleasure Island Design specializes in **high-quality cabinet refinishing and rep
 
 ---
 
+## 🖼️ Digital Archive & Knowledge Base (NEW — AI-Powered Initiative)
+
+**This repository is now the complete digital home for Pleasure Island Design LLC** — public website + professional, searchable business archive and institutional knowledge base.
+
+We are actively migrating and AI-enhancing business documents (marketing plans, strategy, operations, hiring, brand assets) from Google Drive using a turn-key multi-AI pipeline (Grok + Claude + GPT Codex + Gemini + Copilot). 
+
+**See the full system**: [business/README.md](business/README.md) on the `feature/ai-digital-home-archive` branch (or soon main).
+
+This unlocks:
+- Single source of truth for decision making
+- Rich, authentic content for website blog, whitepapers, and marketing
+- Version history and provenance for all business knowledge
+- Foundation for future internal AI tools (RAG over your own docs)
+
+**Current Status**: Foundation structure seeded. Pilot ingestion in progress. Contributions welcome via the documented workflow.
+
+---
+
 ## 🚀 Getting Started
 
 ### Prerequisites
@@ -46,7 +64,7 @@ npm run lint
 npm run lint              # Run all linters
 npm run lint:html        # HTML validation only
 npm run lint:css         # CSS linting only
-npm run lint:js          # JavaScript linting only
+npm run lint:js         # JavaScript linting only
 
 # Fix formatting issues automatically
 npm run format
@@ -55,7 +73,7 @@ npm run format:check     # Check without fixing
 
 ---
 
-## 📋 Project Structure
+## 📂 Project Structure
 
 ```
 .
@@ -65,11 +83,12 @@ npm run format:check     # Check without fixing
 │   └── pleasure-island-scripts.js  # JavaScript functionality
 ├── img/                    # Logo, awards, hero images
 ├── gallery/                # Before/after project photos
+├── business/               # NEW: AI-augmented business archive & knowledge base (see business/README.md)
 ├── .github/
 │   └── workflows/
 │       └── ci.yml         # Automated testing on PRs
 ├── package.json           # Dependencies & npm scripts
-└── docs/
+└── docs/                   # MkDocs technical reference & whitepapers
     └── CONTRIBUTING.md    # Developer guidelines
 ```
 
@@ -125,7 +144,7 @@ All code is automatically validated using:
 
 ---
 
-## 📝 Content & Assets
+## 📌 Content & Assets
 
 ### Images
 - **Optimize before committing** — use tools like TinyPNG or ImageOptim
@@ -135,12 +154,16 @@ All code is automatically validated using:
 
 ### Gallery
 - Before/after project photos stored in `gallery/{project-name}-{year}/`
-- Naming convention: `before-1.jpg`, `after-1.jpg`, etc.
+- Naming convention: `before-1.jpg`, `after-1.jpg` etc.
 - File names should not contain spaces
+
+### Business Documents
+- Follow the AI-assisted workflow in [business/README.md](business/README.md)
+- Always include provenance and structured metadata
 
 ---
 
-## 🌐 Deployment
+## 🌍 Deployment
 
 This static website is hosted on a web server.
 
@@ -199,6 +222,9 @@ Wrap at ~72 characters.
 action: brief description (e.g., "fix: broken mobile menu", "feat: dark mode toggle")
 ```
 
+### Docs Commits
+Use `docs(business): ` or `feat(archive): ` for archive work.
+
 ---
 
 ## 🔮 Roadmap
@@ -212,6 +238,11 @@ action: brief description (e.g., "fix: broken mobile menu", "feat: dark mode tog
 - Modern design system (Claude Design)
 - User interaction tracking
 - Content management system
+
+**Parallel Enabler: AI Digital Archive** (see business/README.md)
+- Complete migration of Google Drive remnants
+- Populate knowledge-base/ with insights
+- Integrate summaries into website content & whitepapers
 
 ---
 
@@ -233,16 +264,12 @@ action: brief description (e.g., "fix: broken mobile menu", "feat: dark mode tog
 
 5. **Keep it simple** — small, focused commits are easier to review
 
----
-
 ## 📚 Resources
 
 - [MDN Web Docs](https://developer.mozilla.org/) — HTML/CSS/JavaScript reference
 - [ESLint Rules](https://eslint.org/docs/rules/) — JavaScript style guide
 - [Git Documentation](https://git-scm.com/doc) — Version control help
 - [Semantic HTML](https://developer.mozilla.org/en-US/docs/Glossary/Semantic_HTML) — Best practices
-
----
 
 ## ❓ FAQ
 
@@ -258,10 +285,11 @@ A: Don't worry — we have version control. Create a new PR with the fix and ref
 **Q: How often do we deploy?**
 A: Changes merge to `main` when PR checks pass. Deployment happens automatically via your hosting provider.
 
----
+**Q: How do I contribute to the business archive?**
+A: Follow the turn-key workflow in [business/README.md](business/README.md). Use AI assistance heavily.
 
-**Last Updated:** December 2024  
-**Version:** 1.0.0  
-**Maintained by:** Pleasure Island Design LLC
+**Last Updated:** June 2026 (AI Digital Home Initiative added)  
+**Version:** 1.1.0  
+**Maintained by:** Pleasure Island Design LLC + multi-AI collaboration
 
 For questions or suggestions, open an issue on GitHub or contact us directly.
