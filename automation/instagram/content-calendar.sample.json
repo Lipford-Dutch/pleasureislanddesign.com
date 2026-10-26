@@ -1,0 +1,35 @@
+{
+  "source": "SAMPLE — replace by running parse_calendar.py against the real .xlsx",
+  "generated_by": "hand-seeded sample (subset of the real workbook content)",
+  "note": "This is a small, illustrative subset so the pipeline can be run and reviewed before the authoritative content-calendar.json is generated from the source workbook. Do NOT treat as the full 30-day plan.",
+  "sheets": {},
+  "posts": [
+    {
+      "Date": "",
+      "Day": "Mon",
+      "Post Type": "Carousel",
+      "Visual Instructions": "Wide kitchen shot before & after, close-up of cabinet doors",
+      "Caption": "✨ From dated oak to coastal chic 🌊 These cabinets went from dark + heavy to light + airy — without the cost of replacement.",
+      "Hashtag Bundle": "#LuxuryCabinetRefinishing #WilmingtonNC #SummerKitchenGlowUp #CoastalKitchenDesign",
+      "Notes": "Tag Wilmington, NC location"
+    },
+    {
+      "Date": "",
+      "Day": "Thu",
+      "Post Type": "Reel",
+      "Visual Instructions": "Timelapse of sanding → priming → spraying → finished look",
+      "Caption": "Ever wondered how we get that flawless, factory finish? Here’s your behind-the-scenes pass.",
+      "Hashtag Bundle": "#CoastalKitchenDesign #CarolinaBeachNC #CabinetTransformation",
+      "Notes": "Use trending audio"
+    },
+    {
+      "Date": "",
+      "Day": "Sat",
+      "Post Type": "Single Image",
+      "Visual Instructions": "Brushed nickel handle against coastal white cabinet",
+      "Caption": "It’s the details that make it luxury. When we refinish, every handle, hinge, and edge gets our full attention.",
+      "Hashtag Bundle": "#CoastalNCStyle #WrightsvilleBeachNC #LuxuryOnABudget",
+      "Notes": "Zoom on detail"
+    }
+  ]
+}

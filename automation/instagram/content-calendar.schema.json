@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pleasure Island Design — Instagram content calendar",
+  "type": "object",
+  "required": ["posts"],
+  "properties": {
+    "source": { "type": "string", "description": "Origin workbook filename" },
+    "generated_by": { "type": "string" },
+    "note": { "type": "string" },
+    "sheets": {
+      "type": "object",
+      "description": "Every worksheet, as an array of header-keyed row objects.",
+      "additionalProperties": {
+        "type": "array",
+        "items": { "type": "object" }
+      }
+    },
+    "posts": {
+      "type": "array",
+      "description": "Rows from the calendar sheet (the one with a Caption column).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "Date": { "type": "string" },
+          "Day": { "type": "string" },
+          "Post Type": { "type": "string" },
+          "Visual Instructions": { "type": "string" },
+          "Caption": { "type": "string" },
+          "Hashtag Bundle": { "type": "string" },
+          "Notes": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}
