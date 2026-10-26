@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a static website (HTML/CSS/JavaScript) with no build process. Deployment is simple: push changes to `main` branch and they automatically sync to production.
+This is a static website (HTML/CSS/JavaScript + PHP form handlers) with no build process. Merging to `main` updates GitHub only — **production is deployed manually via cPanel Git Version Control, not automatically.** For the exact click-path, verification, and rollback steps, follow the **[Deploy Runbook](../pid/operations/deploy-runbook.md)**.
 
 ## Deployment Workflow
 
@@ -34,12 +34,14 @@ git push -u origin feature/my-feature
 - Address feedback if needed
 - Once approved, merge to `main`
 
-### 4. Automatic Deployment
-When merged to `main`:
+### 4. Deployment (manual)
+When merged to `main`, GitHub is updated but **the live site is not**. To publish:
 
-1. CI/CD pipeline runs all checks
-2. Files sync to production server
-3. Changes live immediately (no cache busting needed)
+1. cPanel → **Git™ Version Control** → **Update from Remote** (pull latest `main`)
+2. **Deploy HEAD Commit** (runs `.cpanel.yml`, copies public files to `public_html`)
+3. Verify in an incognito window (see the [Deploy Runbook](../pid/operations/deploy-runbook.md))
+
+CI passing is a gate for *merging*, not a deployment trigger.
 
 ## Pre-Deployment Checklist
 
