@@ -12,3 +12,14 @@ error_log
 .ftpquota
 *.sql
 *.sql.gz
+
+# Runtime-generated directories (forms, blog automation)
+.logs/
+.data/
+.backups/
+.cache/
+
+# Generated during deployment
+*.bak
+*.orig
+*.backup
