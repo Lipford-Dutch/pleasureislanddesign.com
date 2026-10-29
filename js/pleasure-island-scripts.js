@@ -15,6 +15,58 @@
     return Math.min(Math.max(value, min), max);
   }
 
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  // Which promotion the visitor last engaged with (set when a promo CTA is
+  // clicked), so a resulting lead can be attributed to the special that drove it.
+  function activePromo() {
+    try { return sessionStorage.getItem('pidPromo') || 'none'; }
+    catch (e) { return 'none'; }
+  }
+
+  // Shared so the carousel can be safely re-initialised after live reviews load.
+  let carouselAutoTimer = null;
+
+  /* ================================================================
+     CONVERSION TRACKING CONFIG
+     GA4 key events always fire. Google Ads conversions fire only once a
+     conversion ID + labels are set — either edit the defaults below, or
+     define window.PID_ANALYTICS.googleAds before this script loads (e.g.
+     via GTM or an inline snippet). See docs/pid/marketing/measurement-plan.md.
+     ================================================================ */
+  const ADS = Object.assign({
+    conversionId: '',            // e.g. 'AW-123456789' — leave '' to keep Ads off
+    labels: {                    // Google Ads conversion label per GA4 key event
+      form_submission: '',       // contact form (primary conversion)
+      click_to_call: '',         // tel: taps (primary conversion)
+      cta_click: '',             // Request Consultation & other CTAs
+      newsletter_signup: ''      // secondary
+    },
+    leadValue: 0                 // optional default monetary value per lead (USD)
+  }, (window.PID_ANALYTICS && window.PID_ANALYTICS.googleAds) || {});
+
+  /**
+   * Fire a conversion: always a GA4 event (mark it a key event in GA4), plus a
+   * Google Ads conversion when an ID + matching label are configured.
+   */
+  function trackConversion(eventName, params) {
+    const detail = params || {};
+    safeGtag('event', eventName, detail);
+
+    const label = ADS.labels[eventName];
+    if (ADS.conversionId && label) {
+      safeGtag('event', 'conversion', {
+        send_to: ADS.conversionId + '/' + label,
+        value: typeof detail.value === 'number' ? detail.value : ADS.leadValue,
+        currency: detail.currency || 'USD'
+      });
+    }
+  }
+
   /* ================================================================
      HEADER: Scroll shadow + active nav highlighting
      ================================================================ */
@@ -239,13 +291,21 @@
         return ((clientX - rect.left) / rect.width) * 100;
       }
 
-      // Mouse
-      handle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
+      // Mouse — the whole slider is interactive: click jumps the divider there,
+      // and a drag can start anywhere (not just on the thin handle).
+      slider.addEventListener('mousedown', e => {
+        dragging = true;
+        setPosition(getPct(e.clientX));
+        e.preventDefault();
+      });
       window.addEventListener('mousemove', e => { if (dragging) {setPosition(getPct(e.clientX));} });
       window.addEventListener('mouseup', () => { dragging = false; });
 
       // Touch
-      handle.addEventListener('touchstart', e => { dragging = true; e.preventDefault(); }, { passive: false });
+      slider.addEventListener('touchstart', e => {
+        dragging = true;
+        setPosition(getPct(e.touches[0].clientX));
+      }, { passive: true });
       window.addEventListener('touchmove', e => {
         if (dragging) {setPosition(getPct(e.touches[0].clientX));}
       }, { passive: true });
@@ -277,7 +337,11 @@
     if (!cards.length) {return;}
 
     let current = 0;
-    let autoTimer;
+
+    // Reset any prior state so this can run again after live reviews replace the cards.
+    clearInterval(carouselAutoTimer);
+    if (dotsContainer) {dotsContainer.innerHTML = '';}
+    track.style.transform = '';
 
     // Build dots
     cards.forEach((_, i) => {
@@ -299,8 +363,8 @@
     }
 
     function resetAuto() {
-      clearInterval(autoTimer);
-      autoTimer = setInterval(() => goTo(current + 1), 5000);
+      clearInterval(carouselAutoTimer);
+      carouselAutoTimer = setInterval(() => goTo(current + 1), 5000);
     }
 
     prevBtn && prevBtn.addEventListener('click', () => goTo(current - 1));
@@ -316,6 +380,55 @@
     }
 
     resetAuto();
+  }
+
+  /* ================================================================
+     LIVE GOOGLE REVIEWS
+     Replaces the curated fallback cards with authentic 5-star Google
+     reviews when forms/get-reviews.php is configured with an API key +
+     Place ID. If the API is not configured or the request fails, the
+     hand-curated cards already in the markup remain untouched.
+     ================================================================ */
+  function buildReviewCard(review) {
+    const name = escapeHtml(review.name || 'Anonymous');
+    const text = escapeHtml(review.text || '');
+    const meta = escapeHtml(review.time || 'Recently');
+    const initials = escapeHtml(
+      String(review.name || 'A').split(/\s+/).filter(Boolean)
+        .slice(0, 2).map(w => w.charAt(0).toUpperCase()).join('') || 'A'
+    );
+    return `<article class="testimonial-card" aria-label="Review from ${name}">
+      <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+      <blockquote><p>"${text}"</p></blockquote>
+      <footer class="testimonial-author">
+        <div class="author-avatar" aria-hidden="true">${initials}</div>
+        <div>
+          <strong class="author-name">${name}</strong>
+          <span class="author-location">${meta}</span>
+        </div>
+      </footer>
+    </article>`;
+  }
+
+  function initGoogleReviews() {
+    const track = document.getElementById('testimonials-track');
+    if (!track) {return;}
+
+    fetch('/forms/get-reviews.php', { headers: { Accept: 'application/json' } })
+      .then(res => res.ok ? res.json() : null)
+      .then(data => {
+        if (!data || data.success !== true || !Array.isArray(data.reviews)) {
+          return; // not configured / fetch failed → keep curated fallback cards
+        }
+        const fiveStar = data.reviews.filter(
+          r => Number(r.rating) >= 5 && String(r.text || '').trim() !== ''
+        );
+        if (!fiveStar.length) {return;}
+
+        track.innerHTML = fiveStar.map(buildReviewCard).join('');
+        initCarousel(); // re-bind carousel + dots to the freshly rendered cards
+      })
+      .catch(() => { /* keep curated fallback cards */ });
   }
 
   /* ================================================================
@@ -372,7 +485,7 @@
         const activeItems = singleItems.filter(el => !el.classList.contains('hidden'));
         const activeIdx = activeItems.indexOf(item);
         openAt(activeIdx >= 0 ? activeIdx : 0);
-        safeGtag('event', 'click', { event_category: 'Gallery', event_label: item.querySelector('img').alt });
+        safeGtag('event', 'gallery_click', { event_category: 'Gallery', event_label: item.querySelector('img').alt });
       });
     });
 
@@ -409,8 +522,20 @@
 
       feedback.className = 'form-feedback';
 
-      if (!name || !emailRe.test(email) || !message) {
-        feedback.textContent = 'Please fill in all required fields correctly.';
+      // Mirror the server-side rules so users get actionable feedback up front
+      // (server requires name >= 2 chars and message >= 10 chars).
+      if (!name || name.length < 2) {
+        feedback.textContent = 'Please enter your name.';
+        feedback.classList.add('error');
+        return;
+      }
+      if (!emailRe.test(email)) {
+        feedback.textContent = 'Please enter a valid email address.';
+        feedback.classList.add('error');
+        return;
+      }
+      if (message.length < 10) {
+        feedback.textContent = 'Please add a little more detail — your message needs at least 10 characters.';
         feedback.classList.add('error');
         return;
       }
@@ -424,19 +549,26 @@
       new FormData(form).forEach((val, key) => { data[key] = val; });
 
       try {
-        const res = await fetch('https://formspree.io/f/pleasureislanddesign@gmail.com', {
+        const res = await fetch('/forms/contact.php', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
+        const payload = await res.json().catch(() => null);
 
         if (res.ok) {
-          feedback.textContent = "Thank you! We'll be in touch within 1-2 business days.";
+          feedback.textContent = (payload && payload.message) || "Thank you! We'll be in touch within 1-2 business days.";
           feedback.classList.add('success');
           form.reset();
-          safeGtag('event', 'form_submit', { event_category: 'Contact', event_label: 'Contact Form' });
+          trackConversion('form_submission', { method: 'contact_form', form_name: 'contact', promo: activePromo(), event_category: 'Contact', event_label: 'Contact Form' });
         } else {
-          throw new Error('server error');
+          // Surface the server's specific reason (validation / rate-limit) when present.
+          let detail = payload && payload.error;
+          if (!detail && payload && payload.errors) {
+            detail = Object.values(payload.errors)[0];
+          }
+          feedback.textContent = detail || 'Something went wrong. Please call (910) 444-1230 or email pleasureislanddesign@gmail.com.';
+          feedback.classList.add('error');
         }
       } catch {
         feedback.textContent = 'Something went wrong. Please call (910) 444-1230 or email pleasureislanddesign@gmail.com.';
@@ -472,16 +604,16 @@
       msg.textContent = 'Subscribing…';
 
       try {
-        const res = await fetch('https://formspree.io/f/pleasureislanddesign@gmail.com', {
+        const res = await fetch('/forms/newsletter.php', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ email, _subject: 'Newsletter Signup' })
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
         });
 
         if (res.ok) {
           msg.textContent = 'You\'re subscribed! Welcome to the community.';
           form.reset();
-          safeGtag('event', 'form_submit', { event_category: 'Newsletter', event_label: 'Newsletter Signup' });
+          trackConversion('newsletter_signup', { method: 'newsletter_form', event_category: 'Newsletter', event_label: 'Newsletter Signup' });
         } else {
           throw new Error('server error');
         }
@@ -528,10 +660,34 @@
   function initCTATracking() {
     document.querySelectorAll('[data-track]').forEach(el => {
       el.addEventListener('click', () => {
-        safeGtag('event', 'click', {
+        // Remember which promo the visitor engaged with, for lead attribution.
+        if (el.dataset.promo) {
+          try { sessionStorage.setItem('pidPromo', el.dataset.promo); } catch (e) { /* ignore */ }
+        }
+        safeGtag('event', 'cta_click', {
           event_category: 'CTA',
-          event_label: el.dataset.track
+          event_label: el.dataset.track,
+          promo: el.dataset.promo || activePromo()
         });
+      });
+    });
+  }
+
+  /* ================================================================
+     CONVERSION TRACKING — phone & email
+     ================================================================ */
+  function initConversionTracking() {
+    // Phone taps: highest-intent local conversion (GA4 key event: click_to_call).
+    document.querySelectorAll('a[href^="tel:"]').forEach(el => {
+      el.addEventListener('click', () => {
+        trackConversion('click_to_call', { method: 'tel_link', promo: activePromo(), event_category: 'Contact' });
+      });
+    });
+
+    // Email clicks: engagement signal (GA4 key event: email_click).
+    document.querySelectorAll('a[href^="mailto:"]').forEach(el => {
+      el.addEventListener('click', () => {
+        safeGtag('event', 'email_click', { method: 'mailto_link', event_category: 'Contact' });
       });
     });
   }
@@ -552,7 +708,7 @@
         [25, 50, 75, 100].forEach(m => {
           if (depth >= m && !milestones[m]) {
             milestones[m] = true;
-            safeGtag('event', 'scroll', {
+            safeGtag('event', 'scroll_depth', {
               event_category: 'Page Interaction',
               event_label: `Scroll Depth ${m}%`,
               value: m
@@ -576,6 +732,7 @@
     initGalleryFilter();
     initBeforeAfterSliders();
     initCarousel();
+    initGoogleReviews();
     initLightbox();
     initContactForm();
     initNewsletterForm();
@@ -583,6 +740,7 @@
     initMobileStickyBar();
     initCopyrightYear();
     initCTATracking();
+    initConversionTracking();
     initScrollTracking();
   }
 

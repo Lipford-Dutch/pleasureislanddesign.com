@@ -17,3 +17,13 @@ RewriteCond %{HTTP_REFERER} !^https://www.pleasureislanddesign.com/.*$      [NC]
 RewriteCond %{HTTP_REFERER} !^https://www.pleasureislanddesign.com$      [NC]
 RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
 
+# --- Protect sensitive runtime data (PII: leads, subscribers, logs, backups) ---
+# .data/ and .logs/ hold form submissions and subscriber records written by the
+# PHP handlers. They live under the web root, so block all direct HTTP access.
+RedirectMatch 404 ^/\.(data|logs|backups)(/|$)
+
+# Defense-in-depth: never serve raw data/config file types even if path-guessed.
+<FilesMatch "\.(jsonl|log|bak|tmp)$">
+  Require all denied
+</FilesMatch>
+

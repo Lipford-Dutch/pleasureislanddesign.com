@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 690 132" role="img" aria-label="Pleasure Island Design — Palm tree badge">
+  <title>Pleasure Island Design — Palm tree badge</title>
+  <g transform="translate(2 4) scale(1.02)">
+    <defs>
+      <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#2B4E7E"/><stop offset="1" stop-color="#16294a"/>
+      </linearGradient>
+    </defs>
+    <circle cx="60" cy="60" r="56" fill="url(#bgGrad)"/>
+    <circle cx="60" cy="60" r="50" fill="none" stroke="#d4a574" stroke-width="2" opacity=".75"/>
+    
+  <g>
+    <path d="M56 96 Q58 74 54 56" stroke="#d4a574" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+    <path d="M54 56 Q38 48 26 54 Q40 40 56 48" fill="#7DA69E"/>
+    <path d="M54 56 Q44 38 30 36 Q48 28 58 46" fill="#5B8078"/>
+    <path d="M55 55 Q56 34 46 26 Q64 30 60 50" fill="#7DA69E"/>
+    <path d="M56 54 Q68 36 84 36 Q68 28 56 46" fill="#5B8078"/>
+    <path d="M56 55 Q74 46 88 52 Q74 38 55 49" fill="#7DA69E"/>
+    <path d="M40 96 Q60 88 82 96" stroke="#d4a574" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>
+    <circle cx="66" cy="58" r="3" fill="#C4973B"/><circle cx="60" cy="62" r="3" fill="#C4973B"/>
+  </g></g>
+  
+  <g transform="translate(136 32) scale(0.92)">
+    <path d="M6 4 Q4 0 8 0 L34 0 Q38 0 36 4 L33 30 L9 30 Z" fill="#7DA69E" stroke="#b09468" stroke-width="2.5"/>
+    <path d="M12 6 L30 6 L28 26 L14 26 Z" fill="#7DA69E" opacity=".65"/>
+    <rect x="4" y="30" width="36" height="9" rx="3" fill="#7DA69E" stroke="#b09468" stroke-width="2.5"/>
+    <path d="M7 39 L5 62 M37 39 L39 62 M12 39 L12 56 M32 39 L32 56" stroke="#b09468" stroke-width="3.4" stroke-linecap="round"/>
+  </g>
+  
+  <g transform="translate(192 18) scale(0.98)">
+    <text x="0" y="46" font-family="'Lato','Arial Black',Arial,sans-serif" font-weight="900" font-size="46"
+          textLength="470" lengthAdjust="spacingAndGlyphs"
+          fill="#2c3e50">pleasure island des<tspan opacity="0">i</tspan>gn</text>
+    <!-- paintbrush forming the i of "design" (slot: x 404.6–416.8, baseline y 46) -->
+    <g transform="translate(404.6 0)">
+      <path d="M2.6 21.5 L4 46 L8.4 46 L9.8 21.5 Z" fill="#d4a574"/>
+      <rect x="1.6" y="17.2" width="9.2" height="4.6" rx="1.2" fill="#8b7355"/>
+      <path d="M0.6 4.5 Q6.2 -1.5 11.8 4.5 L11 17.2 H1.4 Z" fill="#48a3a3"/>
+    </g>
+    <line x1="1" y1="53.5" x2="471" y2="53.5" stroke="#2c3e50" stroke-width="2.6"/>
+    <text x="1" y="80" font-family="Georgia,'Times New Roman',serif" font-weight="600" font-size="23"
+          textLength="468" lengthAdjust="spacingAndGlyphs"
+          fill="#2c3e50">INTERIORS<tspan fill="#48a3a3"> ✳ </tspan>CABINETRY<tspan fill="#48a3a3"> ✳ </tspan>FURNITURE</text>
+  </g>
+</svg>
