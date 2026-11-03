@@ -1,11 +1,15 @@
 site_name: Pleasure Island Design — Technical Reference
-site_url: https://willyd61.github.io/pleasureislanddesign.com/
+site_url: https://lipford-dutch.github.io/pleasureislanddesign.com/
 site_author: Pleasure Island Design LLC
 site_description: Technical documentation, white papers, and operational guides for pleasureislanddesign.com
-docs_dir: .
+docs_dir: docs
+exclude_docs: |
+  pid/
+  !pid/operations/deploy-runbook.md
+  archive/
 
-repo_name: willyd61/pleasureislanddesign.com
-repo_url: https://github.com/willyd61/pleasureislanddesign.com
+repo_name: Lipford-Dutch/pleasureislanddesign.com
+repo_url: https://github.com/Lipford-Dutch/pleasureislanddesign.com
 edit_uri: edit/main/docs/
 
 copyright: Copyright &copy; 2024 Pleasure Island Design LLC — Apache 2.0 License
@@ -29,8 +33,8 @@ theme:
   font:
     text: Lato
     code: Fira Code
-  logo: img/pid-logo-small.jpg
-  favicon: favicon.ico
+  logo: https://www.pleasureislanddesign.com/img/pid-logo-small.jpg
+  favicon: https://www.pleasureislanddesign.com/img/pid-logo-small.jpg
   features:
     - navigation.tabs
     - navigation.tabs.sticky
@@ -45,7 +49,7 @@ theme:
     - toc.integrate
 
 extra_css:
-  - docs/assets/mkdocs-overrides.css
+  - assets/mkdocs-overrides.css
 
 plugins:
   - search
@@ -64,24 +68,24 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/pleasureislanddesign/
     - icon: fontawesome/brands/github
-      link: https://github.com/willyd61/pleasureislanddesign.com
+      link: https://github.com/Lipford-Dutch/pleasureislanddesign.com
 
 nav:
-  - Home: docs/index.md
+  - Home: index.md
   - White Paper:
-    - Overview: docs/whitepaper/overview.md
-    - Business Model: docs/whitepaper/business-model.md
-    - Brand Guidelines: docs/whitepaper/brand-guidelines.md
-    - Service Standards: docs/whitepaper/service-standards.md
+    - Overview: whitepaper/overview.md
+    - Business Model: whitepaper/business-model.md
+    - Brand Guidelines: whitepaper/brand-guidelines.md
+    - Service Standards: whitepaper/service-standards.md
   - Technical Reference:
-    - Architecture: docs/technical/architecture.md
-    - CI/CD Pipeline: docs/technical/cicd.md
-    - Design System: docs/technical/design-system.md
-    - GitHub Pages: docs/technical/github-pages.md
-    - Deployment: docs/technical/deployment.md
+    - Architecture: technical/architecture.md
+    - CI/CD Pipeline: technical/cicd.md
+    - Design System: technical/design-system.md
+    - GitHub Pages: technical/github-pages.md
+    - Deployment: technical/deployment.md
   - Operations:
-    - Contributing: CONTRIBUTING.md
-    - Security: SECURITY.md
-    - Deployment Guide: DEPLOYMENT.md
-    - Code of Conduct: CODE_OF_CONDUCT.md
-  - Release Notes: docs/release-notes.md
+    - Contributing: https://github.com/Lipford-Dutch/pleasureislanddesign.com/blob/main/CONTRIBUTING.md
+    - Security: https://github.com/Lipford-Dutch/pleasureislanddesign.com/blob/main/SECURITY.md
+    - Deployment Guide: https://github.com/Lipford-Dutch/pleasureislanddesign.com/blob/main/docs/archive/DEPLOYMENT.md
+    - Code of Conduct: https://github.com/Lipford-Dutch/pleasureislanddesign.com/blob/main/CODE_OF_CONDUCT.md
+  - Release Notes: release-notes.md
