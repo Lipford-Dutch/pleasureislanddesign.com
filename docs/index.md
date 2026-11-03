@@ -12,12 +12,12 @@ This site covers everything from brand guidelines and business operations to the
 | [Brand Guidelines](whitepaper/brand-guidelines.md) | Colors, fonts, logo usage |
 | [CI/CD Pipeline](technical/cicd.md) | GitHub Actions workflows |
 | [Design System](technical/design-system.md) | CSS tokens and components |
-| [Contributing](../CONTRIBUTING.md) | Developer workflow |
-| [Deployment](../DEPLOYMENT.md) | How to deploy changes |
+| [Contributing](https://github.com/Lipford-Dutch/pleasureislanddesign.com/blob/main/CONTRIBUTING.md) | Developer workflow |
+| [Deployment](https://github.com/Lipford-Dutch/pleasureislanddesign.com/blob/main/docs/archive/DEPLOYMENT.md) | How to deploy changes |
 | [Release Notes](release-notes.md) | Changelog and version history |
 
 ## Site Status
 
 - **Live URL:** [pleasureislanddesign.com](https://www.pleasureislanddesign.com)
-- **Dev Preview:** [GitHub Pages](https://willyd61.github.io/pleasureislanddesign.com/)
-- **Repo:** [github.com/willyd61/pleasureislanddesign.com](https://github.com/willyd61/pleasureislanddesign.com)
+- **Dev Preview:** [GitHub Pages](https://lipford-dutch.github.io/pleasureislanddesign.com/)
+- **Repo:** [github.com/Lipford-Dutch/pleasureislanddesign.com](https://github.com/Lipford-Dutch/pleasureislanddesign.com)
