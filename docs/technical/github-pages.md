@@ -6,11 +6,19 @@ GitHub Pages is configured to deploy via **GitHub Actions** (not from a branch d
 
 **Settings:** Repository → Settings → Pages → Source: GitHub Actions
 
-## Live Preview URL
+## Live Mirror URL
 
 ```
-https://willyd61.github.io/pleasureislanddesign.com/
+https://lipford-dutch.github.io/pleasureislanddesign.com/
 ```
+
+GitHub Pages is a **mirror** of the public site. Production is GoDaddy cPanel
+(see [CI/CD](cicd.md)). The Pages build publishes only the public site files,
+the same set `.cpanel.yml` deploys: root HTML/CSS/robots/sitemap/favicons and the
+`blog`, `specials`, `shop`, `gallery`, `locations`, `js`, `img`, `fonts`, `forms`
+and `opt-images` directories. `docs/`, `automation/`, `blog-automation/`,
+`blog/drafts`, `business/`, `tests/`, `.github/` and all `*.php` files are never
+published, and the workflow fails if any of them appear in `_site/`.
 
 ## Custom Domain (When Ready for Production)
 
@@ -25,7 +33,7 @@ To point a custom domain at GitHub Pages:
    ```
    Type: CNAME
    Name: www
-   Value: willyd61.github.io
+   Value: lipford-dutch.github.io
    ```
 
 3. For apex domain (`pleasureislanddesign.com`):
@@ -43,9 +51,12 @@ To point a custom domain at GitHub Pages:
 
 5. Wait 24-48 hours for DNS propagation
 
-## Switching to Production Hosting
+## Production Hosting
 
-When moving from GitHub Pages to a production host (Netlify, Vercel, AWS, self-hosted):
+Production already runs on GoDaddy cPanel, deployed from `Lipford-Dutch/pleasureislanddesign.com`
+`main` with `.cpanel.yml`. The custom domain is **not** pointed at GitHub Pages.
+
+If production ever moves to another host (Netlify, Vercel, AWS, self-hosted):
 
 1. Update `DEPLOYMENT.md` with new procedures
 2. Remove or repurpose `deploy.yml`

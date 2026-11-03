@@ -35,7 +35,7 @@ This branch (`phase-beta-release`) focuses on:
 
 ## Resources
 
-- **Website:** https://willyd61.github.io/pleasureislanddesign.com/
+- **Website:** https://www.pleasureislanddesign.com/ (mirror: https://lipford-dutch.github.io/pleasureislanddesign.com/)
 - **YouTube:** https://www.youtube.com/@pleasureislanddesign
 - **Contact:** (910) 444-1230 | pleasureislanddesign@gmail.com
 - **Location:** 3720 Carolina Beach Rd, Suite F, Wilmington, NC 28412

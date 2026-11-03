@@ -44,6 +44,6 @@ None at this time. Please report any discovered vulnerabilities to the email abo
 GitHub will post security advisories for any critical vulnerabilities found in this project.
 
 Subscribe to notifications by:
-1. Go to https://github.com/willyd61/pleasureislanddesign.com
+1. Go to https://github.com/Lipford-Dutch/pleasureislanddesign.com
 2. Click "Watch" > "Custom"
 3. Enable "Security alerts"

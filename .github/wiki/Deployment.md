@@ -29,7 +29,8 @@ gh actions view [run-id] --log
 
 | Environment | URL | Branch | Status |
 |---|---|---|---|
-| **Production** | https://willyd61.github.io/pleasureislanddesign.com/ | main | Live |
+| **Production** | https://www.pleasureislanddesign.com/ (GoDaddy cPanel, deployed from `main` via `.cpanel.yml`) | main | Live |
+| **GitHub Pages mirror** | https://lipford-dutch.github.io/pleasureislanddesign.com/ (public site files only) | main | Live |
 | **Beta/Staging** | phase-beta-release branch | phase-beta-release | Testing |
 | **Local Dev** | http://localhost:8000 | Any | Developer |
 
@@ -106,7 +107,7 @@ git push -u origin feature/your-feature
 gh pr create --title "Brief description" --body "Detailed explanation"
 
 # Or via GitHub web interface
-# Visit https://github.com/willyd61/pleasureislanddesign.com
+# Visit https://github.com/Lipford-Dutch/pleasureislanddesign.com
 # Click "Compare & pull request"
 ```
 
@@ -133,7 +134,7 @@ gh pr merge --rebase # Rebases commits (linear history)
 ```bash
 # Automatic deployment starts immediately after merge
 # Check status at: 
-# https://github.com/willyd61/pleasureislanddesign.com/deployments
+# https://github.com/Lipford-Dutch/pleasureislanddesign.com/deployments
 
 # Or check workflow status
 gh actions list
@@ -253,7 +254,7 @@ watch -n 5 'gh actions view $(gh actions list | head -1 | awk "{print \\$1}") --
 ```
 
 ### Post-Deployment Checks
-1. **Visit website:** https://willyd61.github.io/pleasureislanddesign.com/
+1. **Visit website:** https://lipford-dutch.github.io/pleasureislanddesign.com/
 2. **Check key pages:**
    - [ ] Homepage loads
    - [ ] Blog posts accessible
