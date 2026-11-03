@@ -22,6 +22,14 @@ RewriteRule .*\.(jpg|jpeg|gif|png|bmp)$ - [F,NC]
 # PHP handlers. They live under the web root, so block all direct HTTP access.
 RedirectMatch 404 ^/\.(data|logs|backups)(/|$)
 
+# Blog automation is CLI-only and is no longer deployed (lives in blog-automation/,
+# outside the web root). These rules also cover any copies still sitting on the
+# server from older uploads: drafts, the publisher script and its schedule file.
+RedirectMatch 404 ^/blog/drafts(/|$)
+RedirectMatch 404 ^/blog/(publish-scheduled\.php|scheduled-posts\.json)$
+RedirectMatch 404 ^/blog-automation(/|$)
+RedirectMatch 404 ^/forms/lib(/|$)
+
 # Defense-in-depth: never serve raw data/config file types even if path-guessed.
 <FilesMatch "\.(jsonl|log|bak|tmp)$">
   Require all denied

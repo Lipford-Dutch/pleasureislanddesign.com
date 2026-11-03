@@ -83,7 +83,7 @@ bundles, review to `approved`, then schedule. Suggested rhythm:
 | 4 | Promo graphic (seasonal special) + timelapse | Shift reserve to cheapest-lead channel | Recap / roundup |
 
 Blog posts are staged via the hardened publisher
-(`blog/publish-scheduled.php`) — see the drafts in `blog/drafts/` (finish them
+(`blog-automation/publish-scheduled.php`) — see the drafts in `blog-automation/drafts/` (finish them
 to full styled pages so the quality gate passes).
 
 ---

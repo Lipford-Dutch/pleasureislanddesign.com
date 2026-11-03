@@ -14,7 +14,7 @@ Single source of truth for the `bugfix-1` branch. Supersedes the earlier
 | Contact form | `forms/contact.php` | Working — POSTs JSON, validates, emails |
 | Newsletter | `forms/newsletter.php` | Working — dedup + welcome email |
 | Reviews | `forms/get-reviews.php` | Code ready — **needs Google API key + Place ID** |
-| Blog scheduling | `blog/publish-scheduled.php`, `blog/scheduled-posts.json` | Working — bulk-write, staggered release |
+| Blog scheduling | `blog-automation/publish-scheduled.php`, `blog-automation/scheduled-posts.json` | Working — bulk-write, staggered release |
 | Shared logic | `forms/lib/form-helpers.php` | All validation/sanitization (DRY, tested) |
 | Tests | `tests/unit-tests.php` | 34 tests, exercise the real shared lib |
 | Frontend wiring | `js/pleasure-island-scripts.js` | Posts to `/forms/*.php` |
@@ -52,7 +52,7 @@ signing by itself. Mitigations, in order of effort:
 1. **Pre-flight (local):**
    ```bash
    php -l forms/contact.php && php -l forms/newsletter.php \
-     && php -l forms/get-reviews.php && php -l blog/publish-scheduled.php
+     && php -l forms/get-reviews.php && php -l blog-automation/publish-scheduled.php
    php tests/unit-tests.php          # expect 34/34
    ```
 2. **Push & deploy:** merge `bugfix-1` → `main`, then in GoDaddy cPanel → Git
@@ -96,13 +96,14 @@ created from the build container):
 
 ## Blog scheduling (bulk-write, staggered release)
 
-1. Write posts as HTML into `blog/drafts/<slug>.html` (must contain an `<h1>`
-   and a `<time datetime="YYYY-MM-DD">`).
-2. Add an entry to `blog/scheduled-posts.json` with a `publish_date`.
-3. Publishing:
-   - Manual: `php blog/publish-scheduled.php`
-   - Automated (recommended): cPanel → Cron Jobs, daily:
-     `php /home/<acct>/public_html/blog/publish-scheduled.php`
+1. Write posts as HTML into `blog-automation/drafts/<slug>.html` (must contain an `<h1>`
+   and a `<time datetime="YYYY-MM-DD">`, plus full site chrome — stubs are rejected).
+   `blog-automation/` is NOT deployed to public_html (see `.cpanel.yml`).
+2. Add an entry to `blog-automation/scheduled-posts.json` with a `publish_date`.
+3. Publishing (CLI only — the script returns 404 under any web server):
+   - Preview: `php blog-automation/publish-scheduled.php --dry-run`
+   - Publish in the repo, commit, then deploy (recommended — survives redeploys).
+   - Cron (server): see `blog-automation/README.md`.
 4. On the publish date the post moves from `drafts/` to `blog/`, a backup is
    written to `.backups/`, and the sitemap is updated.
 
