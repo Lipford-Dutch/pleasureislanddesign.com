@@ -1,28 +1,31 @@
-name: Build & Publish Docs
+name: Build Docs
+
+# Builds the MkDocs site and uploads it as a workflow artifact.
+# It no longer commits to main: release notes are generated into the
+# build workspace only, so this works once main is branch-protected.
 
 on:
   push:
     branches: [ main ]
   pull_request:
-    types: [ closed ]
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build-docs:
-    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch' || github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
@@ -34,18 +37,18 @@ jobs:
             mkdocs-git-revision-date-localized-plugin==1.2.2 \
             mkdocs-minify-plugin==0.7.2
 
-      - name: Auto-generate CHANGELOG page
+      - name: Generate release notes page (build-time only, not committed)
         run: |
           cp CHANGELOG.md docs/release-notes.md
+          echo "" >> docs/release-notes.md
           echo "Auto-generated from CHANGELOG.md on $(date -u '+%Y-%m-%d %H:%M UTC')" >> docs/release-notes.md
 
       - name: Build MkDocs site
         run: mkdocs build --strict
 
-      - name: Commit updated docs if changed
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/release-notes.md
-          git diff --staged --quiet || git commit -m "docs: auto-update release notes from CHANGELOG [skip ci]"
-          git push || true
+      - name: Upload built docs
+        uses: actions/upload-artifact@v7
+        with:
+          name: docs-site
+          path: site
+          retention-days: 14
