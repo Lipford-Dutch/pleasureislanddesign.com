@@ -20,7 +20,10 @@
   <meta property="og:url" content="https://www.pleasureislanddesign.com">
   <meta property="og:title" content="Pleasure Island Design | Premium Cabinet Refinishing">
   <meta property="og:description" content="Transform your kitchen in 5-8 days. Premium cabinet refinishing, refacing & repair in SE North Carolina.">
-  <meta property="og:image" content="https://www.pleasureislanddesign.com/img/pid-logo-primary-transparent.png">
+  <meta property="og:image" content="https://www.pleasureislanddesign.com/img/pid-og-v2-1200x630.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pleasure Island Design logo">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter -->
@@ -28,18 +31,23 @@
   <meta name="twitter:site" content="@PID_KitchenCabs">
   <meta name="twitter:title" content="Pleasure Island Design | Premium Cabinet Refinishing">
   <meta name="twitter:description" content="Transform your kitchen in 5-8 days. Premium cabinet refinishing & repair in SE North Carolina.">
-  <meta name="twitter:image" content="https://www.pleasureislanddesign.com/img/pid-logo-primary-transparent.png">
+  <meta name="twitter:image" content="https://www.pleasureislanddesign.com/img/pid-og-v2-1200x630.jpg">
 
   <!-- Canonical -->
   <link rel="canonical" href="https://www.pleasureislanddesign.com">
 
   <!-- Favicon -->
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 
   <!-- Google Fonts: Playfair Display + Lato -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet"></noscript>
 
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-X0PJB95RBE"></script>
@@ -50,11 +58,15 @@
     gtag('config', 'G-X0PJB95RBE');
   </script>
 
-  <!-- Microsoft Clarity (heatmapping) -->
-  <!-- ⚠️ NEEDS CONFIGURATION: Replace "placeholder-clarity-id" with real project ID from https://clarity.microsoft.com -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","placeholder-clarity-id");
-  </script>
+  <!-- Microsoft Clarity (heatmapping) — DISABLED until a real project ID exists.
+       To enable: create a project at https://clarity.microsoft.com, then paste its
+       tracking snippet here (or add it as a tag in Google Tag Manager GTM-W2TMT5K8).
+       CLARITY_PROJECT_ID: (not set) -->
+
+  <!-- Preload LCP hero image -->
+  <link rel="preload" as="image" type="image/avif" fetchpriority="high"
+        imagesrcset="img/site/hero-kitchen-a1-026-480.avif 480w, img/site/hero-kitchen-a1-026-800.avif 800w, img/site/hero-kitchen-a1-026-1200.avif 1200w, img/site/hero-kitchen-a1-026-1600.avif 1600w"
+        imagesizes="(max-width: 900px) 100vw, 60vw">
 
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
@@ -72,16 +84,15 @@
     "url": "https://www.pleasureislanddesign.com",
     "telephone": "+1-910-444-1230",
     "email": "pleasureislanddesign@gmail.com",
-    "image": "https://www.pleasureislanddesign.com/img/pid-logo-primary.png",
+    "image": "https://www.pleasureislanddesign.com/img/pid-og-v2-1200x630.jpg",
     "priceRange": "$$",
     "areaServed": [
-      "Wilmington, NC",
-      "Kure Beach, NC",
-      "Carolina Beach, NC",
-      "Leland, NC",
-      "Wrightsville Beach, NC",
-      "Compass Pointe, NC",
-      "Hampstead, NC"
+      { "@type": "City", "name": "Wilmington", "addressRegion": "NC" },
+      { "@type": "City", "name": "Carolina Beach", "addressRegion": "NC" },
+      { "@type": "City", "name": "Kure Beach", "addressRegion": "NC" },
+      { "@type": "City", "name": "Wrightsville Beach", "addressRegion": "NC" },
+      { "@type": "City", "name": "Leland", "addressRegion": "NC" },
+      { "@type": "City", "name": "Burgaw", "addressRegion": "NC" }
     ],
     "address": {
       "@type": "PostalAddress",
@@ -133,7 +144,7 @@
   <header class="site-header" id="site-header">
     <div class="header-inner">
       <a href="#home" class="header-logo" aria-label="Pleasure Island Design — Home">
-        <img src="img/pid-logo-v2-header.png" alt="Pleasure Island Design" width="330" height="67">
+        <img src="img/pid-logo-v2-header.png" srcset="img/site/pid-logo-v2-header-660.png 660w, img/site/pid-logo-v2-header-1000.png 1000w, img/pid-logo-v2-header.png 1950w" sizes="330px" alt="Pleasure Island Design" width="330" height="67">
       </a>
 
       <nav class="primary-nav" id="primary-nav" role="navigation" aria-label="Main navigation">
@@ -167,19 +178,12 @@
 
       <!-- Visual panel: the work speaks for itself -->
       <figure class="hero-visual">
-        <img
-          src="gallery/motts-landing-2023/after-1.jpg"
-          alt="Premium kitchen cabinet refinishing — Motts Landing, Wilmington NC"
-          class="hero-visual-img"
-          loading="eager"
-          fetchpriority="high"
-          width="1200" height="800"
-        >
+        <picture><source type="image/avif" srcset="img/site/hero-kitchen-a1-026-480.avif 480w, img/site/hero-kitchen-a1-026-800.avif 800w, img/site/hero-kitchen-a1-026-1200.avif 1200w, img/site/hero-kitchen-a1-026-1600.avif 1600w" sizes="(max-width: 900px) 100vw, 60vw"><source type="image/webp" srcset="img/site/hero-kitchen-a1-026-480.webp 480w, img/site/hero-kitchen-a1-026-800.webp 800w, img/site/hero-kitchen-a1-026-1200.webp 1200w, img/site/hero-kitchen-a1-026-1600.webp 1600w" sizes="(max-width: 900px) 100vw, 60vw"><img src="img/site/hero-kitchen-a1-026-1200.jpg" alt="Refinished gray kitchen cabinets with a navy island — Pleasure Island Design" class="hero-visual-img" width="1200" height="900" loading="eager" fetchpriority="high"></picture>
         <figcaption class="hero-visual-caption">
           <span class="caption-dot" aria-hidden="true">●</span>
-          <span class="caption-project">Motts Landing Residence</span>
+          <span class="caption-project">Kitchen Cabinet Refinishing</span>
           <span class="caption-sep" aria-hidden="true">·</span>
-          <span class="caption-location">Wilmington, NC</span>
+          <span class="caption-location">SE North Carolina</span>
         </figcaption>
       </figure>
 
@@ -303,18 +307,21 @@
           <p>Interior designers recommend us by name. Custom builders rely on us for spec homes. Homeowners trust us with kitchens that represent significant investments — because we treat every project with the precision and care it deserves.</p>
           <div class="awards-strip">
             <div class="award-item">
-              <img src="img/2021-nextdoor-award.jpg" alt="2021 Nextdoor Neighborhood Favorite Award" width="80" height="80">
+              <img src="img/2021-nextdoor-award.jpg" alt="2021 Nextdoor Neighborhood Favorite Award" width="80" height="80" loading="lazy">
               <span>2021 Neighborhood Favorite</span>
             </div>
             <div class="award-item">
-              <img src="img/2023-nextdoor-award.jpg" alt="2023 Nextdoor Neighborhood Favorite Award" width="80" height="80">
+              <img src="img/2023-nextdoor-award.jpg" alt="2023 Nextdoor Neighborhood Favorite Award" width="80" height="80" loading="lazy">
               <span>2023 Neighborhood Favorite</span>
             </div>
           </div>
         </div>
         <div class="about-image reveal reveal-right">
-          <div class="about-image-frame">
-            <img src="gallery/brunswick-forest-2023/after_1.jpg" alt="Beautiful refinished cabinets — Brunswick Forest project" loading="lazy">
+          <div class="about-image-frame about-image-frame-portrait">
+            <picture><source type="image/avif" srcset="img/site/about-nicole-a1-057-480.avif 480w, img/site/about-nicole-a1-057-800.avif 800w" sizes="(max-width: 900px) 90vw, 40vw"><source type="image/webp" srcset="img/site/about-nicole-a1-057-480.webp 480w, img/site/about-nicole-a1-057-800.webp 800w" sizes="(max-width: 900px) 90vw, 40vw"><img src="img/site/about-nicole-a1-057-800.jpg" alt="Nicole Rayment at the workbench in the Pleasure Island Design shop" width="800" height="1000" loading="lazy" decoding="async"></picture>
+          </div>
+          <div class="about-image-secondary">
+            <picture><source type="image/avif" srcset="img/site/about-nicole-a1-061-480.avif 480w, img/site/about-nicole-a1-061-800.avif 800w" sizes="(max-width: 900px) 90vw, 30vw"><source type="image/webp" srcset="img/site/about-nicole-a1-061-480.webp 480w, img/site/about-nicole-a1-061-800.webp 800w" sizes="(max-width: 900px) 90vw, 30vw"><img src="img/site/about-nicole-a1-061-800.jpg" alt="Nicole Rayment working with a group around a finishing table in the shop" width="800" height="600" loading="lazy" decoding="async"></picture>
           </div>
           <div class="about-image-badge">
             <span class="badge-icon">★★</span>
@@ -369,6 +376,13 @@
           <h3>Reinstallation &amp; Walkthrough</h3>
           <p>Doors are precision-rehung, hardware installed, and every cabinet adjusted for perfect alignment. We don't leave until you love every detail.</p>
         </div>
+      </div>
+
+      <div class="process-photos reveal" aria-label="Inside our finishing shop">
+        <figure class="process-photo"><picture><source type="image/avif" srcset="img/site/process-a1-048-400.avif 400w, img/site/process-a1-048-700.avif 700w" sizes="(max-width: 600px) 50vw, 25vw"><source type="image/webp" srcset="img/site/process-a1-048-400.webp 400w, img/site/process-a1-048-700.webp 700w" sizes="(max-width: 600px) 50vw, 25vw"><img src="img/site/process-a1-048-700.jpg" alt="HVLP spray gun used for cabinet door finishing" width="700" height="525" loading="lazy" decoding="async"></picture></figure>
+        <figure class="process-photo"><picture><source type="image/avif" srcset="img/site/process-a4-003-400.avif 400w, img/site/process-a4-003-700.avif 700w" sizes="(max-width: 600px) 50vw, 25vw"><source type="image/webp" srcset="img/site/process-a4-003-400.webp 400w, img/site/process-a4-003-700.webp 700w" sizes="(max-width: 600px) 50vw, 25vw"><img src="img/site/process-a4-003-700.jpg" alt="Freshly finished cabinet doors on a drying rack" width="700" height="525" loading="lazy" decoding="async"></picture></figure>
+        <figure class="process-photo"><picture><source type="image/avif" srcset="img/site/process-a6-201-400.avif 400w, img/site/process-a6-201-700.avif 700w" sizes="(max-width: 600px) 50vw, 25vw"><source type="image/webp" srcset="img/site/process-a6-201-400.webp 400w, img/site/process-a6-201-700.webp 700w" sizes="(max-width: 600px) 50vw, 25vw"><img src="img/site/process-a6-201-700.jpg" alt="Cabinet doors laid out on racks in the finishing shop" width="700" height="525" loading="lazy" decoding="async"></picture></figure>
+        <figure class="process-photo"><picture><source type="image/avif" srcset="img/site/process-a6-202-400.avif 400w, img/site/process-a6-202-700.avif 700w" sizes="(max-width: 600px) 50vw, 25vw"><source type="image/webp" srcset="img/site/process-a6-202-400.webp 400w, img/site/process-a6-202-700.webp 700w" sizes="(max-width: 600px) 50vw, 25vw"><img src="img/site/process-a6-202-700.jpg" alt="Close-up of a smooth factory-style cabinet finish" width="700" height="525" loading="lazy" decoding="async"></picture></figure>
       </div>
     </div>
   </section>
@@ -508,6 +522,51 @@
           <div class="gallery-caption">
             <span class="caption-location">Motts Landing, Wilmington</span>
             <span class="caption-type">Cabinet Refinishing</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="refinishing" data-project="Cherry to White">
+          <div class="before-after-slider">
+            <div class="slider-after"><picture><source type="image/avif" srcset="img/site/ba-a4-002-after-600.avif 600w, img/site/ba-a4-002-after-900.avif 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><source type="image/webp" srcset="img/site/ba-a4-002-after-600.webp 600w, img/site/ba-a4-002-after-900.webp 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><img src="img/site/ba-a4-002-after-900.jpg" alt="Cherry kitchen with island after refinishing" width="900" height="675" loading="lazy" decoding="async"></picture></div>
+            <div class="slider-before"><picture><source type="image/avif" srcset="img/site/ba-a4-001-before-600.avif 600w, img/site/ba-a4-001-before-900.avif 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><source type="image/webp" srcset="img/site/ba-a4-001-before-600.webp 600w, img/site/ba-a4-001-before-900.webp 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><img src="img/site/ba-a4-001-before-900.jpg" alt="Cherry kitchen with island before refinishing" width="900" height="675" loading="lazy" decoding="async"></picture></div>
+            <div class="slider-handle" role="slider" aria-label="Drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+              <span class="slider-arrow slider-arrow-left" aria-hidden="true">◀</span>
+              <span class="slider-arrow slider-arrow-right" aria-hidden="true">▶</span>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <span class="caption-location">SE North Carolina</span>
+            <span class="caption-type">Cabinet Refinishing</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="refinishing" data-project="Kitchen Refresh">
+          <div class="before-after-slider">
+            <div class="slider-after"><picture><source type="image/avif" srcset="img/site/ba-a6-212-after-600.avif 600w, img/site/ba-a6-212-after-900.avif 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><source type="image/webp" srcset="img/site/ba-a6-212-after-600.webp 600w, img/site/ba-a6-212-after-900.webp 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><img src="img/site/ba-a6-212-after-900.jpg" alt="Kitchen cabinets after refinishing" width="900" height="675" loading="lazy" decoding="async"></picture></div>
+            <div class="slider-before"><picture><source type="image/avif" srcset="img/site/ba-a6-038-before-600.avif 600w, img/site/ba-a6-038-before-900.avif 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><source type="image/webp" srcset="img/site/ba-a6-038-before-600.webp 600w, img/site/ba-a6-038-before-900.webp 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><img src="img/site/ba-a6-038-before-900.jpg" alt="Kitchen cabinets before refinishing" width="900" height="675" loading="lazy" decoding="async"></picture></div>
+            <div class="slider-handle" role="slider" aria-label="Drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+              <span class="slider-arrow slider-arrow-left" aria-hidden="true">◀</span>
+              <span class="slider-arrow slider-arrow-right" aria-hidden="true">▶</span>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <span class="caption-location">SE North Carolina</span>
+            <span class="caption-type">Cabinet Refinishing</span>
+          </div>
+        </div>
+
+        <div class="gallery-item" data-category="refinishing" data-project="Dining Table">
+          <div class="before-after-slider">
+            <div class="slider-after"><picture><source type="image/avif" srcset="img/site/ba-a6-157-after-600.avif 600w, img/site/ba-a6-157-after-900.avif 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><source type="image/webp" srcset="img/site/ba-a6-157-after-600.webp 600w, img/site/ba-a6-157-after-900.webp 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><img src="img/site/ba-a6-157-after-900.jpg" alt="Dining table after refinishing" width="900" height="675" loading="lazy" decoding="async"></picture></div>
+            <div class="slider-before"><picture><source type="image/avif" srcset="img/site/ba-a6-059-before-600.avif 600w, img/site/ba-a6-059-before-900.avif 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><source type="image/webp" srcset="img/site/ba-a6-059-before-600.webp 600w, img/site/ba-a6-059-before-900.webp 900w" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 33vw"><img src="img/site/ba-a6-059-before-900.jpg" alt="Dining table before refinishing" width="900" height="675" loading="lazy" decoding="async"></picture></div>
+            <div class="slider-handle" role="slider" aria-label="Drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0">
+              <span class="slider-arrow slider-arrow-left" aria-hidden="true">◀</span>
+              <span class="slider-arrow slider-arrow-right" aria-hidden="true">▶</span>
+            </div>
+          </div>
+          <div class="gallery-caption">
+            <span class="caption-location">SE North Carolina</span>
+            <span class="caption-type">Furniture Refinishing</span>
           </div>
         </div>
 
@@ -748,7 +807,7 @@
         <li>Cabinet boxes finished on site</li>
         <li>Factory-quality sprayed finish</li>
         <li>Trusted through neighborhood referrals</li>
-        <li>Serving Wilmington, Carolina Beach, Kure Beach, Compass Pointe, Leland, Hampstead, and surrounding coastal NC communities</li>
+        <li>Serving Wilmington, Carolina Beach, Kure Beach, Wrightsville Beach, Leland, Burgaw, and surrounding coastal NC communities</li>
       </ul>
 
       <!-- Section CTA -->
@@ -858,7 +917,7 @@
           <details class="faq-item">
             <summary class="faq-question">What areas do you serve?</summary>
             <div class="faq-answer">
-              <p>We serve the <strong>greater Southeast North Carolina region</strong>, including Wilmington, Kure Beach, Carolina Beach, Leland, Wrightsville Beach, Southport, and surrounding communities. Not sure if we cover your area? Give us a call!</p>
+              <p>We serve the <strong>greater Southeast North Carolina region</strong>, including Wilmington, Carolina Beach, Kure Beach, Wrightsville Beach, Leland, Burgaw, and surrounding communities. Not sure if we cover your area? Give us a call!</p>
             </div>
           </details>
           <details class="faq-item">
@@ -928,20 +987,20 @@
       <div class="section-header reveal">
         <p class="section-eyebrow">Where We Work</p>
         <h2 class="section-title">Serving <em>SE North Carolina</em></h2>
-        <p class="section-subtitle">Wilmington, Kure Beach, Carolina Beach, Leland, Wrightsville Beach, Southport, and surrounding coastal communities.</p>
+        <p class="section-subtitle">Wilmington, Carolina Beach, Kure Beach, Wrightsville Beach, Leland, Burgaw, and surrounding coastal communities.</p>
       </div>
       <div class="service-area-grid reveal">
         <div class="service-area-map">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106337.53!2d-77.9!3d34.05!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89a9f5e32f23a739%3A0x7f30a6c6b5b77869!2sWilmington%2C%20NC!5e0!3m2!1sen!2sus!4v1716000000000!5m2!1sen!2sus"
-            title="Pleasure Island Design service area map — SE North Carolina"
+            src="https://www.google.com/maps/embed?origin=mfe&amp;pb=!1m3!2m1!1s3720+Carolina+Beach+Rd+Suite+F,+Wilmington,+NC+28412!6i11"
+            title="Map: Pleasure Island Design, 3720 Carolina Beach Rd, Wilmington, NC"
             width="100%"
             height="400"
             loading="lazy"
             style="border:0;"
             allowfullscreen=""
             referrerpolicy="no-referrer-when-downgrade"
-            aria-label="Map of SE North Carolina service area"
+            aria-label="Map showing the Pleasure Island Design studio in Wilmington, NC"
           ></iframe>
         </div>
         <div class="service-area-list">
@@ -958,7 +1017,6 @@
             <li>Porters Neck</li>
             <li>Mayfaire</li>
             <li>Landfall</li>
-            <li>Southport</li>
             <li>Ogden</li>
           </ul>
           <p class="area-note">Don't see your community? <a href="#contact" class="text-link">Contact us</a> — we likely travel there.</p>
@@ -1058,7 +1116,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <img src="img/pid-logo-v2-header.png" alt="Pleasure Island Design" width="295" height="60" loading="lazy">
+          <img src="img/pid-logo-v2-header.png" srcset="img/site/pid-logo-v2-header-660.png 660w, img/site/pid-logo-v2-header-1000.png 1000w, img/pid-logo-v2-header.png 1950w" sizes="295px" alt="Pleasure Island Design" width="295" height="60" loading="lazy">
           <p class="footer-tagline">Interiors · Cabinetry · Furniture</p>
           <p class="footer-desc">Premium cabinet refinishing and design services serving Southeast North Carolina since 2014.</p>
         </div>

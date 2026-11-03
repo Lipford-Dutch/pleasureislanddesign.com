@@ -52,18 +52,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 // --- API NOT CONFIGURED ---
 if (!$api_key || !$place_id) {
     log_event('API_NOT_CONFIGURED');
-    respond([
-        'error' => 'Google Places API not configured',
-        'setup_steps' => [
-            '1. Create Google Cloud project: https://console.cloud.google.com',
-            '2. Enable Places API',
-            '3. Create API key (restrict to Places API)',
-            '4. Find Place ID (search on Google Maps)',
-            '5. Set environment variables: GOOGLE_PLACES_API_KEY, GOOGLE_PLACE_ID',
-            '6. Or contact administrator to configure'
-        ],
-        'demo_reviews' => get_demo_reviews()
-    ], 503);
+    // Fail quietly: no setup instructions or sample reviews in public output.
+    // Setup: set GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID in the server environment,
+    // then add data-live-reviews="on" to #testimonials-track in index.html.
+    respond(['success' => false, 'configured' => false], 200);
 }
 
 // --- TRY LIVE API ---

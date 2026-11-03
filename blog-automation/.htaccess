@@ -1,0 +1,3 @@
+# This folder must never be web-served. If it is ever copied into public_html
+# by mistake, deny everything.
+Require all denied
