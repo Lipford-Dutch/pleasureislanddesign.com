@@ -1,0 +1,52 @@
+{
+  "description": "Blog post scheduling config. Posts are stored as .html files in /blog/drafts/, then moved to /blog/ on scheduled publish date.",
+  "instructions": {
+    "workflow": "1. Write post in /blog/drafts/ as {slug}.html 2. Add entry to this JSON with publish_date 3. Cron job or manual deploy checks this file daily 4. When date arrives, moves post to /blog/ and updates index",
+    "date_format": "YYYY-MM-DD",
+    "publish_immediately": "Set publish_date to today or leave empty to publish now",
+    "draft_location": "/blog/drafts/",
+    "live_location": "/blog/"
+  },
+  "posts": [
+    {
+      "slug": "kitchen-paint-selection-guide",
+      "title": "The Complete Guide to Selecting Cabinet Paint for Your Kitchen",
+      "publish_date": "2026-07-01",
+      "category": "Care",
+      "description": "How to choose the right paint type, color, and finish for cabinet refinishing projects.",
+      "featured": false
+    },
+    {
+      "slug": "diy-cabinet-care-mistakes",
+      "title": "5 Common DIY Cabinet Care Mistakes (And How to Avoid Them)",
+      "publish_date": "2026-07-15",
+      "category": "Care",
+      "description": "Protect your refinished cabinets from common household mistakes.",
+      "featured": false
+    },
+    {
+      "slug": "modern-vs-traditional-cabinet-styles",
+      "title": "Modern vs. Traditional Cabinet Styles: Which is Right for Your Home?",
+      "publish_date": "2026-08-01",
+      "category": "Design",
+      "description": "Explore the differences between contemporary and classic cabinet aesthetics.",
+      "featured": false
+    },
+    {
+      "slug": "hardware-trends-2026",
+      "title": "Cabinet Hardware Trends 2026: What's In and What's Out",
+      "publish_date": "2026-08-15",
+      "category": "Trends",
+      "description": "Stay current with the latest cabinet hardware styles, finishes, and innovations.",
+      "featured": false
+    },
+    {
+      "slug": "budget-cabinet-refinishing",
+      "title": "Cabinet Refinishing on a Budget: Options and Trade-Offs",
+      "publish_date": "2026-09-01",
+      "category": "Services",
+      "description": "Explore cost-effective cabinet transformation methods.",
+      "featured": false
+    }
+  ]
+}
