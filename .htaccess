@@ -1,9 +1,16 @@
 
 RewriteEngine on
+
+# --- Canonical host: one 301 hop to https://www.pleasureislanddesign.com ---
+# 1) http://(www.)pleasureislanddesign.com/* -> https://www...
 RewriteCond %{HTTPS} off
 RewriteCond %{HTTP:X-Forwarded-SSL} !on
-RewriteCond %{HTTP_HOST} ^pleasureislanddesign\.com$ [OR]
-RewriteCond %{HTTP_HOST} ^www\.pleasureislanddesign\.com$
+RewriteCond %{HTTP_HOST} ^pleasureislanddesign\.com$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www\.pleasureislanddesign\.com$ [NC]
+RewriteRule ^(.*)$ "https\:\/\/www\.pleasureislanddesign\.com\/$1" [R=301,L]
+
+# 2) https://pleasureislanddesign.com/* (bare domain over HTTPS) -> https://www...
+RewriteCond %{HTTP_HOST} ^pleasureislanddesign\.com$ [NC]
 RewriteRule ^(.*)$ "https\:\/\/www\.pleasureislanddesign\.com\/$1" [R=301,L]
 
 RewriteCond %{HTTP_REFERER} !^$
@@ -35,3 +42,27 @@ RedirectMatch 404 ^/forms/lib(/|$)
   Require all denied
 </FilesMatch>
 
+# --- Performance: compression + browser caching (no-ops if modules are absent) ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 hour"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/webp "access plus 30 days"
+  ExpiresByType image/avif "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+  ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+  AddType image/webp .webp
+</IfModule>
