@@ -9,7 +9,7 @@
  * Used by:
  *   - forms/contact.php
  *   - forms/newsletter.php
- *   - blog/publish-scheduled.php
+ *   - blog-automation/publish-scheduled.php
  *   - tests/unit-tests.php
  */
 

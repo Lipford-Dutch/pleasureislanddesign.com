@@ -413,6 +413,9 @@
   function initGoogleReviews() {
     const track = document.getElementById('testimonials-track');
     if (!track) {return;}
+    // Live Google reviews are opt-in. Until the Places API key + Place ID are set on
+    // the server, leave data-live-reviews off so no request (and no console error) is made.
+    if (track.dataset.liveReviews !== 'on') {return;}
 
     fetch('/forms/get-reviews.php', { headers: { Accept: 'application/json' } })
       .then(res => res.ok ? res.json() : null)

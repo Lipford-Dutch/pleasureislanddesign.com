@@ -1,10 +1,10 @@
 {
-  "description": "Blog post scheduling config. Posts are stored as .html files in /blog/drafts/, then moved to /blog/ on scheduled publish date.",
+  "description": "Blog post scheduling config. Posts are stored as .html files in /blog-automation/drafts/, then moved to /blog/ on scheduled publish date.",
   "instructions": {
-    "workflow": "1. Write post in /blog/drafts/ as {slug}.html 2. Add entry to this JSON with publish_date 3. Cron job or manual deploy checks this file daily 4. When date arrives, moves post to /blog/ and updates index",
+    "workflow": "1. Write post in /blog-automation/drafts/ as {slug}.html 2. Add entry to this JSON with publish_date 3. Cron job or manual deploy checks this file daily 4. When date arrives, moves post to /blog/ and updates index",
     "date_format": "YYYY-MM-DD",
     "publish_immediately": "Set publish_date to today or leave empty to publish now",
-    "draft_location": "/blog/drafts/",
+    "draft_location": "/blog-automation/drafts/",
     "live_location": "/blog/"
   },
   "posts": [
