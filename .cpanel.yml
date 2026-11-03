@@ -22,8 +22,11 @@ deployment:
     - /bin/cp -f sitemap.xml     $DEPLOYPATH/
     - /bin/cp -f .htaccess       $DEPLOYPATH/
     - /bin/cp -f .nojekyll       $DEPLOYPATH/
+    - /bin/cp -f favicon.ico favicon-32x32.png favicon-16x16.png apple-touch-icon.png $DEPLOYPATH/
 
     # --- Public directories (remove-then-copy = idempotent, clears stale files) ---
+    # NOTE: blog-automation/ (drafts, schedule, CLI publisher) is intentionally NOT deployed.
+    # The blog/ rm -rf also removes any old blog/drafts/ + publish-scheduled.php copies on the server.
     - /bin/rm -rf $DEPLOYPATH/blog       && /bin/cp -R blog       $DEPLOYPATH/
     - /bin/rm -rf $DEPLOYPATH/specials   && /bin/cp -R specials   $DEPLOYPATH/
     - /bin/rm -rf $DEPLOYPATH/shop       && /bin/cp -R shop       $DEPLOYPATH/

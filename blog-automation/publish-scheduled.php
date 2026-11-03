@@ -1,24 +1,69 @@
 <?php
 /**
- * Blog Post Publisher (Production-Ready)
+ * Blog Post Publisher — CLI ONLY
  *
  * Scheduled Publishing System
- * - Reads scheduled-posts.json
- * - Publishes posts when publish_date arrives
- * - Auto-updates blog index & sitemap
- * - Comprehensive logging
- * - Rollback capability
+ * - Reads blog-automation/scheduled-posts.json
+ * - Publishes drafts from blog-automation/drafts/ into blog/ when publish_date arrives
+ * - Auto-updates blog/index.html & sitemap.xml
+ * - Logging + backups
  *
- * Usage:
- *   Manual: php blog/publish-scheduled.php
- *   Cron: 0 0 * * * php /path/to/blog/publish-scheduled.php
+ * SECURITY (2026-11 audit):
+ *   This script lives OUTSIDE the deployed web root (blog-automation/ is not in
+ *   .cpanel.yml) and refuses to run under any web SAPI. It can only be started
+ *   from a shell or cron. Optionally, set PID_PUBLISH_TOKEN in the environment
+ *   (or in a config file outside public_html, see PID_PUBLISH_CONFIG below) and
+ *   pass --token=<value>; when a token is configured it is REQUIRED.
+ *
+ * Usage (from the repo root):
+ *   Preview:  php blog-automation/publish-scheduled.php --dry-run
+ *   Publish:  php blog-automation/publish-scheduled.php
+ *   Target a different blog dir (e.g. a server cron writing into public_html):
+ *             PID_BLOG_DIR=$HOME/public_html/blog php blog-automation/publish-scheduled.php
+ *   Note: .cpanel.yml replaces public_html/blog on every deploy, so posts published
+ *   straight into public_html are wiped by the next deploy. The safe flow is to
+ *   run this in the repo, commit the result, and deploy (see PR notes).
  */
+
+// ---- Hard guard: never runnable over HTTP ----
+if (PHP_SAPI !== 'cli' || isset($_SERVER['REQUEST_METHOD'])) {
+    if (!headers_sent()) {
+        http_response_code(404);
+        header('Content-Type: text/plain; charset=utf-8');
+    }
+    echo 'Not found';
+    exit;
+}
+
+// ---- Optional shared-secret check (config lives outside the web root) ----
+$pid_cli_args = $argv ?? [];
+$pid_expected_token = (string) getenv('PID_PUBLISH_TOKEN');
+$pid_config_path = getenv('PID_PUBLISH_CONFIG') ?: (getenv('HOME') ? getenv('HOME') . '/.pid-secrets/publisher.php' : '');
+if ($pid_expected_token === '' && $pid_config_path && is_readable($pid_config_path)) {
+    $pid_cfg = include $pid_config_path; // expected: <?php return ['token' => '...'];
+    if (is_array($pid_cfg) && !empty($pid_cfg['token'])) {
+        $pid_expected_token = (string) $pid_cfg['token'];
+    }
+}
+if ($pid_expected_token !== '') {
+    $pid_given = '';
+    foreach ($pid_cli_args as $pid_arg) {
+        if (strpos($pid_arg, '--token=') === 0) {
+            $pid_given = substr($pid_arg, 8);
+        }
+    }
+    if (!hash_equals($pid_expected_token, $pid_given)) {
+        fwrite(STDERR, "[Blog Publisher] Missing or invalid --token. Aborting.\n");
+        exit(2);
+    }
+}
 
 require_once dirname(__DIR__) . '/forms/lib/form-helpers.php';
 
-define('BLOG_ROOT', __DIR__);
-define('CONFIG_FILE', BLOG_ROOT . '/scheduled-posts.json');
-define('DRAFTS_DIR', BLOG_ROOT . '/drafts');
+$pid_blog_dir = getenv('PID_BLOG_DIR') ?: dirname(__DIR__) . '/blog';
+define('BLOG_ROOT', rtrim($pid_blog_dir, '/'));
+define('CONFIG_FILE', __DIR__ . '/scheduled-posts.json');
+define('DRAFTS_DIR', __DIR__ . '/drafts');
 define('LOG_FILE', dirname(BLOG_ROOT) . '/.logs/blog-publisher.log');
 define('BACKUP_DIR', dirname(BLOG_ROOT) . '/.backups');
 
@@ -30,7 +75,7 @@ foreach ([dirname(LOG_FILE), BACKUP_DIR] as $dir) {
 }
 
 $start_time = microtime(true);
-$DRY_RUN = in_array('--dry-run', $argv ?? [], true);
+$DRY_RUN = in_array('--dry-run', $pid_cli_args, true);
 $stats = ['published' => 0, 'would_publish' => 0, 'skipped' => 0, 'errors' => 0];
 
 if ($DRY_RUN) {
