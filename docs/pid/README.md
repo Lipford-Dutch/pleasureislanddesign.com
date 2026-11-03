@@ -10,7 +10,7 @@
 - Trifold Brochure
 - Sales Strategies
 - Business Plan v1.0
-- Hiring Report
+- Hiring Report (moved to the PID Google Drive, folder PID-Confidential; see `operations/hiring/hiring-report.md`)
 - Welcome Document
 - Instagram Calendar
 
