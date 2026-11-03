@@ -14,6 +14,13 @@ deployment:
     - export DEPLOYPATH=$HOME/public_html
     - /bin/mkdir -p $DEPLOYPATH
 
+    # --- Backup current public_html before changing it ---
+    # Backups live in $HOME/backups (outside the web root, never served). Keep the newest 5.
+    - export BACKUPDIR=$HOME/backups
+    - /bin/mkdir -p $BACKUPDIR && /bin/chmod 700 $BACKUPDIR
+    - /bin/tar -czf $BACKUPDIR/public_html-$(/bin/date +%Y%m%d-%H%M%S).tgz -C $HOME public_html
+    - /bin/ls -1t $BACKUPDIR/public_html-*.tgz | /usr/bin/tail -n +6 | /usr/bin/xargs -r /bin/rm -f
+
     # --- Root pages & server config ---
     - /bin/cp -f index.html      $DEPLOYPATH/
     - /bin/cp -f 404.html        $DEPLOYPATH/

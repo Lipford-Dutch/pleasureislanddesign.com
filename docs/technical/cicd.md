@@ -7,7 +7,8 @@
 | `ci.yml` | All PRs + push to main | Lint HTML/CSS/JS, validate assets and links |
 | `deploy.yml` | Push to main | Publish the public site files (only) to the GitHub Pages mirror |
 | `docs.yml` | Push to main + PRs to main | Build MkDocs (strict) and upload it as an artifact |
-| cPanel `.cpanel.yml` | cPanel Git deploy of `main` | Deploy the public site to production (GoDaddy) |
+| `cpanel-deploy.yml` | Push to main (site files) + manual | Auto-deploy `main` to production (GoDaddy cPanel) via UAPI, then smoke-test |
+| cPanel `.cpanel.yml` | cPanel Git deploy of `main` | Back up `public_html`, then deploy the public site to production (GoDaddy) |
 
 ## CI Workflow (`ci.yml`)
 
@@ -50,6 +51,52 @@ Version Control. `.cpanel.yml` removes and re-copies the public directories and
 root files into the web root, so stale files (for example old blog drafts) are
 cleared on each deploy. `blog-automation/` is intentionally not deployed.
 
+Before copying, `.cpanel.yml` archives the current web root to
+`$HOME/backups/public_html-YYYYMMDD-HHMMSS.tgz` (outside `public_html`, mode 700)
+and keeps only the newest 5 archives.
+
+### Auto-deploy workflow (`cpanel-deploy.yml`)
+
+Runs on push to `main` (changes only under `docs/`, `*.md` or `mkdocs.yml` are
+ignored) and on manual dispatch. One deploy at a time (`concurrency: cpanel-deploy`).
+
+**How it works** (all calls are cPanel UAPI over `https://$CPANEL_HOST:2083/execute/...`
+with header `Authorization: cpanel $CPANEL_USER:$CPANEL_API_TOKEN`):
+1. `VersionControl/update` with `branch=main` — cPanel pulls `main` into
+   `~/repositories/pleasureislanddesign.com`
+2. `VersionControlDeployment/create` — runs `.cpanel.yml` (backup, then copy)
+3. Polls `VersionControlDeployment/retrieve` until that deploy succeeds or fails (3 min timeout)
+4. Smoke test: `www` returns 200, the bare domain 301-redirects to `www`,
+   `/blog/publish-scheduled.php` and `/blog/scheduled-posts.json` return 404
+
+If `CPANEL_API_TOKEN` (or the user/host secrets) is not set, the job skips with a
+notice instead of failing.
+
+**Required repo secrets** (`Settings → Secrets and variables → Actions`):
+
+| Secret | Value |
+|--------|-------|
+| `CPANEL_API_TOKEN` | cPanel API token named `grokbot-deploy` |
+| `CPANEL_USER` | cPanel username |
+| `CPANEL_HOST` | cPanel server hostname (no `https://`, no port) |
+
+**Revoking the token:**
+1. cPanel → Security → Manage API Tokens → select `grokbot-deploy` → Revoke
+2. GitHub → repo Settings → Secrets and variables → Actions → delete `CPANEL_API_TOKEN`
+   (or `gh secret delete CPANEL_API_TOKEN --repo Lipford-Dutch/pleasureislanddesign.com`)
+
+After revoking, pushes to `main` will fail at step 1 until the secret is deleted
+(then they skip) or replaced with a new token.
+
+**Manual fallback:**
+- cPanel → Files → Git™ Version Control → Manage the repo → Pull or Deploy tab →
+  Update from Remote, then Deploy HEAD Commit; or
+- cPanel → Advanced → Terminal:
+  ```bash
+  uapi VersionControl update repository_root=$HOME/repositories/pleasureislanddesign.com branch=main
+  uapi VersionControlDeployment create repository_root=$HOME/repositories/pleasureislanddesign.com
+  ```
+
 ## Docs Workflow (`docs.yml`)
 
 Runs on push to main and on PRs to main. Builds the MkDocs site; it never commits
@@ -70,7 +117,7 @@ to `main`, so it works with branch protection.
 
 ## Secrets & Environment Variables
 
-Currently no secrets are required. For future integrations:
+Secrets in use: `CPANEL_API_TOKEN`, `CPANEL_USER`, `CPANEL_HOST` (see Production Deploy above).
 
 - Add secrets at: `Settings → Secrets and variables → Actions`
 - Reference in workflows as: `${{ secrets.YOUR_SECRET_NAME }}`

@@ -1,0 +1,149 @@
+name: Deploy to GoDaddy cPanel
+
+# Production auto-deploy: when main changes, tell cPanel (UAPI) to pull main into
+# its private repo clone and run .cpanel.yml (which backs up public_html, then
+# copies only the public site files into public_html). Then smoke-test the live site.
+#
+# Required repo secrets (Settings > Secrets and variables > Actions):
+#   CPANEL_API_TOKEN  cPanel API token (cPanel > Security > Manage API Tokens)
+#   CPANEL_USER       cPanel username
+#   CPANEL_HOST       cPanel server hostname (no scheme, no port)
+# If CPANEL_API_TOKEN is not set, the job skips with a notice instead of failing.
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - 'docs/**'
+      - '**/*.md'
+      - 'mkdocs.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cpanel-deploy
+  cancel-in-progress: false
+
+env:
+  REPO_ROOT: /home/kyjlg8o1knr0/repositories/pleasureislanddesign.com
+  SITE_WWW: https://www.pleasureislanddesign.com
+  SITE_BARE: https://pleasureislanddesign.com
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check deploy secrets
+        id: secrets
+        env:
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+        run: |
+          if [ -z "$CPANEL_API_TOKEN" ] || [ -z "$CPANEL_USER" ] || [ -z "$CPANEL_HOST" ]; then
+            echo "::notice title=cPanel deploy skipped::CPANEL_API_TOKEN, CPANEL_USER or CPANEL_HOST secret is not set. Skipping auto-deploy (deploy manually from cPanel Git Version Control)."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Pull main into the cPanel repository
+        if: steps.secrets.outputs.ready == 'true'
+        env:
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+        run: |
+          set -euo pipefail
+          resp=$(curl -sS --fail --max-time 120 \
+            -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_API_TOKEN}" \
+            --data-urlencode "repository_root=${REPO_ROOT}" \
+            --data-urlencode "branch=main" \
+            "https://${CPANEL_HOST}:2083/execute/VersionControl/update")
+          if [ "$(jq -r '.status' <<<"$resp")" != "1" ]; then
+            echo "::error::VersionControl/update failed: $(jq -c '.errors' <<<"$resp")"
+            exit 1
+          fi
+          echo "cPanel repo now at: $(jq -r '.data.last_update.identifier // "unknown"' <<<"$resp")"
+          echo "Expected commit:    ${GITHUB_SHA}"
+
+      - name: Start cPanel deployment (.cpanel.yml)
+        id: deploy
+        if: steps.secrets.outputs.ready == 'true'
+        env:
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+        run: |
+          set -euo pipefail
+          resp=$(curl -sS --fail --max-time 60 \
+            -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_API_TOKEN}" \
+            --data-urlencode "repository_root=${REPO_ROOT}" \
+            "https://${CPANEL_HOST}:2083/execute/VersionControlDeployment/create")
+          if [ "$(jq -r '.status' <<<"$resp")" != "1" ]; then
+            echo "::error::VersionControlDeployment/create failed: $(jq -c '.errors' <<<"$resp")"
+            exit 1
+          fi
+          deploy_id=$(jq -r '.data.deploy_id' <<<"$resp")
+          if [ -z "$deploy_id" ] || [ "$deploy_id" = "null" ]; then
+            echo "::error::No deploy_id returned by cPanel"
+            exit 1
+          fi
+          echo "Queued cPanel deployment ${deploy_id} (log: $(jq -r '.data.log_path // "n/a"' <<<"$resp"))"
+          echo "deploy_id=${deploy_id}" >> "$GITHUB_OUTPUT"
+
+      - name: Wait for cPanel deployment to finish
+        if: steps.secrets.outputs.ready == 'true'
+        env:
+          CPANEL_API_TOKEN: ${{ secrets.CPANEL_API_TOKEN }}
+          CPANEL_USER: ${{ secrets.CPANEL_USER }}
+          CPANEL_HOST: ${{ secrets.CPANEL_HOST }}
+          DEPLOY_ID: ${{ steps.deploy.outputs.deploy_id }}
+        run: |
+          set -euo pipefail
+          deadline=$(( $(date +%s) + 180 ))
+          while :; do
+            resp=$(curl -sS --fail --max-time 30 \
+              -H "Authorization: cpanel ${CPANEL_USER}:${CPANEL_API_TOKEN}" \
+              "https://${CPANEL_HOST}:2083/execute/VersionControlDeployment/retrieve")
+            ts=$(jq -c --arg id "$DEPLOY_ID" '[.data[]? | select((.deploy_id|tostring) == $id)][0].timestamps // {}' <<<"$resp")
+            if [ "$(jq -r '.succeeded // empty' <<<"$ts")" != "" ]; then
+              echo "cPanel deployment ${DEPLOY_ID} succeeded"
+              break
+            fi
+            if [ "$(jq -r '.failed // .canceled // empty' <<<"$ts")" != "" ]; then
+              echo "::error::cPanel deployment ${DEPLOY_ID} failed or was canceled: ${ts}"
+              exit 1
+            fi
+            if [ "$(date +%s)" -ge "$deadline" ]; then
+              echo "::error::Timed out after 3 minutes waiting for cPanel deployment ${DEPLOY_ID} (last state: ${ts})"
+              exit 1
+            fi
+            sleep 10
+          done
+
+      - name: Smoke test the live site
+        if: steps.secrets.outputs.ready == 'true'
+        run: |
+          set -uo pipefail
+          fail=0
+          check() { # url expected_code [expected_location_prefix]
+            local url=$1 want=$2 loc_want=${3:-} out code loc
+            out=$(curl -sS -o /dev/null --max-time 30 -w '%{http_code} %{redirect_url}' "$url") || out="000 "
+            code=${out%% *}; loc=${out#* }
+            if [ "$code" != "$want" ]; then
+              echo "::error::$url returned $code (expected $want)"; fail=1; return
+            fi
+            if [ -n "$loc_want" ] && [[ "$loc" != "$loc_want"* ]]; then
+              echo "::error::$url redirects to '$loc' (expected $loc_want...)"; fail=1; return
+            fi
+            echo "OK  $code  $url ${loc:+-> $loc}"
+          }
+          check "${SITE_WWW}/" 200
+          check "${SITE_BARE}/" 301 "${SITE_WWW}/"
+          check "${SITE_WWW}/blog/publish-scheduled.php" 404
+          check "${SITE_WWW}/blog/scheduled-posts.json" 404
+          exit $fail
