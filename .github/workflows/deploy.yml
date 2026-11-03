@@ -22,12 +22,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -36,14 +36,51 @@ jobs:
       - name: Run linters (quality gate before deploy)
         run: npm run lint
 
+      # Publish ONLY the public site, mirroring .cpanel.yml.
+      # Never publish docs/, automation/, blog-automation/, blog/drafts,
+      # storefront-beta/, business/, tests/, .github/ or root markdown docs.
+      - name: Assemble public site into _site/
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf _site && mkdir -p _site
+
+          # Root public files (copied only if present)
+          for f in index.html 404.html styles.css robots.txt sitemap.xml .nojekyll CNAME \
+                   favicon.ico favicon-32x32.png favicon-16x16.png apple-touch-icon.png \
+                   site.webmanifest manifest.json; do
+            if [ -f "$f" ]; then cp -f "$f" _site/; fi
+          done
+
+          # Public directories (same list as .cpanel.yml)
+          for d in blog specials shop gallery locations js img fonts forms opt-images; do
+            if [ -d "$d" ]; then cp -R "$d" _site/; fi
+          done
+
+          # Never publish unpublished drafts or automation sources
+          rm -rf _site/blog/drafts _site/blog-automation _site/automation
+
+          # Pages is static: PHP cannot run there and would be served as source.
+          # Drop server-side files, the scheduler data and stray git metadata.
+          find _site -type f \( -name '*.php' -o -name '.gitignore' -o -name '.gitattributes' \) -delete
+          rm -f _site/blog/scheduled-posts.json
+
+          # Guardrail: fail if anything sensitive slipped in
+          if find _site \( -path '_site/docs*' -o -path '*/drafts*' -o -path '_site/blog-automation*' \
+               -o -path '_site/automation*' -o -path '_site/.github*' \) -print -quit | grep -q .; then
+            echo "::error::Non-public paths found in _site"; exit 1
+          fi
+          echo "Publishing $(find _site -type f | wc -l) files"
+
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
 
       - name: Upload site artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
-          path: '.'
+          path: '_site'
+          include-hidden-files: true
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
