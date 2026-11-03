@@ -14,7 +14,7 @@ Guide to setting up your development environment for Pleasure Island Design webs
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/willyd61/pleasureislanddesign.com.git
+git clone https://github.com/Lipford-Dutch/pleasureislanddesign.com.git
 cd pleasureislanddesign.com
 ```
 

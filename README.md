@@ -5,10 +5,27 @@
 [![CI](https://github.com/Lipford-Dutch/pleasureislanddesign.com/actions/workflows/ci.yml/badge.svg)](https://github.com/Lipford-Dutch/pleasureislanddesign.com/actions/workflows/ci.yml)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-## 📋 Project Status (June 2026)
+## 📋 Project Status (November 2026)
 
-| Component | Status | Notes |
-|-----------|--------|-------|
+| Area | Status | Notes |
+|------|--------|-------|
+| **Production site** | ✅ Live | GoDaddy cPanel, deployed from `Lipford-Dutch/pleasureislanddesign.com` `main` via cPanel Git Version Control and `.cpanel.yml` |
+| **GitHub Pages mirror** | ✅ Live | [lipford-dutch.github.io/pleasureislanddesign.com](https://lipford-dutch.github.io/pleasureislanddesign.com/) publishes **only the public site files** (same set as `.cpanel.yml`); `docs/`, automation, drafts and PHP are never published |
+| **Source of truth** | ✅ This repo | The former personal repo `willyd61/pleasureislanddesign.com` is now a public fork of this repo and is not deployed |
+| **Phase 0 – consolidation** | ✅ Complete (Nov 2, 2026) | Personal work promoted into this repo, cPanel retargeted here, personal repo turned into a fork |
+| **Phase 1 – repo hygiene** | 🚧 In progress | Dependency graph on; CI scoped Pages publish merged; docs build no longer pushes to `main`; security/audit fixes merged; remaining: repository settings and project docs |
+| **Blog automation** | 🔒 Not deployed | Drafts, schedule and publisher live in `blog-automation/` (CLI only, outside the web root) |
+| **Confidential business docs** | 🔒 Moved | The hiring report now lives in the private company Drive; the repo keeps a pointer only |
+
+**See:** [PROJECT_BACKLOG.md](PROJECT_BACKLOG.md) (current backlog) | [BUGFIX_1.md](BUGFIX_1.md) | [PHASE3_ROADMAP.md](PHASE3_ROADMAP.md)
+
+## 🚢 Deployment
+
+- **Production:** merges to `main` are pulled into GoDaddy cPanel (Git Version Control) and deployed with `.cpanel.yml`, which copies only the public site directories and root files into the web root.
+- **GitHub Pages:** `.github/workflows/deploy.yml` assembles the same public file set into `_site/` and publishes it (Pages source: GitHub Actions). A guardrail fails the build if `docs/`, drafts or automation paths slip in.
+- **Docs:** `.github/workflows/docs.yml` builds the MkDocs site as a workflow artifact; it does not commit to `main`.
+
+-----------|--------|-------|
 | **Live Website** | ✅ Production | Deployed to GoDaddy cPanel, live at pleasureislanddesign.com |
 | **Contact Forms** | ✅ Enhanced | Production-ready with rate limiting, validation, logging |
 | **Newsletter** | ✅ Enhanced | Duplicate prevention, subscriber tracking |
@@ -53,7 +70,7 @@ This unlocks:
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 20+ ([Download](https://nodejs.org))
+- Node.js 22+ ([Download](https://nodejs.org))
 - npm 10+ (included with Node.js)
 - Git
 

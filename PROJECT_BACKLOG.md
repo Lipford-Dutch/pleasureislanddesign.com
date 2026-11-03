@@ -1,8 +1,35 @@
 # Pleasure Island Design - Project Backlog & Roadmap
 
 **Current Phase:** Beta Release (`phase-beta-release`) + **AI Digital Home Parallel Track**  
-**Last Updated:** June 02, 2026  
+**Last Updated:** November 2, 2026  
 **Burn Rate:** High (Critical audit fixes + archive foundation)
+
+---
+
+## 📍 Current Status (November 2, 2026)
+
+**Source of truth:** `Lipford-Dutch/pleasureislanddesign.com` `main`. The former personal repo is now a public fork and is not deployed.
+**Production:** GoDaddy cPanel, deployed from `main` with `.cpanel.yml`. **Mirror:** GitHub Pages, public site files only.
+
+### ✅ Phase 0 — Consolidation (complete Nov 2, 2026)
+- [x] Promote the personal repo's public site work into this repo (PR #2)
+- [x] Retarget cPanel Git Version Control to this repo and redeploy
+- [x] Convert the personal repo into a public fork of this repo
+
+### 🚧 Phase 1 — Repo hygiene (in progress)
+- [x] Dependency graph enabled; Dependency Review check passing
+- [x] GitHub Pages publishes only public site files; Pages source set to GitHub Actions (PR #6)
+- [x] `docs.yml` no longer pushes to `main`; MkDocs build fixed (PR #6)
+- [x] GitHub Actions versions bumped (PR #6)
+- [x] Website audit/security fixes: blog drafts and publisher moved to `blog-automation/` (not deployed), favicons, `.htaccess` hardening (PR #3)
+- [x] Confidential hiring report moved out of the public docs tree, pointer left in place (PR #5)
+- [x] Outlined logo SVGs added (PR #4)
+- [x] Project docs refreshed (README, backlog, CI/CD and Pages docs, wiki) to the current setup
+- [ ] Decide on secret scanning, Issues and branch protection / required checks (awaiting owner approval)
+- [ ] Review the remaining `docs/pid` source documents for anything that should move to private storage (awaiting owner decision)
+- [ ] Fix the cPanel Git Version Control UI remote display (CLI deploys work)
+
+The sections below are the earlier (June 2026) roadmap, kept for reference.
 
 ---
 
@@ -309,8 +336,8 @@ Comprehensive roadmap for moving from current production issues (3.7/10 audit sc
 - **Product/Project Management:** 0.25 FTE
 
 ### Tools & Services
-- **Hosting:** GitHub Pages (free)
-- **Domain:** willyd61.github.io (free)
+- **Hosting:** GoDaddy cPanel (production) + GitHub Pages mirror (free)
+- **Domain:** www.pleasureislanddesign.com (mirror: lipford-dutch.github.io/pleasureislanddesign.com)
 - **Analytics:** Google Analytics (free) + Clarity (free)
 - **Email:** Gmail (free)
 - **Design:** Figma (optional, $12-30/mo)

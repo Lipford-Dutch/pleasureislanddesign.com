@@ -187,14 +187,10 @@ All images require descriptive alt text:
 - Verify file exists with `git ls-files`
 
 ### Canonical/OG Tags Wrong
-**Problem:** Points to www.pleasureislanddesign.com  
-**Solution:**
+**Problem:** Canonical or OG URLs point at the GitHub Pages mirror  
+**Solution:** Production is https://www.pleasureislanddesign.com (GoDaddy cPanel). Canonical and OG URLs should use the production domain, not the `lipford-dutch.github.io` mirror:
 ```html
-<!-- WRONG -->
-<link rel="canonical" href="https://www.pleasureislanddesign.com">
-
-<!-- RIGHT -->
-<link rel="canonical" href="https://willyd61.github.io/pleasureislanddesign.com">
+<link rel="canonical" href="https://www.pleasureislanddesign.com/">
 ```
 
 ### Analytics Not Tracking
