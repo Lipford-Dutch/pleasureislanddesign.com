@@ -35,7 +35,7 @@ conversions); the rest are engagement signals.
 | `scroll_depth` | 25/50/75/100% depth reached | — | Content engagement. |
 
 Each lead-related event carries `method`, `event_category`, and **`promo`** (the
-last special the visitor engaged with — `usa250`, `summer`, `military`,
+last special the visitor engaged with — `usa250`, `thanksgiving2026`, `military`,
 `referral`, or `none`) so you can see **which special produces leads** in GA4.
 
 ---
