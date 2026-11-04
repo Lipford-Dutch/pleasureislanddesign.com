@@ -2454,23 +2454,6 @@ address { font-style: normal; }
   .hero-visual .hero-visual-caption { bottom: calc(var(--space-6) + 56px); }
 }
 
-.about-image-frame-portrait { aspect-ratio: 4 / 5; }
-
-.about-image-secondary {
-  margin-top: var(--space-4);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-md);
-  aspect-ratio: 4 / 3;
-}
-
-.about-image-secondary img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
 .process-photos {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
