@@ -1,12 +1,12 @@
 # Pleasure Island Design - Project Backlog & Roadmap
 
 **Current Phase:** Beta Release (`phase-beta-release`) + **AI Digital Home Parallel Track**  
-**Last Updated:** November 2, 2026  
+**Last Updated:** November 4, 2026  
 **Burn Rate:** High (Critical audit fixes + archive foundation)
 
 ---
 
-## 📍 Current Status (November 2, 2026)
+## 📍 Current Status (November 4, 2026)
 
 **Source of truth:** `Lipford-Dutch/pleasureislanddesign.com` `main`. The former personal repo is now a public fork and is not deployed.
 **Production:** GoDaddy cPanel, deployed from `main` with `.cpanel.yml`. **Mirror:** GitHub Pages, public site files only.
@@ -25,9 +25,27 @@
 - [x] Confidential hiring report moved out of the public docs tree, pointer left in place (PR #5)
 - [x] Outlined logo SVGs added (PR #4)
 - [x] Project docs refreshed (README, backlog, CI/CD and Pages docs, wiki) to the current setup
+- [x] Auto-deploy `main` → GoDaddy cPanel via UAPI, with rolling `public_html` backups (PR #8)
+- [x] Before/after gallery refresh; expired Summer Refresh card replaced with the Thanksgiving Special (PRs #9, #10)
+- [x] Dead CSS from the reverted About layout removed (`.about-image-frame-portrait`, `.about-image-secondary`)
 - [ ] Decide on secret scanning, Issues and branch protection / required checks (awaiting owner approval)
 - [ ] Review the remaining `docs/pid` source documents for anything that should move to private storage (awaiting owner decision)
 - [ ] Fix the cPanel Git Version Control UI remote display (CLI deploys work)
+- [ ] Review PR #11 (`Create dependabot.yml`), open and unreviewed
+
+### 🔶 Open decisions — site content and assets (owner)
+These came out of the audit (PR #3) and the gallery refresh (PR #10) and are **not** code problems:
+
+| # | Item | Why it's waiting |
+|---|---|---|
+| 1 | Four AI-placeholder before/after cards (Hardware, Refacing, Cabinet Repair, Drawer Upgrades) | They're labelled AI illustrations, not real PID work. Need real project photos. Files: `img/site/ba/ai-temp/`, cards tagged `data-ai-placeholder="true"` |
+| 2 | Business claims: "since 2014" / "over a decade" (founded 2018), "500+ transformations", "5.0 · 50+ reviews", "#1 cabinet refinishers", `aggregateRating` schema, Google Business Profile link (a Google *search* URL) | Unverified claims, left exactly as they were |
+| 3 | The "Roger, Kure Beach" testimonial appears twice; a customer quote spells the owner "Nicole Raymont" (`index.html:804`, `locations/wrightsville-beach.html:570`) | Editing a quoted review is the owner's call |
+| 4 | GA4 loads twice — `gtag.js` directly and again through GTM | Pick one; costs ~196 KB when it double-loads |
+| 5 | Microsoft Clarity | Disabled commented hook; needs a real project ID |
+| 6 | Live Google reviews | Needs a Places API key on the server plus `data-live-reviews="on"` |
+| 7 | ~270 unreferenced image files, ~42 MB, in `img/`, `gallery/` and `opt-images/` | Includes superseded before/after sources, the round-1 3:4 wine bar files, `img/pid-social-preview-1200x630.png` (old logo + "60–80% Savings") and the `img/site/about-nicole-*` set orphaned by PR #9. Nothing deleted — some of these trees may be the photo archive |
+| 8 | The 5 scheduled blog drafts (Jul–Sep 2026) | Never published; they fail the publisher's own quality check and need writing out to full posts |
 
 The sections below are the earlier (June 2026) roadmap, kept for reference.
 
