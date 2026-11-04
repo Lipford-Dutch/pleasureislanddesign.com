@@ -2532,7 +2532,3 @@ address { font-style: normal; }
 @media (max-width: 700px) {
   .location-photo-grid { grid-template-columns: 1fr; }
 }
-
-/* Before/after refresh 2026-11-04: portrait (3:4) pair, no layout shift */
-.gallery-grid { align-items: start; }
-.before-after-slider--portrait { aspect-ratio: 3/4; }
