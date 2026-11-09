@@ -1,4 +1,4 @@
-# Google Ads Campaign Pack — PID Summer 2026
+# Google Ads Campaign Pack — PID Thanksgiving 2026
 
 Everything needed to audit the two existing campaigns and rebuild them for
 lead volume, sized for a **~$2,000/mo** budget. Written to be executed in the

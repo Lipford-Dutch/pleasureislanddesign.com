@@ -15,7 +15,7 @@ the difference between Google optimizing for leads vs. flying blind.
 ## Phase 0 — Deploy first (5 min)
 Ads pointing at stale pages waste money.
 1. cPanel → Git Version Control → **Update from Remote** → **Deploy HEAD Commit**.
-2. In an **incognito** window, confirm: new logo in the header, USA 250 + Summer
+2. In an **incognito** window, confirm: new logo in the header, USA 250 + Thanksgiving
    specials on `/specials/`, and the contact form submits with a 10+ char message.
 
 ## Phase 1 — The conversion unlock (10 min) — BEFORE spending a dollar
@@ -58,7 +58,7 @@ Open the two existing campaigns in the live account.
 ---
 
 ## Which special is working? (built-in)
-Every lead now carries a **`promo`** parameter (`usa250`, `summer`, `military`,
+Every lead now carries a **`promo`** parameter (`usa250`, `thanksgiving2026`, `military`,
 `referral`, `none`) — set from the last special CTA the visitor clicked.
 - **GA4:** Reports → Engagement → Events → `form_submission` → break down by
   `promo` (register `promo` as a custom dimension first: Admin → Custom
