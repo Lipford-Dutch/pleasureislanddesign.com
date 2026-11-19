@@ -1,0 +1,20 @@
+{
+  "_comment": "Copy to config.local.json (gitignored) and fill in ONLY owner-verified values. Launch blockers stay empty until Will supplies them. Never invent a review URL, address, or phone.",
+  "google_review_url": "",
+  "google_review_url_verified": false,
+  "google_review_url_verified_by": "",
+  "google_review_url_verified_on": "",
+  "business_postal_address": "",
+  "business_postal_address_confirmed_by_owner": false,
+  "business_phone": "",
+  "business_phone_confirmed_by_owner": false,
+  "qr_image_url": "",
+  "qr_image_file": "",
+  "ledger_path": "",
+  "output_dir": "",
+  "initial_wait_days": 7,
+  "reminder_min_days": 10,
+  "reminder_max_days": 14,
+  "stale_after_days": 90,
+  "approval_max_hours": 72
+}
