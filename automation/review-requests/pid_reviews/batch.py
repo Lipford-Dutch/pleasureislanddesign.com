@@ -16,7 +16,7 @@ from pathlib import Path
 
 from .eligibility import SEND_ACTIONS, evaluate, normalize_email
 from .paths import TEMPLATE_DIR
-from .render import qr_ready, render
+from .render import QR_CID_URL, qr_ready, render
 
 SENDER = "pleasureislanddesign@gmail.com"
 FROM_DISPLAY = "Nicole Rayment | Pleasure Island Design"
@@ -44,6 +44,12 @@ def _canonical(obj):
 def batch_digest(batch):
     body = {k: v for k, v in batch.items() if k != "batch_sha256"}
     return _sha(_canonical(body))
+
+
+def _qr_sha(cfg):
+    if not qr_ready(cfg):
+        return ""
+    return _sha(Path(cfg["qr_image_file"]).read_bytes())
 
 
 def build_batch(rows, cfg, today, now=None):
@@ -79,6 +85,7 @@ def build_batch(rows, cfg, today, now=None):
         "google_review_url": cfg["google_review_url"],
         "postal_address_sha256": _sha(cfg["business_postal_address"].strip()),
         "qr_included": qr_ready(cfg),
+        "qr_sha256": _qr_sha(cfg),
         "template_sha256": template_hashes(),
         "count": len(entries),
         "entries": entries,
@@ -132,6 +139,8 @@ def verify_approval(batch, approval, cfg, now=None):
         raise BatchError("review URL changed since the batch was approved; approval invalidated")
     if _sha((cfg.get("business_postal_address") or "").strip()) != batch["postal_address_sha256"]:
         raise BatchError("postal address changed since the batch was approved; approval invalidated")
+    if _qr_sha(cfg) != batch.get("qr_sha256", ""):
+        raise BatchError("QR image changed since the batch was approved; approval invalidated")
     return True
 
 
@@ -162,6 +171,10 @@ def build_outbox(batch, approval, rows, cfg, today, out_dir, now=None):
         em["X-PID-Template-Version"] = msg.template_version
         em.set_content(msg.text)
         em.add_alternative(msg.html, subtype="html")
+        if f'src="{QR_CID_URL}"' in msg.html:
+            em.get_body(("html",)).add_related(Path(cfg["qr_image_file"]).read_bytes(), "image", "png",
+                                               cid="<" + QR_CID_URL[4:] + ">", disposition="inline",
+                                               filename="pid-google-review-qr.png")
         path = outdir / f"{e['request_id']}.eml"
         path.write_bytes(bytes(em))
         written.append(path)

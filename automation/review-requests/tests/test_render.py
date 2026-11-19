@@ -90,6 +90,16 @@ class ReviewUrlValidation(unittest.TestCase):
             with self.assertRaises(RenderError, msg=bad):
                 self.check(bad)
 
+    def test_official_gpage_review_short_link_accepted(self):
+        for ok in ("https://g.page/r/FAKE-TEST-ONLY-ID/review", "https://g.page/r/FAKE_test-12/review/"):
+            self.check(ok)
+
+    def test_other_gpage_paths_rejected(self):
+        for bad in ("https://g.page/some-business", "https://g.page/r/FAKE-ID", "https://g.page/r/FAKE-ID/review/extra",
+                    "https://g.page/r/FAKE-ID/review?utm_medium=qr", "http://g.page/r/FAKE-ID/review"):
+            with self.assertRaises(RenderError, msg=bad):
+                self.check(bad)
+
     def test_verifier_and_date_required(self):
         with self.assertRaises(RenderError):
             validate_review_url(FAKE_REVIEW_URL, ready_cfg(google_review_url_verified_by=""))
@@ -109,6 +119,14 @@ class OptionalBlocks(unittest.TestCase):
             self.assertIn("Scan this code", render("initial", {}, ready_cfg(qr_image_url=url, qr_image_file=str(png))).html)
             self.assertNotIn("Scan this code", render("initial", {}, ready_cfg(qr_image_url=url, qr_image_file=str(png) + ".missing")).html)
             self.assertNotIn("Scan this code", render("initial", {}, cfg(qr_image_url=url, qr_image_file=str(png)), preview=True).html)
+
+    def test_qr_inline_cid_option(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            png = Path(tmp) / "qr.png"
+            png.write_bytes(b"\x89PNG fake")
+            m = render("reminder", {}, ready_cfg(qr_image_url="cid:pid-review-qr", qr_image_file=str(png)))
+            self.assertIn('src="cid:pid-review-qr"', m.html)
+            self.assertNotIn("Scan this code", render("initial", {}, ready_cfg(qr_image_url="cid:other", qr_image_file=str(png))).html)
 
     def test_phone_optional_and_needs_owner_confirmation(self):
         self.assertNotIn("555-0100", render("initial", {}, ready_cfg(business_phone="555-0100")).text)

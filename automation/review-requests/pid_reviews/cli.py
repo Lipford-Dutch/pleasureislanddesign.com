@@ -11,7 +11,9 @@ from .config import config_blockers, ledger_path, load_config, output_dir
 from .eligibility import SEND_ACTIONS, evaluate
 from .ledger import LedgerError, init_ledger, load_ledger
 from .paths import PrivatePathError, TOOL_OUT_DIR, check_output_dir
-from .render import RenderError, render
+import shutil
+
+from .render import QR_CID_URL, RenderError, render
 
 NO_SEND = "No email was sent. This tool has no mail integration."
 SAMPLE_RECORD = {"household_id": "HH-SAMPLE", "project_id": "PRJ-SAMPLE", "first_name": ""}
@@ -81,7 +83,11 @@ def cmd_render(args, cfg):
     stem = f"{'PREVIEW-NOT-FOR-SEND-' if msg.preview else ''}{record['household_id']}-{record['project_id']}-{args.kind}"
     (out / f"{stem}.txt").write_text(f"Subject: {msg.subject}\nPreheader: {msg.preheader}\n"
                                      f"template_version: {msg.template_version}\n\n{msg.text}", encoding="utf-8")
-    (out / f"{stem}.html").write_text(msg.html, encoding="utf-8")
+    html_out = msg.html
+    if f'src="{QR_CID_URL}"' in html_out:  # make the inline QR visible in a browser preview
+        shutil.copyfile(cfg["qr_image_file"], out / f"{stem}-qr.png")
+        html_out = html_out.replace(f'src="{QR_CID_URL}"', f'src="{stem}-qr.png"')
+    (out / f"{stem}.html").write_text(html_out, encoding="utf-8")
     print(f"Wrote {out / (stem + '.txt')} and .html")
     if msg.unresolved:
         print(f"PREVIEW ONLY: unresolved {', '.join(msg.unresolved)}")

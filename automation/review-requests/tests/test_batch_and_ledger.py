@@ -81,6 +81,23 @@ class Batches(unittest.TestCase):
             self.assertTrue((files[0].parent / "OUTBOX-NOT-SENT.json").is_file())
 
 
+    def test_outbox_embeds_inline_qr_and_qr_change_invalidates_approval(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            png = Path(tmp) / "qr.png"
+            png.write_bytes(b"\x89PNG fake qr")
+            c = ready_cfg(qr_image_url="cid:pid-review-qr", qr_image_file=str(png))
+            b = build_batch([row()], c, today=TODAY, now=NOW)
+            self.assertTrue(b["qr_included"])
+            files = build_outbox(b, approval_for(b), [row()], c, TODAY, Path(tmp) / "o", now=NOW)
+            msg = message_from_bytes(files[0].read_bytes())
+            imgs = [p for p in msg.walk() if p.get_content_type() == "image/png"]
+            self.assertEqual(len(imgs), 1)
+            self.assertEqual(imgs[0]["Content-ID"], "<pid-review-qr>")
+            png.write_bytes(b"\x89PNG different")
+            with self.assertRaises(BatchError):
+                verify_approval(b, approval_for(b), c, now=NOW)
+
+
 class LedgerAndPaths(unittest.TestCase):
     def test_ledger_inside_repo_refused_but_example_allowed(self):
         with tempfile.TemporaryDirectory() as repo:

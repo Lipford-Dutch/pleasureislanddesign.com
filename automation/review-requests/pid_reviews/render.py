@@ -29,6 +29,8 @@ GREETING_RE = re.compile(r"Hi \{\{\s*first_name\s*\}\},")
 NAME_OK_RE = re.compile(r"^[^\W\d_]+(?:[ '\u2019.-][^\W\d_]+)*\.?$", re.U)
 
 REQUIRED = ("google_review_url", "business_postal_address")
+QR_CID_URL = "cid:pid-review-qr"  # inline attachment; the outbox embeds qr_image_file
+GPAGE_REVIEW_RE = re.compile(r"^/r/[A-Za-z0-9_-]{6,64}/review/?$")
 REVIEW_HOSTS = {"g.page", "search.google.com", "www.google.com", "google.com", "maps.app.goo.gl"}
 UNRESOLVED = "[[UNRESOLVED {name} - PREVIEW ONLY, NOT FOR SEND]]"
 
@@ -68,6 +70,8 @@ def validate_review_url(url, cfg):
     host = (parts.hostname or "").lower()
     if host not in REVIEW_HOSTS:
         raise RenderError(f"host {host!r} is not a Google review host ({', '.join(sorted(REVIEW_HOSTS))})")
+    if host == "g.page" and not GPAGE_REVIEW_RE.match(parts.path):
+        raise RenderError("g.page links must be Google's official review short link: https://g.page/r/<id>/review")
     if host in ("www.google.com", "google.com") and parts.path.rstrip("/") in ("/search", "", "/maps"):
         raise RenderError("a Google search/maps URL is not a write-review link")
     if re.search(r"(^|&)(utm_[a-z]+|gclid|fbclid|mc_eid)=", parts.query or ""):
@@ -82,7 +86,8 @@ def qr_ready(cfg):
         return False
     qr_url = (cfg.get("qr_image_url") or "").strip()
     qr_file = (cfg.get("qr_image_file") or "").strip()
-    return bool(qr_url.startswith("https://") and qr_file and Path(qr_file).is_file())
+    url_ok = qr_url.startswith("https://") or qr_url == QR_CID_URL
+    return bool(url_ok and qr_file and Path(qr_file).is_file())
 
 
 def phone_ready(cfg):
