@@ -1,0 +1,17 @@
+# Private data and generated output must never be committed.
+# The real ledger belongs OUTSIDE the repo (~/.pid-private/review-requests/ledger.csv).
+*.csv
+!examples/ledger.example.csv
+*.sqlite
+*.db
+config.local.json
+*.local.json
+out/
+batches/
+approved-outbox/
+*.eml
+*.approval.json
+qr/
+*.png
+__pycache__/
+*.pyc

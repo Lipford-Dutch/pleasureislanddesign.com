@@ -1,0 +1,26 @@
+Subject: One optional reminder: your PID project review
+Preheader: No need to respond; this is our last review reminder.
+From: Nicole Rayment | Pleasure Island Design <pleasureislanddesign@gmail.com>
+Reply-To: pleasureislanddesign@gmail.com
+template_version: pid-review-reminder-v1.1.0-2026-11-19
+
+Hi {{first_name}},
+
+One gentle reminder: if you’d like to share your experience with Pleasure Island Design on Google, the link is below. Honest feedback of any kind is welcome.
+
+Share an honest Google review:
+{{google_review_url}}
+
+If you’ve already reviewed us, thank you—there’s nothing more to do. This is our last review reminder. If you need help with your project, just reply here.
+
+Thank you,
+Nicole Rayment
+Pleasure Island Design
+https://www.pleasureislanddesign.com/
+pleasureislanddesign@gmail.com
+{{#phone_block}}{{business_phone}}
+{{/phone_block}}
+-----
+Optional customer review solicitation from Pleasure Island Design.
+{{business_postal_address}}
+To stop all PID marketing emails, including review requests, reply “unsubscribe.”

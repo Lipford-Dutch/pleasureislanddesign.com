@@ -1,0 +1,10 @@
+household_id,project_id,first_name,recipient_email,mailbox_verified,customer_role,project_scope,completion_verified,completion_evidence_ref,completion_date,final_invoice_issued,invoice_ref,invoice_date,same_project_confirmed,open_issue,status,initial_sent_at,reminder_sent_at,reminder_count,stop_reason,service_hold,service_hold_reason,service_hold_revisit_on,notes
+HH-FAKE-001,PRJ-FAKE-001,Alex,fake-001@example.invalid,yes,homeowner,kitchen_cabinets,yes,FAKE-EVIDENCE,2026-11-10,yes,FAKE-INVOICE,2026-11-12,yes,no,verified,,,0,,no,,,FAKE: eligible initial
+HH-FAKE-002,PRJ-FAKE-002,,fake-002@example.invalid,yes,homeowner,kitchen_cabinets,yes,FAKE-EVIDENCE,2026-11-25,yes,FAKE-INVOICE,2026-11-26,yes,no,verified,,,0,,no,,,FAKE: courtesy wait
+HH-FAKE-003,PRJ-FAKE-003,,fake-003@example.invalid,yes,homeowner,kitchen_cabinets,no,,2026-11-10,yes,FAKE-INVOICE,2026-11-12,yes,no,candidate,,,0,,no,,,"FAKE: invoice only, no completion proof"
+HH-FAKE-004,PRJ-FAKE-004,,fake-004@example.invalid,yes,contractor,kitchen_cabinets,yes,FAKE-EVIDENCE,2026-11-10,yes,FAKE-INVOICE,2026-11-12,yes,no,verified,,,0,,no,,,FAKE: contractor
+HH-FAKE-005,PRJ-FAKE-005,,fake-005@example.invalid,yes,homeowner,kitchen_cabinets,yes,FAKE-EVIDENCE,2026-11-10,yes,FAKE-INVOICE,2026-11-12,yes,no,sent,2026-11-19,,0,,no,,,FAKE: reminder due
+HH-FAKE-006,PRJ-FAKE-006,,fake-006@example.invalid,yes,homeowner,kitchen_cabinets,yes,FAKE-EVIDENCE,2026-11-10,yes,FAKE-INVOICE,2026-11-12,yes,no,sent,2026-11-15,2026-11-27,1,,no,,,FAKE: reminder cap reached
+HH-FAKE-007,PRJ-FAKE-007,,fake-007@example.invalid,yes,homeowner,kitchen_cabinets,yes,FAKE-EVIDENCE,2026-11-10,yes,FAKE-INVOICE,2026-11-12,yes,no,suppressed,2026-11-19,,0,unsubscribe,no,,,FAKE: unsubscribed
+HH-FAKE-008,PRJ-FAKE-008,,fake-008@example.invalid,yes,homeowner,kitchen_cabinets,yes,FAKE-EVIDENCE,2026-11-10,yes,FAKE-INVOICE,2026-11-12,yes,no,verified,,,0,,yes,touch-up visit scheduled,2026-12-04,FAKE: neutral service hold
+HH-FAKE-009,PRJ-FAKE-009,,fake-009@example.invalid,yes,homeowner,other,yes,FAKE-EVIDENCE,2026-11-10,yes,FAKE-INVOICE,2026-11-12,yes,no,verified,,,0,,no,,,FAKE: not kitchen

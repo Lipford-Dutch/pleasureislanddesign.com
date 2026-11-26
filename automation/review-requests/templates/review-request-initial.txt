@@ -1,0 +1,28 @@
+Subject: An optional review of your PID kitchen cabinet project
+Preheader: Your honest experience can help other homeowners. No obligation.
+From: Nicole Rayment | Pleasure Island Design <pleasureislanddesign@gmail.com>
+Reply-To: pleasureislanddesign@gmail.com
+template_version: pid-review-initial-v1.1.0-2026-11-19
+
+Hi {{first_name}},
+
+Thank you for choosing Pleasure Island Design for your kitchen cabinet project. If you’d like, would you share an honest review of your experience on Google? Your feedback can help other homeowners decide whether we’re the right fit.
+
+Share an honest Google review:
+{{google_review_url}}
+
+This is completely optional, and all feedback is welcome. Google requires a Google Account to post a review.
+
+If you need help with your project, you can reply to me here—whether or not you leave a review.
+
+Thank you,
+Nicole Rayment
+Pleasure Island Design
+https://www.pleasureislanddesign.com/
+pleasureislanddesign@gmail.com
+{{#phone_block}}{{business_phone}}
+{{/phone_block}}
+-----
+Optional customer review solicitation from Pleasure Island Design.
+{{business_postal_address}}
+To stop all PID marketing emails, including review requests, reply “unsubscribe.”
